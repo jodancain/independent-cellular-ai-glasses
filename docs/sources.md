@@ -193,3 +193,21 @@ Breezy Desktop 与 XRLinuxDriver（Linux 下 XR 眼镜虚拟屏与头动驱动�
 <https://github.com/wheaney/breezy-desktop>
 
 <https://github.com/wheaney/XRLinuxDriver>
+
+## S29
+
+WebAssembly Micro Runtime（WAMR）代码仓库（小体积 WebAssembly 运行时，供手表模式小程序沙箱参考）
+
+<https://github.com/bytecodealliance/wasm-micro-runtime>
+
+## S30
+
+Linux 内核文档：USB gadget UVC 功能（设备作为标准 USB 摄像头）
+
+<https://docs.kernel.org/usb/gadget_uvc.html>
+
+## S31
+
+WebRTC 官方网站（开源实时音视频通信框架）
+
+<https://webrtc.org/>
