@@ -15,7 +15,7 @@
 | [开发需求](docs/requirements.md) | 硬性边界、场景、硬件选项、系统交付和验证方法 |
 | [芯片候选](docs/chips.md) | 已讨论平台的公开信息、项目判断及待核实项 |
 | [工程判断](docs/engineering-assessment.md) | 选型依据、系统集成风险及证据边界 |
-| [串流终端方向](docs/streaming-direction.md) | v0.2：Quest 级串流眼镜架构、有线/Wi-Fi 7/5G 三种连接、五层软件兼容、分级睡眠、芯片组合与待验证项 |
+| [串流终端方向](docs/streaming-direction.md) | v0.3：依赖网络而非手机的串流 AR 眼镜；联网全功能 / 断网手表模式、6DoF 真实画面交互、四类主机、五层软件兼容、分级睡眠、主+协处理器芯片组合 |
 | [供应商回复模板](docs/supplier-response.md) | 可复制的技术方案回复与偏差表 |
 | [完整来源](docs/sources.md) | 官方资料、公开参考项目及核验日期 |
 | [贡献指南](CONTRIBUTING.md) | Issue、Pull Request 和公开资料边界 |
