@@ -1,198 +1,168 @@
+// 定稿框图（Remotion 版）：暗场、暖白单色信号、线型区分信号类型、直角走线、慢速光束、到达闪光。
+// 全部动画由 useCurrentFrame() 驱动；光束周期 4 s，双向链路每周期换向，8 s 首尾无缝。
 import React, { useMemo } from "react";
 import { AbsoluteFill, useCurrentFrame, useVideoConfig } from "remotion";
-import { getLength, getPointAtLength } from "@remotion/paths";
-import { Diagram, SIGNAL_STYLE, SignalKind } from "./types";
-import { canvasSize, FONT, LINE_H, layoutDiagram, LEGEND_H, MARGIN, TITLE_H } from "./layout";
+import { getLength } from "@remotion/paths";
+import LAYOUTS from "../diagrams/layouts.json";
 
-const FONT_FAMILY = '-apple-system, "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif';
-const SPEED = 170; // 光点速度，像素 / 秒（按整圈取整，保证循环无缝）
-const DASH = 26; // 虚线周期
+export type Pt = { x: number; y: number };
+export type LNode = { id: string; lines: string[]; accent?: boolean; reserved?: boolean; x: number; y: number; w: number; h: number };
+export type LEdge = { from: string; to: string; kind: string; label?: string; bidir?: boolean; dashed?: boolean; pts: Pt[]; lx: number | null; ly: number | null; knock?: number[][] };
+export type Layout = { title: string; subtitle?: string; width: number; height: number; groups: { id: string; label: string; x: number; y: number; w: number; h: number }[]; nodes: LNode[]; edges: LEdge[] };
 
-export const FlowDiagram: React.FC<{ diagram: Diagram }> = ({ diagram }) => {
+export const DIAGRAMS = LAYOUTS as unknown as Record<string, Layout>;
+export const DIAGRAM_ORDER = ["Overview", "HardwareCompute", "HardwarePower", "DataPaths", "SoftwareStack", "Protocol", "PowerStates", "Calls", "Deploy"];
+
+const SIGNAL = "#e8e2d4";
+const T = { bg: "#050608", grid: "rgba(242,244,248,.07)", groupFill: "rgba(242,244,248,.02)", groupStroke: "rgba(242,244,248,.1)", nodeFill: "#0b0e15", nodeStroke: "rgba(242,244,248,.18)", accentFill: "#12141a", text: "#f2f4f8", sub: "#9aa6bd", base: 0.6, knock: "#050608" };
+const KIND_NAME: Record<string, string> = { video: "视频 / 画面", data: "数据", control: "控制 / 信令", pose: "姿态 / 传感", audio: "音频", rf: "无线 / 网络", power: "供电 / 电源" };
+const DASH: Record<string, string> = { pose: "10 6", audio: "1.5 7", rf: "14 5 2 5", control: "6 4", power: "3 5" };
+const WIDTH: Record<string, number> = { video: 4, data: 2.2 };
+const PHASE: Record<string, number> = { video: 0, pose: 0.25, data: 0.5, rf: 0.5, audio: 0.75, control: 0.25, power: 0.75 };
+export const CYCLE_MS = 4000;
+const TRAVEL_MS = 2800;
+const FONT_CN = '"Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif';
+const FONT_EN = '"Barlow", "DIN Alternate", "Noto Sans SC", sans-serif';
+const FONT_MONO = '"JetBrains Mono", Menlo, monospace';
+
+const ease = (x: number) => (x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2);
+const cjk = (ch: string) => /[⺀-￿]/.test(ch);
+const textW = (s: string, size: number) => [...s].reduce((w, ch) => w + (cjk(ch) ? size * 1.02 : size * 0.6), 0);
+const roundPath = (pts: Pt[], r = 8) => {
+  let d = `M ${pts[0].x} ${pts[0].y}`;
+  for (let i = 1; i < pts.length - 1; i++) {
+    const a = pts[i - 1], b = pts[i], c = pts[i + 1];
+    const r1 = Math.min(r, Math.hypot(b.x - a.x, b.y - a.y) / 2, Math.hypot(c.x - b.x, c.y - b.y) / 2);
+    const ux = Math.sign(b.x - a.x), uy = Math.sign(b.y - a.y), vx = Math.sign(c.x - b.x), vy = Math.sign(c.y - b.y);
+    d += ` L ${b.x - ux * r1} ${b.y - uy * r1} Q ${b.x} ${b.y} ${b.x + vx * r1} ${b.y + vy * r1}`;
+  }
+  const z = pts[pts.length - 1];
+  return d + ` L ${z.x} ${z.y}`;
+};
+
+const PAD = 40;
+export const diagramSize = (D: Layout, hideHeader = false) => {
+  const top = hideHeader ? 24 : 84;
+  return { width: Math.ceil((D.width + PAD * 2) / 2) * 2, height: Math.ceil((D.height + PAD + top) / 2) * 2, top };
+};
+
+export const FlowDiagram: React.FC<{ id: string; hideHeader?: boolean; transparent?: boolean }> = ({ id, hideHeader = false, transparent = false }) => {
   const frame = useCurrentFrame();
-  const { durationInFrames, fps } = useVideoConfig();
-  const layout = useMemo(() => layoutDiagram(diagram), [diagram]);
-  const { width, height } = canvasSize(layout);
-  const loopT = frame / durationInFrames; // 0..1，循环一周
-  const loopSec = durationInFrames / fps;
+  const { fps } = useVideoConfig();
+  const D = DIAGRAMS[id];
+  const { width: W, height: H, top } = diagramSize(D, hideHeader);
+  const t = (frame / fps) * 1000;
+  const geo = useMemo(() => D.edges.map((e) => { const d = roundPath(e.pts); return { d, len: getLength(d) }; }), [D]);
 
-  const edgeGeo = useMemo(
-    () =>
-      layout.edges.map((le) => {
-        const len = Math.max(1, getLength(le.d));
-        const cycles = Math.max(1, Math.round((SPEED * loopSec) / len));
-        const count = Math.max(1, Math.min(4, Math.round(len / 260)));
-        // 预采样路径点，逐帧只做查表插值
-        const step = 3;
-        const samples: { x: number; y: number }[] = [];
-        for (let s = 0; s <= len; s += step) {
-          const p = getPointAtLength(le.d, s);
-          samples.push({ x: p?.x ?? 0, y: p?.y ?? 0 });
-        }
-        const at = (dist: number) => {
-          const f = Math.min(samples.length - 1, Math.max(0, dist / step));
-          const i = Math.floor(f);
-          const j = Math.min(samples.length - 1, i + 1);
-          const r = f - i;
-          return { x: samples[i].x + (samples[j].x - samples[i].x) * r, y: samples[i].y + (samples[j].y - samples[i].y) * r };
-        };
-        return { len, cycles, count, at };
-      }),
-    [layout, loopSec],
-  );
-
-  const usedKinds = Array.from(new Set(diagram.edges.map((e) => e.kind))) as SignalKind[];
-  const ox = MARGIN;
-  const oy = MARGIN + TITLE_H;
-  // 关键芯片的呼吸光（整周期正弦，循环无缝）
-  const breathe = 0.55 + 0.45 * Math.sin(loopT * Math.PI * 2 * 2);
+  // 节点最近一次被信号“抵达”的时间差（无状态计算，任意帧可直接渲染）
+  const sinceArrive = (nodeId: string) => {
+    let best = Infinity;
+    D.edges.forEach((e) => {
+      if (e.dashed) return;
+      const ph = (PHASE[e.kind] || 0) * CYCLE_MS;
+      const cyc = Math.floor((t + ph) / CYCLE_MS);
+      for (const c of [cyc, cyc - 1]) {
+        const back = !!e.bidir && ((c % 2) + 2) % 2 === 1;
+        const target = back ? e.from : e.to;
+        if (target !== nodeId) continue;
+        const arrive = c * CYCLE_MS - ph + TRAVEL_MS;
+        const dt = t - arrive;
+        if (dt >= 0 && dt < best) best = dt;
+      }
+    });
+    return best;
+  };
+  const used = [...new Set(D.edges.map((e) => e.kind))];
+  let lx = W - PAD;
+  const legend = [...used].reverse().map((k) => {
+    const label = KIND_NAME[k] || k;
+    lx -= textW(label, 16) + 44 + 14;
+    return { k, label, x: lx };
+  });
 
   return (
-    <AbsoluteFill style={{ background: "radial-gradient(ellipse at 30% 0%, #16213e 0%, #0a0f1f 55%, #070b16 100%)", fontFamily: FONT_FAMILY }}>
-      <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
+    <AbsoluteFill style={{ background: transparent ? "transparent" : T.bg }}>
+      <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`}>
         <defs>
-          <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
-            <path d="M 32 0 L 0 0 0 32" fill="none" stroke="#1e293b" strokeWidth="0.6" opacity="0.5" />
-          </pattern>
-          <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur stdDeviation="3.2" result="b" />
-            <feMerge>
-              <feMergeNode in="b" />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
-          </filter>
-          {Object.entries(SIGNAL_STYLE).map(([k, s]) => (
-            <marker key={k} id={`arrow-${k}`} viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-              <path d="M 0 0 L 10 5 L 0 10 z" fill={s.color} />
-            </marker>
-          ))}
+          <pattern id="grid" width="16" height="16" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r=".8" fill={T.grid} /></pattern>
+          <marker id="ar" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="4.2" markerHeight="4.2" orient="auto-start-reverse"><path d="M0 .5 L7.5 4 L0 7.5 z" fill={SIGNAL} /></marker>
+          <filter id="bm" x="-10%" y="-10%" width="120%" height="120%" filterUnits="userSpaceOnUse"><feGaussianBlur stdDeviation="4" /></filter>
         </defs>
-        <rect width={width} height={height} fill="url(#grid)" />
-
-        {/* 标题 */}
-        <text x={MARGIN} y={MARGIN + 34} fill="#e2e8f0" fontSize={30} fontWeight={700}>
-          {diagram.title}
-        </text>
-        <text x={MARGIN} y={MARGIN + 66} fill="#94a3b8" fontSize={15}>
-          {diagram.subtitle}
-        </text>
-
-        <g transform={`translate(${ox} ${oy})`}>
-          {/* 分组 */}
-          {[...layout.groups]
-            .sort((a, b) => a.depth - b.depth)
-            .map((g) => (
-              <g key={g.id}>
-                <rect x={g.x} y={g.y} width={g.w} height={g.h} rx={14} fill={g.depth ? "rgba(56,189,248,0.04)" : "rgba(148,163,184,0.05)"} stroke="#475569" strokeDasharray="6 6" strokeWidth={1.2} />
-                <text x={g.x + 14} y={g.y + 22} fill="#cbd5e1" fontSize={14} fontWeight={600}>
-                  {g.label}
-                </text>
+        {!transparent && <rect width={W} height={H} fill="url(#grid)" />}
+        {!hideHeader && (
+          <g>
+            <text x={PAD} y={50} fill={T.text} fontSize={22} fontWeight={500} letterSpacing={2} fontFamily={FONT_EN}>{D.title}</text>
+            {legend.map((l) => (
+              <g key={l.k}>
+                <line x1={l.x - 6} y1={44} x2={l.x + 26} y2={44} stroke={SIGNAL} strokeWidth={WIDTH[l.k] || 3} strokeLinecap="round" strokeDasharray={DASH[l.k]} />
+                <text x={l.x + 32} y={50} fill={T.sub} fontSize={16} fontFamily={FONT_CN}>{l.label}</text>
               </g>
             ))}
-
-          {/* 连线：底线 + 流动虚线 */}
-          {layout.edges.map((le) => {
-            const e = diagram.edges[le.index];
-            const c = SIGNAL_STYLE[e.kind].color;
-            const offset = -loopT * DASH * Math.round((SPEED * 0.6 * loopSec) / DASH);
+          </g>
+        )}
+        <g transform={`translate(${PAD} ${top})`}>
+          {D.groups.map((g, i) => (
+            <g key={g.id}>
+              <rect x={g.x} y={g.y} width={g.w} height={g.h} rx={12} fill={T.groupFill} stroke={T.groupStroke} />
+              <text x={g.x + 18} y={g.y + 30} fill={T.sub} fontSize={15} letterSpacing={1.5} fontFamily={FONT_EN} fontWeight={500}>{String(i + 1).padStart(2, "0")}</text>
+              <text x={g.x + 48} y={g.y + 30} fill={T.sub} fontSize={16} letterSpacing={1} fontFamily={FONT_CN}>{g.label}</text>
+            </g>
+          ))}
+          {D.edges.map((e, i) => (
+            <g key={`e${i}`}>
+              {(e.knock || []).map(([x1, y1, x2, y2], j) => <line key={j} x1={x1} y1={y1} x2={x2} y2={y2} stroke={T.knock} strokeWidth={10} />)}
+              <path d={geo[i].d} fill="none" stroke={SIGNAL} strokeOpacity={e.dashed ? 0.5 : T.base} strokeWidth={WIDTH[e.kind] || 3} strokeLinejoin="round" strokeLinecap="round"
+                markerEnd="url(#ar)" markerStart={e.bidir ? "url(#ar)" : undefined} strokeDasharray={e.dashed ? "6 7" : DASH[e.kind]} />
+            </g>
+          ))}
+          {D.edges.map((e, i) => {
+            if (e.dashed) return null;
+            const { d, len: L } = geo[i];
+            const ph = (PHASE[e.kind] || 0) * CYCLE_MS;
+            const local = (((t + ph) % CYCLE_MS) + CYCLE_MS) % CYCLE_MS;
+            const run = local / TRAVEL_MS;
+            if (run > 1) return null;
+            const back = !!e.bidir && Math.floor((t + ph) / CYCLE_MS) % 2 === 1;
+            const bl = Math.min(240, Math.max(80, L * 0.45));
+            const head = ease(run) * (L + bl);
             return (
-              <g key={`l${le.index}`}>
-                <path d={le.d} fill="none" stroke={c} strokeOpacity={0.22} strokeWidth={e.dashed ? 2 : 3} strokeDasharray={e.dashed ? "4 6" : undefined}
-                  markerEnd={`url(#arrow-${e.kind})`} markerStart={e.bidir ? `url(#arrow-${e.kind})` : undefined} />
-                {!e.bidir && (
-                  <path d={le.d} fill="none" stroke={c} strokeOpacity={e.dashed ? 0.5 : 0.85} strokeWidth={e.dashed ? 1.5 : 2.2} strokeDasharray={`8 ${DASH - 8}`} strokeDashoffset={offset} strokeLinecap="round" />
-                )}
-                {e.bidir && (
-                  <path d={le.d} fill="none" stroke={c} strokeOpacity={0.45} strokeWidth={1.6} strokeDasharray={`3 ${DASH / 2 - 3}`} strokeDashoffset={offset / 2} strokeLinecap="round" />
-                )}
+              <g key={`b${i}`}>
+                {([["glow", bl, 0.55, 12], ["body", bl * 0.8, 0.85, 5], ["core", bl * 0.4, 0.95, 2.4]] as [string, number, number, number][]).map(([k, seg, op, sw]) => {
+                  const start = back ? L - head : head - seg;
+                  return <path key={k} d={d} fill="none" stroke={k === "core" ? "#ffffff" : SIGNAL} strokeWidth={sw} strokeLinecap="round" opacity={op}
+                    strokeDasharray={`${seg} ${L * 4 + seg}`} strokeDashoffset={-start} filter={k === "glow" ? "url(#bm)" : undefined} />;
+                })}
               </g>
             );
           })}
-
-          {/* 信号光点 */}
-          {layout.edges.map((le) => {
-            const e = diagram.edges[le.index];
-            const c = SIGNAL_STYLE[e.kind].color;
-            const { len, cycles, count, at } = edgeGeo[le.index];
-            const dots: React.ReactNode[] = [];
-            const dirs = e.bidir ? [1, -1] : [1];
-            dirs.forEach((dir) => {
-              for (let k = 0; k < count; k++) {
-                const base = (loopT * cycles + k / count + (dir < 0 ? 0.5 / count : 0)) % 1;
-                for (let tail = 0; tail < 4; tail++) {
-                  let t = base - (tail * 9) / len;
-                  if (t < 0) continue;
-                  if (dir < 0) t = 1 - t;
-                  const p = at(t * len);
-                  dots.push(
-                    <circle key={`${dir}-${k}-${tail}`} cx={p.x} cy={p.y} r={tail === 0 ? (e.dashed ? 3 : 4.2) : 3.4 - tail * 0.6}
-                      fill={tail === 0 ? "#ffffff" : c} opacity={tail === 0 ? 0.95 : 0.7 - tail * 0.15}
-                      filter={tail === 0 ? "url(#glow)" : undefined} stroke={tail === 0 ? c : undefined} strokeWidth={tail === 0 ? 2 : 0} />,
-                  );
-                }
-              }
-            });
-            return <g key={`d${le.index}`}>{dots}</g>;
-          })}
-
-          {/* 连线标签 */}
-          {layout.edges.map((le) => {
-            const e = diagram.edges[le.index];
-            if (!e.label || le.labelX === undefined || le.labelY === undefined) return null;
-            const lx = le.labelX;
-            const ly = le.labelY;
-            const lines = e.label.split("\n");
-            const w = Math.max(...lines.map((l) => [...l].reduce((s, ch) => s + (/[⺀-￿]/.test(ch) ? 12.5 : 7), 0))) + 12;
-            const h = lines.length * 16 + 6;
+          {D.nodes.map((n) => {
+            const dt = sinceArrive(n.id);
+            const k = dt === Infinity ? 0 : dt < 300 ? dt / 300 : Math.exp(-(dt - 300) / 650);
             return (
-              <g key={`t${le.index}`}>
-                <rect x={lx - w / 2} y={ly - h / 2} width={w} height={h} rx={6} fill="#0b1222" stroke={SIGNAL_STYLE[e.kind].color} strokeOpacity={0.5} />
-                {lines.map((l, i) => (
-                  <text key={i} x={lx} y={ly - h / 2 + 15 + i * 16} fill={SIGNAL_STYLE[e.kind].color} fontSize={12} textAnchor="middle">
-                    {l}
-                  </text>
+              <g key={n.id} opacity={n.reserved ? 0.6 : 1}>
+                {k > 0.02 && <rect x={n.x - 3} y={n.y - 3} width={n.w + 6} height={n.h + 6} rx={11} fill="none" stroke={SIGNAL} strokeOpacity={0.5 * k} strokeWidth={6} filter="url(#bm)" />}
+                <rect x={n.x} y={n.y} width={n.w} height={n.h} rx={8} fill={n.accent ? T.accentFill : T.nodeFill} stroke={n.accent ? SIGNAL : T.nodeStroke} strokeWidth={n.accent ? 1.4 : 1} strokeDasharray={n.reserved ? "4 4" : undefined} />
+                {n.accent && <rect x={n.x + 12} y={n.y} width={30} height={2} fill={SIGNAL} />}
+                {n.lines.map((txt, i) => (
+                  <text key={i} x={n.x + 20} y={n.y + 34 + i * 24 + (i ? 3 : 0)} fill={i ? T.sub : T.text} fontSize={i ? 16 : 21} fontWeight={i ? 400 : 500} fontFamily={FONT_CN}>{txt}</text>
                 ))}
               </g>
             );
           })}
-
-          {/* 节点 */}
-          {layout.nodes.map((n) => (
-            <g key={n.id}>
-              {n.accent && (
-                <rect x={n.x - 4} y={n.y - 4} width={n.w + 8} height={n.h + 8} rx={14} fill="none" stroke="#38bdf8" strokeOpacity={0.35 * breathe} strokeWidth={6} filter="url(#glow)" />
-              )}
-              <rect x={n.x} y={n.y} width={n.w} height={n.h} rx={10} fill={n.accent ? "#0f2236" : "#111a2e"} stroke={n.accent ? "#38bdf8" : "#3b4a63"} strokeWidth={n.accent ? 1.8 : 1.2} />
-              {n.lines.map((l, i) => (
-                <text key={i} x={n.x + n.w / 2} y={n.y + 12 + LINE_H * (i + 0.75)} fill={i === 0 ? "#f1f5f9" : "#94a3b8"}
-                  fontSize={i === 0 ? FONT + 1 : FONT - 2} fontWeight={i === 0 ? 650 : 400} textAnchor="middle">
-                  {l}
-                </text>
-              ))}
-            </g>
-          ))}
-        </g>
-
-        {/* 图例与注释 */}
-        <g transform={`translate(${MARGIN} ${height - MARGIN - LEGEND_H + 22})`}>
-          {usedKinds.map((k, i) => (
-            <g key={k} transform={`translate(${i * 150} 0)`}>
-              <line x1={0} y1={0} x2={34} y2={0} stroke={SIGNAL_STYLE[k].color} strokeWidth={3} strokeDasharray="8 6" strokeDashoffset={-loopT * 14 * 12} />
-              <circle cx={(loopT * 4 % 1) * 34} cy={0} r={3.5} fill="#fff" stroke={SIGNAL_STYLE[k].color} strokeWidth={2} />
-              <text x={42} y={5} fill="#cbd5e1" fontSize={13}>
-                {SIGNAL_STYLE[k].name}
-              </text>
-            </g>
-          ))}
-          {diagram.notes && (
-            <text x={0} y={30} fill="#64748b" fontSize={12.5}>
-              {diagram.notes.join("　·　")}
-            </text>
-          )}
+          {D.edges.map((e, i) => {
+            if (!e.label || e.lx == null || e.ly == null) return null;
+            const lines = e.label.split("\n");
+            const lw = Math.max(...lines.map((l) => [...l].reduce((w, ch) => w + (cjk(ch) ? 15.5 : 9.2), 0))) + 16;
+            const lh = lines.length * 20 + 6;
+            return (
+              <g key={`l${i}`}>
+                <rect x={e.lx - lw / 2} y={e.ly - lh / 2} width={lw} height={lh} rx={5} fill={T.knock} />
+                {lines.map((l, j) => <text key={j} x={e.lx!} y={e.ly! - lh / 2 + 18 + j * 20} fill={SIGNAL} fontSize={15} textAnchor="middle" fontFamily={FONT_MONO}>{l}</text>)}
+              </g>
+            );
+          })}
         </g>
       </svg>
     </AbsoluteFill>
   );
 };
-
-export const diagramSize = (d: Diagram) => canvasSize(layoutDiagram(d));

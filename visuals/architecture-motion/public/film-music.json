@@ -1,0 +1,39 @@
+{
+  "bpm": 120,
+  "bars": 56,
+  "duration": 112.0,
+  "sections": [
+    {
+      "name": "intro",
+      "startBar": 0,
+      "startSec": 0.0
+    },
+    {
+      "name": "drop1",
+      "startBar": 8,
+      "startSec": 16.0
+    },
+    {
+      "name": "interlude",
+      "startBar": 28,
+      "startSec": 56.0
+    },
+    {
+      "name": "drop2",
+      "startBar": 36,
+      "startSec": 72.0
+    },
+    {
+      "name": "outro",
+      "startBar": 50,
+      "startSec": 100.0
+    }
+  ],
+  "impacts": [
+    0.0,
+    16.0,
+    56.0,
+    72.0,
+    100.0
+  ]
+}

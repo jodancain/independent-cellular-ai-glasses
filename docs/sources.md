@@ -1,6 +1,6 @@
 # 核验来源与参考项目
 
-**来源核验日期 2026-11-02；S43–S48 及 S17、S18 摘要补充于 2026-11-03**
+**来源核验日期 2026-11-02；S43–S48 及 S17、S18 摘要补充于 2026-11-03；S49–S56 补充于 2026-11-04**
 
 以下链接用于支持技术讨论。原厂规格和参考板信息只证明其公开内容；器件可采购性、实际量产配置、整机实现、授权和可获得的 BSP 仍须供应商书面确认。推荐与适用性判断见 [芯片候选](chips.md) 和 [工程判断](engineering-assessment.md)。
 
@@ -313,3 +313,51 @@ Monado 开源 OpenXR 运行时（含基于 Basalt 的 inside-out 追踪与光学
 Road to VR：Google 扩大与 XREAL 的 Android XR 硬件合作（2026-01）
 
 <https://roadtovr.com/google-hardware-partnership-xreal-android-xr-leader/>
+
+## S49
+
+Engadget：Lumus 在 CES 2026 展示 Z-30 光波导（30° 视场、演示机 720×720、几何反射式）与 70° 宽视场光波导原型
+
+<https://www.engadget.com/wearables/lumus-brought-a-massively-wider-fov-to-smartglasses-at-ces-2026-233245949.html>
+
+## S50
+
+Mixed News：Lumus Z-30 光学引擎（30° 视场，比 Z-50 轻约一半）
+
+<https://mixed-news.com/en/lumus-z-30-optical-engine/>
+
+## S51
+
+Virtual Reality News：Meta Ray-Ban Display 采用 Lumus 几何光波导 + LCoS 光源
+
+<https://virtual.reality.news/news/chinese-companys-laser-tech-could-fix-ar-glasses/>
+
+## S52
+
+Advanced Photonics（2025）：户外可读需约 4000 尼特入眼亮度
+
+<https://www.researching.cn/articles/OJcc665f3ab505f0fd>
+
+## S53
+
+JBD Hummingbird 全彩 microLED 光机新闻稿（2023）：0.13 英寸、640×480、30° 视场可在 25–45° 定制、1.0 g、典型功耗约 260 mW
+
+<https://prnewswire.com/news-releases/jbd-launches-hummingbird-polychrome-microled-projector-an-industry-supremacy-for-consumer-ar-market-equipped-with-sid-2023-display-of-the-year-award-winning-0-13-microled-panels-in-mass-production-now-301833241.html>
+
+## S54
+
+BusinessWire：Hexagon Semi HX77 AR 显示处理器基于芯原 Nano IP（2026-03；可驱动双路独立 1080p，支持 MIPI / LVDS / DP / eDP）
+
+<https://secure.businesswire.com/news/home/20260304459518/en/Hexagon-Semis-HX77-AR-Display-Processor-Achieves-Ultra-Low-Power-Consumption-with-VeriSilicons-Nano-IP-Portfolio>
+
+## S55
+
+Synaptics VS680 产品简介（AV1 / HEVC / H.264 硬解、MIPI DSI 输出）
+
+<https://manuals.plus/m/f5a5fcde50f7ed25d614ac5a9c02f2f57254bf011a9184e1b9e8e2a7f18ab7d5>
+
+## S56
+
+BusinessWire：芯原 VC9800D 视频 IP 支持 AV1 / AV2 等（2026-06）
+
+<https://secure.businesswire.com/news/home/20260605153030/en/VeriSilicon-Drives-Commercial-Adoption-of-AV2-Across-Next-Generation-Video-and-Streaming-Applications>

@@ -1,6 +1,6 @@
 # 系统架构图（初版）
 
-**v0.1 · 2026-11-03 · 依据 [串流终端方向](streaming-direction.md) v0.7.3、[技术路线](technical-roadmap.md) v0.1 · 配套 [设计开发要求](design-requirements.md)**
+**v0.1.1 · 2026-11-04 · 依据 [串流终端方向](streaming-direction.md) v0.7.4、[技术路线](technical-roadmap.md) v0.1 · 配套 [设计开发要求](design-requirements.md)**
 
 本页把方案和技术路线画成图，供评审和分工使用。
 
@@ -72,7 +72,7 @@ flowchart LR
 
 ## 2 眼镜硬件框图
 
-眼镜里有四颗芯片：①显示与重投影处理器、②主 SoC、③RedCap 蜂窝、④低功耗 MCU。见技术路线第 0、1.6 节。
+眼镜里有四颗芯片：①显示与重投影处理器（可选：集成硬件解码，扩展为视频与显示处理器）、②主 SoC、③RedCap 蜂窝、④低功耗 MCU。见技术路线第 0、1.2、1.6 节。
 
 ### 2.1 显示、计算与连接
 
@@ -80,9 +80,9 @@ flowchart LR
 flowchart LR
   USBC["USB-C<br/>DP Alt / USB 3 / PD"]
   DPRX["DP 接收桥接芯片<br/>候选 LT7911UXC 类"]
-  DPU["① 显示与重投影处理器<br/>原型 FPGA<br/>扭曲 · 畸变 · 缩放 · 补帧"]
+  DPU["① 显示与重投影处理器<br/>原型 FPGA<br/>扭曲 · 畸变 · 缩放 · 补帧<br/>可选：集成硬解（视频与显示处理器）"]
   DSW["显示开关"]
-  OPT["左右 birdbath + micro-OLED<br/>1920×1200 级 · 90–120 Hz"]
+  OPT["左右光波导 + 光机<br/>视场 30–50° · 光机待定"]
   SOC["② 主 SoC<br/>主选 AR2 Gen 1 / 有条件备选 AR1+ Gen 1<br/>解码 · 6DoF · 手势 · 合成 · 通话"]
   WIFI["Wi-Fi 7 / 蓝牙"]
   CELL["③ RedCap 模组<br/>RG255C-GL（X35）+ eSIM"]
@@ -384,3 +384,4 @@ flowchart LR
 | 版本 | 日期 | 内容 |
 | --- | --- | --- |
 | v0.1 | 2026-11-03 | 初版，共 8 张图：系统全景、硬件框图、数据通路、软件栈、协议通道、功耗状态机、通话链路、部署视图 |
+| v0.1.1 | 2026-11-04 | 显示方案改为左右光波导 + 光机；① 增加可选硬解（视频与显示处理器）；对应方案 v0.7.4 |

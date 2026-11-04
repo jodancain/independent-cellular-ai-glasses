@@ -55,7 +55,7 @@ export const hwCompute: Diagram = {
     { id: "dprx", label: "DP 接收桥接芯片\n候选 LT7911UXC 类" },
     { id: "dpu", label: "① 显示与重投影处理器\n原型 FPGA\n扭曲 · 畸变 · 缩放 · 补帧", accent: true },
     { id: "dsw", label: "显示开关" },
-    { id: "opt", label: "左右 birdbath + micro-OLED\n1920×1200 级 · 90–120 Hz" },
+    { id: "opt", label: "左右光波导 + 光机\n视场 30–50° · 光机待定" },
     { id: "soc", label: "② 主 SoC\n主选 AR2 Gen 1\n有条件备选 AR1+ Gen 1\n解码 · 6DoF · 手势 · 合成 · 通话", accent: true },
     { id: "wifi", label: "Wi-Fi 7 / 蓝牙" },
     { id: "cell", label: "③ RedCap 模组\nRG255C-GL（X35）+ eSIM", accent: true },
