@@ -211,3 +211,21 @@ Linux 内核文档：USB gadget UVC 功能（设备作为标准 USB 摄像头）
 WebRTC 官方网站（开源实时音视频通信框架）
 
 <https://webrtc.org/>
+
+## S32
+
+NVIDIA Audio2Face-3D SDK 代码仓库（语音驱动口型与情绪，C++ / CUDA；许可条款以仓库为准）
+
+<https://github.com/NVIDIA/Audio2Face-3D-SDK>
+
+## S33
+
+LiveKit 代码仓库（开源实时音视频服务，Apache-2.0）
+
+<https://github.com/livekit/livekit>
+
+## S34
+
+Meta Ray-Ban Display 官方产品页（镜框电池 960 mWh，混合使用最长约 6 小时）
+
+<https://www.meta.com/ai-glasses/meta-ray-ban-display-glasses-and-neural-band/>
