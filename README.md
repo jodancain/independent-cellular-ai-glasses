@@ -15,7 +15,7 @@
 | [开发需求](docs/requirements.md) | 硬性边界、场景、硬件选项、系统交付和验证方法 |
 | [芯片候选](docs/chips.md) | 已讨论平台的公开信息、项目判断及待核实项 |
 | [工程判断](docs/engineering-assessment.md) | 选型依据、系统集成风险及证据边界 |
-| [串流终端方向](docs/streaming-direction.md) | v0.5：默认无线、依赖网络而非手机的串流 AR 眼镜；联网全功能 / 断网手表模式、手机级视频通话与虚拟形象、6DoF 真实画面交互、开放云（官方或自建）、8 小时续航方案、芯片组合 |
+| [串流终端方向](docs/streaming-direction.md) | v0.6：默认无线、依赖网络而非手机的串流 AR 眼镜；联网全功能 / 断网手表模式、手机级视频通话与虚拟形象、6DoF 真实画面交互、开放云、8 小时混合续航、≤ 85 g 重量与人体工学、芯片组合 |
 | [供应商回复模板](docs/supplier-response.md) | 可复制的技术方案回复与偏差表 |
 | [完整来源](docs/sources.md) | 官方资料、公开参考项目及核验日期 |
 | [贡献指南](CONTRIBUTING.md) | Issue、Pull Request 和公开资料边界 |

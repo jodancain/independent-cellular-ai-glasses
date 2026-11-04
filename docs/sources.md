@@ -229,3 +229,21 @@ LiveKit 代码仓库（开源实时音视频服务，Apache-2.0）
 Meta Ray-Ban Display 官方产品页（镜框电池 960 mWh，混合使用最长约 6 小时）
 
 <https://www.meta.com/ai-glasses/meta-ray-ban-display-glasses-and-neural-band/>
+
+## S35
+
+Android Central：Ray-Ban Meta Gen 2 与 Gen 1 对比（Gen 2 约 48 g；其他来源 48–52 g 不一）
+
+<https://www.androidcentral.com/apps-software/meta/ray-ban-meta-smart-glasses-gen-2-vs-gen-1>
+
+## S36
+
+Tom's Guide：Meta Ray-Ban Display 发布报道（约 69 g）
+
+<https://www.tomsguide.com/computing/smart-glasses/meta-ray-ban-display-glasses-features-neural-link-price-and-availability>
+
+## S37
+
+Tom's Hardware：XREAL One 评测（约 84 g，无内置电池；One Pro 约 87 g）
+
+<https://www.tomshardware.com/peripherals/wearable-tech/xreal-one-review>
