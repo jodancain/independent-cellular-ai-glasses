@@ -1,6 +1,6 @@
 # 系统架构图（初版）
 
-**v0.1 · 2026-11-03 · 依据 [串流终端方向](streaming-direction.md) v0.7.2、[技术路线](technical-roadmap.md) v0.1 · 配套 [设计开发要求](design-requirements.md)**
+**v0.1 · 2026-11-03 · 依据 [串流终端方向](streaming-direction.md) v0.7.3、[技术路线](technical-roadmap.md) v0.1 · 配套 [设计开发要求](design-requirements.md)**
 
 本页把方案和技术路线画成图，供评审和分工使用。
 
@@ -89,7 +89,7 @@ flowchart LR
   UFS["UFS / eMMC"]
   IMU["IMU ≥ 1 kHz"]
   TRK["追踪相机 ×2"]
-  EYE["眼动相机 ×2 + 红外"]
+  EYE["眼动相机 ×2（预留）"]
   CSW["主摄 MIPI 开关"]
   MIC["多麦克风 → 扬声器"]
 
@@ -99,7 +99,7 @@ flowchart LR
   IMU --> DPU
   IMU --> SOC
   TRK --> SOC
-  EYE --> SOC
+  EYE -.-> SOC
   CSW --> SOC
   MIC --- SOC
   SOC --- WIFI
@@ -120,7 +120,7 @@ flowchart LR
   MIC["麦克风"]
   NAND["小容量 NAND<br/>手表模式录制"]
   PMIC["PMIC + 负载开关"]
-  DOMS["各电源域<br/>显示 · 显示处理器 · 主 SoC · Wi-Fi<br/>蜂窝 · 追踪 / 眼动 / 主摄"]
+  DOMS["各电源域<br/>显示 · 显示处理器 · 主 SoC · Wi-Fi<br/>蜂窝 · 追踪 / 眼动（预留）/ 主摄"]
   BAT["左右耳后电池<br/>合计 5–7 Wh"]
   PD["USB-C PD"]
 
@@ -137,7 +137,7 @@ flowchart LR
   PD --> PMIC
 ```
 
-**布局**（方案第 7.3 节）：前框只放光学、显示、追踪 / 眼动 / 主摄和麦克风；主板、射频、电池全部后移到镜腿，主 SoC 和蜂窝放外侧远离太阳穴，两侧镜腿重量差 ≤ 3 g。
+**布局**（方案第 7.3 节）：前框只放光学、显示、追踪 / 主摄和麦克风；眼动相机仅预留结构空间，当前版本不装。主板、射频、电池全部后移到镜腿，主 SoC 和蜂窝放外侧远离太阳穴，两侧镜腿重量差 ≤ 3 g。
 
 **设计约束**（见技术路线第 1.6–1.9 节、方案第 7.3 节）：
 
@@ -202,7 +202,7 @@ flowchart LR
     H2["统一串流服务<br/>硬件编码 · 串流纪律"]
     H3["OpenXR 远端渲染<br/>参照 ALVR / WiVRn"]
     H4["虚拟摄像头 / 麦克风（V1）"]
-    H5["虚拟形象渲染<br/>语音驱动口型 + 眼动参数 · GPU"]
+    H5["虚拟形象渲染<br/>语音驱动口型 + 头部姿态 · GPU<br/>眼动参数接口预留"]
   end
 
   subgraph SOCSW["眼镜主 SoC（AOSP，基于厂商 BSP）"]
@@ -210,7 +210,7 @@ flowchart LR
     G1["串流客户端<br/>硬解 · 最新帧优先 · 关键帧恢复"]
     G2["空间合成器（自研）<br/>虚拟屏锚定 · 多屏"]
     G3["OpenXR 运行时<br/>厂商运行时，备选 Monado"]
-    G4["感知<br/>6DoF VIO · 手势 · 眼动参数"]
+    G4["感知<br/>6DoF VIO · 手势<br/>眼动参数接口预留"]
     G5["通话<br/>WebRTC（V2）· 云串流（V3）· UVC / UAC 设备（有线 V1）"]
     G6["兼容层接收端<br/>L3 语义卡片 · L4 像素转化"]
     G7["系统服务<br/>连接管理 · 主机发现与切换 · OTA · 同步插件 · 小程序下发"]
@@ -317,13 +317,13 @@ stateDiagram-v2
 ```mermaid
 flowchart LR
   subgraph GL["眼镜"]
-    E1["眼动相机"] --> E2["本地提取注视 / 眨眼参数<br/>（不上传眼部图像）"]
+    E1["眼动相机 ×2（预留，当前版本不装）"] -. "预留" .-> E2["本地提取注视 / 眨眼参数<br/>（预留，当前版本不开发）"]
     E3["IMU / 6DoF"] --> E4["头部姿态"]
     E5["麦克风阵列<br/>波束成形 · 降噪 · 回声消除"]
     E6["主摄（第一人称视角）"]
   end
   subgraph RENDER["GPU 主机或云"]
-    R1["虚拟形象渲染<br/>语音驱动口型 + 眼动 + 头部姿态"]
+    R1["虚拟形象渲染<br/>语音驱动口型 + 头部姿态<br/>（眼动参数接口预留）"]
     R2["输出一路视频<br/>角标注明“虚拟形象”"]
   end
   subgraph PATHS["三种接入方式"]
@@ -331,7 +331,7 @@ flowchart LR
     V2["V2 眼镜独立通话<br/>WebRTC"]
     V3["V3 云端通话<br/>云主机运行通话软件"]
   end
-  E2 --> R1
+  E2 -. "预留" .-> R1
   E4 --> R1
   E5 --> R1
   R1 --> R2
