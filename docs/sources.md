@@ -109,3 +109,87 @@ MentraOS 社区代码仓库
 <https://github.com/Mentra-Community/MentraOS>
 
 手机运行架构可供应用生态设计参考，不能直接当作独立眼镜操作系统。
+
+---
+
+## 串流终端方向补充来源（核验日期 2026-11-03）
+
+以下来源支持 [串流终端方向](streaming-direction.md)。厂商宣传数字（延迟、功耗、性能倍数）未经本项目复现；论坛内容是个别用户反馈，只作为待核实线索。
+
+## S17
+
+Qualcomm Snapdragon AR2 Gen 1 官方产品页（多芯片分布式架构、Wi-Fi 7、宣称 < 2 ms 持续延迟）
+
+<https://www.qualcomm.com/xr-vr-ar/products/ar-series/snapdragon-ar2-gen-1-platform>
+
+## S18
+
+UploadVR：Snapdragon AR1+ Gen 1 发布报道（每眼最高 1280×1280 @ 60 Hz、Wi-Fi 7、端侧小模型）；官方页见 [S7](#s7)
+
+<https://www.uploadvr.com/qualcomm-snapdragon-ar1-plus-smart-glasses-chip/>
+
+## S19
+
+Road to VR：Snapdragon XR2（第一代）发布报道，5G 为可选集成（X55）
+
+<https://roadtovr.com/qualcomm-snapdragon-xr2-5g-announcement/>
+
+## S20
+
+Notebookcheck：XREAL One Pro 发布报道（X1 芯片、USB-C DP 输入、宣称约 3 ms 运动到光子延迟）
+
+<https://www.notebookcheck.net/xreal-one-pro-ar-glasses-launch-with-virtual-171-inch-display-bose-audio-and-optional-12-mp-camera.928200.0.html>
+
+## S21
+
+Qualcomm Snapdragon XR2+ Gen 2 官方产品页
+
+<https://www.qualcomm.com/xr-vr-ar/products/vr-mr-series/snapdragon-xr2-plus-gen-2-platform>
+
+## S22
+
+Qualcomm 新闻稿：Snapdragon X35 5G NR-Light（RedCap）Modem-RF 系统
+
+<https://www.qualcomm.com/news/releases/2023/02/qualcomm-introduces-the-world-s-first-5g-nr-light-modem-rf-system>
+
+## S23
+
+Quectel RG255C 系列官方产品页；Quectel 论坛 eDRX 用户反馈（非官方规格）
+
+<https://www.quectel.com/product/5g-redcap-rg255c-series>
+
+<https://forums.quectel.com/t/seting-up-edrx-for-redcap/53612>
+
+## S24
+
+ALVR 官方代码仓库（PC VR 无线串流到一体机）
+
+<https://github.com/alvr-org/ALVR>
+
+## S25
+
+WiVRn 代码仓库（OpenXR 应用串流到一体机）
+
+<https://github.com/WiVRn/WiVRn>
+
+## S26
+
+Sunshine（LizardByte）与 Moonlight 客户端代码仓库
+
+<https://github.com/LizardByte/Sunshine>
+
+<https://github.com/moonlight-stream/moonlight-qt>
+
+## S27
+
+Windows 虚拟显示驱动开源项目（基于 IddCx 间接显示驱动）
+
+<https://github.com/VirtualDrivers/Virtual-Display-Driver>
+
+## S28
+
+Breezy Desktop 与 XRLinuxDriver（Linux 下 XR 眼镜虚拟屏与头动驱动）
+
+<https://github.com/wheaney/breezy-desktop>
+
+<https://github.com/wheaney/XRLinuxDriver>
