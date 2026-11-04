@@ -247,3 +247,33 @@ Tom's Guide：Meta Ray-Ban Display 发布报道（约 69 g）
 Tom's Hardware：XREAL One 评测（约 84 g，无内置电池；One Pro 约 87 g）
 
 <https://www.tomshardware.com/peripherals/wearable-tech/xreal-one-review>
+
+## S38
+
+Quectel 5G RedCap EVB Kit 官方产品页（适用 RG255AA / RG255C / RG255G-GL 系列）
+
+<https://www.quectel.com/product/5g-redcap-evb-kit>
+
+## S39
+
+DigiKey 论坛：5G-REDCAP-EVB-KIT 购买时不含 RG255C 模组（分销商答复，非厂商规格）
+
+<https://forum.digikey.com/t/quectel-5g-redcap-evb-kit-rg255c/47262>
+
+## S40
+
+Quectel 新闻稿：Rx255C 系列 5G RedCap 模组基于 Snapdragon X35 5G Modem-RF 系统
+
+<https://www.quectel.com/news-and-pr/rx255c-5g-redcap-module/>
+
+## S41
+
+Qoitech Otii Arc Pro 技术规格书（2024，Mouser 托管）
+
+<https://mouser.com/datasheet/2/1394/Qoitech_5282024_Otii_Arc_Pro_TechSpec_2024-3453416.pdf>
+
+## S42
+
+Nordic Power Profiler Kit II 产品简介（Mouser 托管）
+
+<https://www.mouser.com/datasheet/2/297/Power_Profiler_Kit_II_PB_v1_0-1928294.pdf>

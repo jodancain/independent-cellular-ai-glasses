@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>输入→显示延迟测试页</title>
+  <style>
+    :root {
+      --bg: #0b0b0d;
+      --panel: #17171b;
+      --panel-2: #202027;
+      --line: #33333c;
+      --text: #f2f2f5;
+      --muted: #a7a7b3;
+      --accent: #6ea8fe;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+        "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    }
+
+    button, input, select {
+      font: inherit;
+    }
+
+    /* 角落黑白翻转区：保持纯色、无过渡，便于光电传感器/高速相机取边沿 */
+    .flip-square {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: min(48vmin, 520px);
+      height: min(48vmin, 520px);
+      background: #ffffff;
+      border: 2px solid #55555f;
+      z-index: 10;
+      transition: none;
+      user-select: none;
+    }
+
+    .flip-square.is-black {
+      background: #000000;
+    }
+
+    .square-hint {
+      position: fixed;
+      left: 0;
+      top: min(48vmin, 520px);
+      width: min(48vmin, 520px);
+      padding: 6px 10px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.4;
+      background: rgba(11, 11, 13, 0.72);
+      z-index: 11;
+      pointer-events: none;
+    }
+
+    .timer-panel {
+      position: fixed;
+      left: 24px;
+      bottom: 22px;
+      z-index: 12;
+      padding: 12px 18px 14px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: rgba(16, 16, 19, 0.92);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+    }
+
+    .timer-label {
+      color: var(--muted);
+      font-size: 12px;
+      letter-spacing: 0.04em;
+    }
+
+    .ms-timer {
+      margin-top: 4px;
+      font-size: clamp(38px, 6.2vw, 82px);
+      line-height: 1.05;
+      font-weight: 650;
+      font-variant-numeric: tabular-nums;
+      font-family: "SFMono-Regular", Menlo, Consolas, "Liberation Mono", monospace;
+      white-space: nowrap;
+    }
+
+    .flip-state {
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .panel {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: min(430px, 42vw);
+      height: 100%;
+      overflow-y: auto;
+      padding: 18px 18px 28px;
+      border-left: 1px solid var(--line);
+      background: var(--panel);
+      z-index: 20;
+    }
+
+    .panel h1 {
+      margin: 0 0 8px;
+      font-size: 20px;
+      line-height: 1.35;
+    }
+
+    .hint {
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .controls {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--panel-2);
+    }
+
+    .controls label {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .controls input[type="text"],
+    .controls input:not([type]),
+    .controls select {
+      width: 100%;
+      padding: 7px 8px;
+      border: 1px solid #464652;
+      border-radius: 6px;
+      background: #101014;
+      color: var(--text);
+    }
+
+    .controls .wide { grid-column: 1 / -1; }
+
+    .controls .inline {
+      flex-direction: row;
+      align-items: center;
+      gap: 8px;
+      color: var(--text);
+      font-size: 13px;
+    }
+
+    .controls .inline input[type="range"] {
+      flex: 1;
+      accent-color: var(--accent);
+    }
+
+    .controls output {
+      min-width: 44px;
+      color: var(--text);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .controls button {
+      padding: 8px 10px;
+      border: 1px solid #4a4a57;
+      border-radius: 6px;
+      background: #26262e;
+      color: var(--text);
+      cursor: pointer;
+    }
+
+    .controls button:hover {
+      border-color: var(--accent);
+    }
+
+    .controls button.primary {
+      background: #2d4f86;
+      border-color: #4f7fc9;
+    }
+
+    .status {
+      min-height: 18px;
+      margin: 12px 2px 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .table-wrap {
+      margin-top: 12px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      overflow: auto;
+      max-height: 44vh;
+      background: #101014;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    th, td {
+      padding: 7px 8px;
+      border-bottom: 1px solid #2a2a33;
+      text-align: left;
+    }
+
+    th {
+      position: sticky;
+      top: 0;
+      background: #1c1c23;
+      color: #d8d8e2;
+      font-weight: 600;
+    }
+
+    td.num {
+      font-variant-numeric: tabular-nums;
+      font-family: "SFMono-Regular", Menlo, Consolas, monospace;
+    }
+
+    .privacy {
+      margin: 14px 2px 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.65;
+    }
+
+    .warning {
+      color: #ffcf70;
+    }
+
+    @media (max-width: 820px) {
+      .panel {
+        width: 100%;
+        height: 52%;
+        top: auto;
+        bottom: 0;
+        border-left: 0;
+        border-top: 1px solid var(--line);
+      }
+      .flip-square {
+        width: min(44vmin, 300px);
+        height: min(44vmin, 300px);
+      }
+      .square-hint {
+        top: min(44vmin, 300px);
+        width: min(44vmin, 300px);
+      }
+      .timer-panel {
+        bottom: 54%;
+        left: 12px;
+        padding: 8px 12px;
+        background: rgba(16, 16, 19, 0.86);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="flipSquare" class="flip-square" aria-label="黑白翻转方块"></div>
+  <div class="square-hint">黑白翻转区：光电传感器或高速相机对准此区域；空格键可手动翻转。</div>
+
+  <section class="timer-panel" aria-live="off">
+    <div class="timer-label">performance.now() / ms（拍屏比对用绝对毫秒）</div>
+    <div id="msTimer" class="ms-timer">0.000</div>
+    <div id="flipState" class="flip-state">当前：白</div>
+  </section>
+
+  <aside class="panel">
+    <h1>输入→显示延迟测试页</h1>
+    <p class="hint">
+      单文件网页，无外部依赖。全屏后把光电传感器/高速相机对准左上角方块，按空格或定时翻转，
+      记录“输入/动作时间戳”；显示边沿、延迟和有效标记由外接测量结果补填。<br>
+      也可用拍屏比对：页面显示 performance.now() 绝对毫秒，拍下屏幕后与事件时间戳相减。
+    </p>
+
+    <div class="controls">
+      <label>条件编号
+        <input id="conditionInput" type="text" value="C1" autocomplete="off">
+      </label>
+      <label>路径
+        <select id="pathSelect">
+          <option value="A1">A1 有线原始画面</option>
+          <option value="A2">A2 有线编码（近似）</option>
+          <option value="B" selected>B Wi-Fi 串流</option>
+        </select>
+      </label>
+      <label class="wide">测试项
+        <input id="itemInput" type="text" value="内容延迟-翻转" autocomplete="off">
+      </label>
+      <label class="wide inline">
+        <input id="timerToggle" type="checkbox">
+        定时翻转（1–5 Hz）
+      </label>
+      <label class="wide inline">频率
+        <input id="hzRange" type="range" min="1" max="5" step="1" value="2">
+        <output id="hzOut">2 Hz</output>
+      </label>
+      <button id="flipBtn" class="primary" type="button">翻转一次（空格）</button>
+      <button id="markBtn" type="button">记录当前计时</button>
+      <button id="clearBtn" type="button">清空记录</button>
+      <button id="fullBtn" type="button">全屏</button>
+      <button id="csvBtn" class="wide" type="button">导出 CSV（表 1-2 列名）</button>
+    </div>
+
+    <div id="status" class="status"></div>
+
+    <div class="table-wrap">
+      <table id="logTable">
+        <thead>
+          <tr>
+            <th>样本号</th>
+            <th>条件编号</th>
+            <th>路径</th>
+            <th>测试项</th>
+            <th>采集时间</th>
+            <th>输入/动作时间戳 (ms)</th>
+            <th>备注</th>
+          </tr>
+        </thead>
+        <tbody id="logBody"></tbody>
+      </table>
+    </div>
+
+    <p class="privacy">
+      数据只保存在本机浏览器内存中，不上传。原始 CSV、视频和照片保存在受控目录，不提交到公开仓库；
+      不记录真实设备序列号、IMSI/IMEI、账号或受试者个人信息。
+    </p>
+  </aside>
+
+  <script>
+    "use strict";
+
+    (function () {
+      const square = document.getElementById("flipSquare");
+      const msTimer = document.getElementById("msTimer");
+      const flipState = document.getElementById("flipState");
+      const statusEl = document.getElementById("status");
+      const logBody = document.getElementById("logBody");
+      const conditionInput = document.getElementById("conditionInput");
+      const pathSelect = document.getElementById("pathSelect");
+      const itemInput = document.getElementById("itemInput");
+      const timerToggle = document.getElementById("timerToggle");
+      const hzRange = document.getElementById("hzRange");
+      const hzOut = document.getElementById("hzOut");
+      const flipBtn = document.getElementById("flipBtn");
+      const markBtn = document.getElementById("markBtn");
+      const clearBtn = document.getElementById("clearBtn");
+      const fullBtn = document.getElementById("fullBtn");
+      const csvBtn = document.getElementById("csvBtn");
+
+      const records = [];
+      let sequence = 0;
+      let isBlack = false;
+      let timerId = null;
+
+      function pad(value, length) {
+        return String(value).padStart(length, "0");
+      }
+
+      function wallClock(date) {
+        return date.getFullYear() + "-" +
+          pad(date.getMonth() + 1, 2) + "-" +
+          pad(date.getDate(), 2) + " " +
+          pad(date.getHours(), 2) + ":" +
+          pad(date.getMinutes(), 2) + ":" +
+          pad(date.getSeconds(), 2) + "." +
+          pad(date.getMilliseconds(), 3);
+      }
+
+      function fileStamp(date) {
+        return date.getFullYear() +
+          pad(date.getMonth() + 1, 2) +
+          pad(date.getDate(), 2) + "_" +
+          pad(date.getHours(), 2) +
+          pad(date.getMinutes(), 2) +
+          pad(date.getSeconds(), 2);
+      }
+
+      function updateStatus(extra) {
+        const timerText = timerToggle.checked ? ("开，" + hzRange.value + " Hz") : "关";
+        const text = "已记录 " + records.length + " 个事件；当前：" +
+          (isBlack ? "黑" : "白") + "；定时翻转：" + timerText +
+          (extra ? "；" + extra : "");
+        statusEl.textContent = text;
+      }
+
+      function renderTimer() {
+        msTimer.textContent = performance.now().toFixed(3);
+        window.requestAnimationFrame(renderTimer);
+      }
+
+      function addRecord(kind) {
+        const eventTs = performance.now();
+        const now = new Date();
+        const record = {
+          seq: ++sequence,
+          condition: conditionInput.value.trim() || "C1",
+          path: pathSelect.value,
+          item: itemInput.value.trim() || "内容延迟-翻转",
+          collectedAt: wallClock(now),
+          inputTs: eventTs.toFixed(3),
+          displayTs: "",
+          latency: "",
+          frame: String(sequence),
+          valid: "是",
+          note: kind === "mark"
+            ? "手动记录当前计时；需补显示边沿/延迟后才有意义"
+            : "页面翻转记录；显示边沿与延迟需由光电/高速相机结果补齐"
+        };
+        records.push(record);
+        appendRow(record);
+        updateStatus(kind === "mark" ? "已记录当前计时" : "已翻转");
+      }
+
+      function appendRow(record) {
+        const tr = document.createElement("tr");
+        const values = [
+          record.seq,
+          record.condition,
+          record.path,
+          record.item,
+          record.collectedAt,
+          record.inputTs,
+          record.note
+        ];
+        values.forEach(function (value, index) {
+          const td = document.createElement("td");
+          td.textContent = String(value);
+          if (index === 0 || index === 5) {
+            td.className = "num";
+          }
+          tr.appendChild(td);
+        });
+        logBody.appendChild(tr);
+        tr.scrollIntoView({ block: "nearest" });
+      }
+
+      function flip(source) {
+        isBlack = !isBlack;
+        square.classList.toggle("is-black", isBlack);
+        flipState.textContent = "当前：" + (isBlack ? "黑" : "白") +
+          "（" + (source || "手动") + "）";
+        addRecord(source === "标记" ? "mark" : "flip");
+      }
+
+      function restartTimer() {
+        if (timerId !== null) {
+          window.clearInterval(timerId);
+          timerId = null;
+        }
+        if (!timerToggle.checked) {
+          updateStatus();
+          return;
+        }
+        const hz = Number(hzRange.value);
+        const intervalMs = Math.round(1000 / hz);
+        timerId = window.setInterval(function () {
+          flip("定时");
+        }, intervalMs);
+        updateStatus();
+      }
+
+      function setFrequencyLabel() {
+        hzOut.textContent = hzRange.value + " Hz";
+      }
+
+      function csvEscape(value) {
+        const text = value === null || value === undefined ? "" : String(value);
+        if (/[",\r\n]/.test(text)) {
+          return '"' + text.replace(/"/g, '""') + '"';
+        }
+        return text;
+      }
+
+      function exportCsv() {
+        const headers = [
+          "样本号", "条件编号", "路径", "测试项", "采集时间",
+          "输入/动作时间戳", "显示边沿时间戳", "延迟 (ms)",
+          "帧号/场次", "有效", "无效原因/备注"
+        ];
+        const lines = [headers.join(",")];
+        records.forEach(function (record) {
+          const row = [
+            record.seq, record.condition, record.path, record.item,
+            record.collectedAt, record.inputTs, record.displayTs,
+            record.latency, record.frame, record.valid, record.note
+          ];
+          lines.push(row.map(csvEscape).join(","));
+        });
+        // 加 BOM，方便 Excel 直接识别 UTF-8 中文。
+        const blob = new Blob(["\ufeff" + lines.join("\r\n") + "\r\n"], {
+          type: "text/csv;charset=utf-8"
+        });
+        const url = URL.createObjectURL(blob);
+        const anchor = document.createElement("a");
+        anchor.href = url;
+        anchor.download = "latency_log_" + fileStamp(new Date()) + ".csv";
+        document.body.appendChild(anchor);
+        anchor.click();
+        document.body.removeChild(anchor);
+        window.setTimeout(function () {
+          URL.revokeObjectURL(url);
+        }, 1000);
+        updateStatus("已导出 " + records.length + " 行 CSV");
+      }
+
+      function toggleFullscreen() {
+        if (!document.fullscreenElement) {
+          const target = document.documentElement;
+          if (target.requestFullscreen) {
+            target.requestFullscreen().catch(function () {});
+          }
+        } else if (document.exitFullscreen) {
+          document.exitFullscreen().catch(function () {});
+        }
+      }
+
+      flipBtn.addEventListener("click", function () { flip("按钮"); });
+      markBtn.addEventListener("click", function () { addRecord("mark"); });
+      clearBtn.addEventListener("click", function () {
+        if (records.length === 0) {
+          updateStatus("没有可清空的记录");
+          return;
+        }
+        if (window.confirm("确定清空页面内记录？已导出的 CSV 不受影响。")) {
+          records.length = 0;
+          sequence = 0;
+          logBody.textContent = "";
+          updateStatus("已清空记录");
+        }
+      });
+      fullBtn.addEventListener("click", toggleFullscreen);
+      csvBtn.addEventListener("click", exportCsv);
+
+      timerToggle.addEventListener("change", restartTimer);
+      hzRange.addEventListener("input", function () {
+        setFrequencyLabel();
+        if (timerToggle.checked) {
+          restartTimer();
+        } else {
+          updateStatus();
+        }
+      });
+
+      document.addEventListener("keydown", function (event) {
+        const tag = (event.target && event.target.tagName || "").toLowerCase();
+        const typing = ["input", "select", "textarea"].indexOf(tag) >= 0;
+        if (event.code === "Space" && !typing) {
+          event.preventDefault();
+          if (event.repeat) {
+            return;
+          }
+          flip("空格");
+          return;
+        }
+        if ((event.key === "f" || event.key === "F") && !typing) {
+          event.preventDefault();
+          toggleFullscreen();
+        }
+      });
+
+      document.addEventListener("visibilitychange", function () {
+        if (document.hidden && timerToggle.checked) {
+          statusEl.textContent = "页面进入后台，浏览器可能节流定时器；正式测试请保持本页在前台。";
+        } else {
+          updateStatus();
+        }
+      });
+
+      setFrequencyLabel();
+      updateStatus("等待翻转");
+      renderTimer();
+    })();
+  </script>
+</body>
+</html>

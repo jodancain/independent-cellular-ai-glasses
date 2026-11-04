@@ -1,0 +1,46 @@
+{
+  "_note": "示例数据，非实测",
+  "start": {
+    "test_start": {
+      "protocol": "TCP",
+      "num_streams": 4,
+      "duration": 60,
+      "reverse": 0
+    }
+  },
+  "intervals": [
+    {
+      "sum": {
+        "start": 0,
+        "end": 60,
+        "seconds": 60,
+        "bytes": 93750000,
+        "bits_per_second": 12500000.0
+      }
+    }
+  ],
+  "end": {
+    "sum_sent": {
+      "start": 0,
+      "end": 60,
+      "seconds": 60,
+      "bytes": 93750000,
+      "bits_per_second": 12500000.0,
+      "retransmits": 21
+    },
+    "sum_received": {
+      "start": 0,
+      "end": 60,
+      "seconds": 60,
+      "bytes": 92250000,
+      "bits_per_second": 12300000.0
+    },
+    "sum": {
+      "start": 0,
+      "end": 60,
+      "seconds": 60,
+      "bytes": 92250000,
+      "bits_per_second": 12300000.0
+    }
+  }
+}

@@ -17,6 +17,8 @@
 | [工程判断](docs/engineering-assessment.md) | 选型依据、系统集成风险及证据边界 |
 | [串流终端方向](docs/streaming-direction.md) | v0.7：默认无线、依赖网络而非手机的串流 AR 眼镜；联网全功能 / 断网手表模式、手机级视频通话与虚拟形象、6DoF 真实画面交互、开放云、8 小时混合续航、续航优先、佩戴无感的重量分配、芯片组合 |
 | [现成硬件验证计划](docs/validation-plan.md) | 自研前用现成设备做的 6 组验证：串流延迟与兼容、6DoF 交互、RedCap 联网与睡眠、手表模式功耗、视频通话与虚拟形象、佩戴无感基线；含设备清单、步骤、通过标准与记录表 |
+| [第 1、3、6 组设备准备清单](docs/equipment-groups-1-3-6.md) | 先做的三组验证的候选设备、共用关系与核实项（不含价格） |
+| [测试工具](tools/README.md) | 第 1、3、6 组的计时页、延迟统计、RedCap AT / 测速 / 电流分析、人体工学统计脚本（标准库，含单元测试） |
 | [供应商回复模板](docs/supplier-response.md) | 可复制的技术方案回复与偏差表 |
 | [完整来源](docs/sources.md) | 官方资料、公开参考项目及核验日期 |
 | [贡献指南](CONTRIBUTING.md) | Issue、Pull Request 和公开资料边界 |
