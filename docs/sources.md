@@ -1,6 +1,6 @@
 # 核验来源与参考项目
 
-**来源核验日期 2026-11-02**
+**来源核验日期 2026-11-02；S43–S48 及 S17、S18 摘要补充于 2026-11-03**
 
 以下链接用于支持技术讨论。原厂规格和参考板信息只证明其公开内容；器件可采购性、实际量产配置、整机实现、授权和可获得的 BSP 仍须供应商书面确认。推荐与适用性判断见 [芯片候选](chips.md) 和 [工程判断](engineering-assessment.md)。
 
@@ -118,13 +118,13 @@ MentraOS 社区代码仓库
 
 ## S17
 
-Qualcomm Snapdragon AR2 Gen 1 官方产品页（多芯片分布式架构、Wi-Fi 7、宣称 < 2 ms 持续延迟）
+Qualcomm Snapdragon AR2 Gen 1 官方产品页（多芯片分布式架构，含 AR 处理器与协处理器、Wi-Fi 7、宣称 < 2 ms 持续延迟）
 
 <https://www.qualcomm.com/xr-vr-ar/products/ar-series/snapdragon-ar2-gen-1-platform>
 
 ## S18
 
-UploadVR：Snapdragon AR1+ Gen 1 发布报道（每眼最高 1280×1280 @ 60 Hz、Wi-Fi 7、端侧小模型）；官方页见 [S7](#s7)
+UploadVR：Snapdragon AR1+ Gen 1 发布报道（每眼最高 1280×1280 @ 60 Hz、Wi-Fi 7、端侧小模型；比 AR1 小约 26%、功耗低约 7%，改进 ISP，支持单目 / 双目 HUD 输出）；官方页见 [S7](#s7)
 
 <https://www.uploadvr.com/qualcomm-snapdragon-ar1-plus-smart-glasses-chip/>
 
@@ -277,3 +277,39 @@ Qoitech Otii Arc Pro 技术规格书（2024，Mouser 托管）
 Nordic Power Profiler Kit II 产品简介（Mouser 托管）
 
 <https://www.mouser.com/datasheet/2/297/Power_Profiler_Kit_II_PB_v1_0-1928294.pdf>
+
+## S43
+
+UploadVR：Qualcomm Snapdragon Reality Elite 发布（2026-06，XR2+ Gen 2 继任；面向一体机与有线计算盒，GPU +60%、NPU 48 TOPS、UFS 4.0、2×USB 3.1、蓝牙 6.0，均为厂商宣称）
+
+<https://uploadvr.com/qualcomm-snapdragon-reality-elite-new-flagship-xr-chipset>
+
+## S44
+
+XREAL Aura（原 Project Aura）：眼镜内 X1S 芯片 + 外接 Snapdragon 计算盒；约 70° 视场、每眼 1920×1200、最高 120 Hz、眼镜约 95 g（媒体报道，计算盒芯片名称各报道说法不一）
+
+<https://www.androidcentral.com/gaming/virtual-reality/xreal-project-aura-google-io-2026>
+
+## S45
+
+龙迅 LT7911UXC 产品简介（Type-C / DP1.4a 接收，四路 MIPI DSI / CSI 或 LVDS 输出，DSC；标注为预发布资料，LCSC 托管）
+
+<https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2212091108_LONTIUM-SEMICONDUCTOR-LT7911UXC-U3B00AED_C5310989.pdf>
+
+## S46
+
+Sony Semiconductor Solutions 新闻稿：0.44 英寸全高清 OLED 微显示屏（ECX350F，120 Hz，最高 10000 尼特，2024-09）
+
+<https://sony.mediaroom.com/2024-09-24-Sony-Semiconductor-Solutions-to-Release-0-44-Type-Full-HD-OLED-Microdisplay-with-Industrys-Smallest-Pixels-and-Highest-Brightness>
+
+## S47
+
+Monado 开源 OpenXR 运行时（含基于 Basalt 的 inside-out 追踪与光学手部追踪，追踪部分标为实验性）
+
+<https://monado.freedesktop.org/>
+
+## S48
+
+Road to VR：Google 扩大与 XREAL 的 Android XR 硬件合作（2026-01）
+
+<https://roadtovr.com/google-hardware-partnership-xreal-android-xr-leader/>
