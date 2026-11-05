@@ -4,16 +4,16 @@
 
 | 产物 | 生成方式 |
 | --- | --- |
-| `dist/system-architecture-motion.html` | 10 张图的 Remotion 播放页，单文件，可直接打开：`node scripts/build-html.mjs` |
+| `dist/system-architecture-motion.html` | 11 张图的 Remotion 播放页，单文件，可直接打开：`node scripts/build-html.mjs` |
 | `dist/plan-film.mp4` | 112 秒全流程宣传片，配乐由代码合成：`npx remotion render PlanFilm dist/plan-film.mp4` |
-| `dist/tech-film.mp4` | 约 8 分 34 秒技术全解（24 章），配乐由代码合成：`npx remotion render TechFilm dist/tech-film.mp4 --timeout=400000` |
+| `dist/tech-film.mp4` | 约 9 分钟技术全解（25 章），配乐由代码合成：`npx remotion render TechFilm dist/tech-film.mp4 --timeout=400000` |
 | `dist-site/` | 公网站点（文档转网页 + 实时框图）：`node scripts/build-site.mjs` |
 
 ## 数据与代码
 
-- `src/diagrams/index.ts`：10 张图的节点和连线定义。
+- `src/diagrams/index.ts`：11 张图的节点和连线定义。
 - `src/diagrams/hw-manual.json`：硬件框图的手工排版。
-- `src/diagrams/layouts.json`：其余 9 张图的直角走线排版，由 ELK 生成：
+- `src/diagrams/layouts.json`：其余 10 张图的直角走线排版，由 ELK 生成：
   ```bash
   npx esbuild scripts/elk-all.ts --bundle --platform=node --outfile=/tmp/elk-all.cjs && node /tmp/elk-all.cjs
   ```

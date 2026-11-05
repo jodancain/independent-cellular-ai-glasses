@@ -8,7 +8,7 @@
 > - 图中的芯片和器件型号都是**候选**，按技术路线第 1 节的门禁和切换条件定案，M1 结束前不冻结。
 > - 接口和数值是【设计目标】，还没有实测。
 > - 图用 Mermaid 编写，GitHub 上能直接显示。
-> - **动态版**：同样 10 张图的信号流动动画（Remotion），单文件 HTML 在 [`visuals/architecture-motion/dist/system-architecture-motion.html`](../visuals/architecture-motion/dist/system-architecture-motion.html)，下载后用浏览器打开。
+> - **动态版**：同样 11 张图的信号流动动画（Remotion），单文件 HTML 在 [`visuals/architecture-motion/dist/system-architecture-motion.html`](../visuals/architecture-motion/dist/system-architecture-motion.html)，下载后用浏览器打开。
 
 **目录**
 
@@ -21,6 +21,7 @@
 7. 视频通话与虚拟形象链路
 8. 部署视图：官方云与自建
 9. 显示模式与小脑调度
+10. 投屏与多路信号
 
 ---
 
@@ -458,6 +459,57 @@ flowchart LR
 
 ---
 
+## 10 投屏与多路信号
+
+对应[方案](streaming-direction.md)第 3.11、4.5 节。规则：实时视频只解 1 路全帧率；多块虚拟屏和多人通话在手上合成一路；主摄一次采集多处使用；投屏的操作经控制面回传；A1 时显示处理器把 DP 画面层和 MCU 的气泡叠加层合成后上屏。能同时硬解几路、操作回传延迟阈值待 M1 实测。
+
+```mermaid
+flowchart LR
+  subgraph HANDS["手：多路合一"]
+    PC["PC<br/>多块虚拟屏打包成一路<br/>按回传事件注入输入"]
+    MEET["主机 / 云<br/>多人通话合成一路宫格"]
+    PH["手机<br/>看板描述 · 降级流发缩略图"]
+  end
+  subgraph FEET["脚：控制 > 音频 > 通话 > 投屏 > 同步"]
+    WD["有线 A1 / A2"]
+    WF["Wi-Fi 7"]
+    CL["蜂窝"]
+    BL["BLE 常连"]
+  end
+  subgraph CERE["小脑：同时处理多少路"]
+    DEC["主 SoC：1 路全帧率硬解<br/>其余为缩略图图层"]
+    CAP["主 SoC：主摄一次采集<br/>取景 · 识别 · 通话编码"]
+    MIX["主 SoC：混音 + 回声消除"]
+    COMP["空间合成器<br/>投屏拆层锚定 · 气泡 · 状态"]
+    INP["输入回传<br/>手势指针 · 点击 · 文字"]
+    MCU["MCU：气泡叠加层"]
+    DPU["显示处理器<br/>DP 层 + 叠加层 → 扭曲上屏"]
+  end
+  subgraph ORG["器官"]
+    WG["光波导（视网膜）"]
+    EYE["主摄（眼睛）"]
+    MIC["麦克风（嘴巴）"]
+    SPK["扬声器 / 耳机（耳朵）"]
+  end
+  PC -- 一路打包视频 --> WF
+  PC -- A1 原始画面 --> WD
+  MEET -- 一路宫格 --> CL
+  PH -- 描述 · 缩略图 --> BL
+  WF --> DEC
+  CL --> DEC
+  WD -- DP --> DPU
+  BL --> MCU
+  DEC --> COMP
+  COMP -- MIPI --> DPU
+  MCU -- 叠加层 --> DPU
+  DPU --> WG
+  EYE --> CAP
+  CAP -- 通话上行 --> CL
+  MIC --> MIX
+  MIX --> SPK
+  INP -. 输入事件（控制面） .-> WF
+```
+
 ## 修订记录
 
 | 版本 | 日期 | 内容 |
@@ -467,3 +519,4 @@ flowchart LR
 | v0.1.2 | 2026-11-04 | 同步决定 #22–#24：MCU 改 A/B 两案（A 案外加小 BLE），补 BLE 常驻与音频前级；L0/L3/L4 改为投屏 / 看板 / 看板兜底；对应方案 v0.7.5 |
 | v0.2 | 2026-11-04 | 全部图按脑 / 小脑 / 手重画：全景加脑与 BLE 控制面，硬件图加 MCU 常驻听音，数据通路与状态机加看板态，软件栈加 Mika 手与云端 LLM，协议加看板描述与 BLE，部署加自建 LLM；新增第 9 张图“显示模式与小脑调度” |
 | v0.3 | 2026-11-05 | 按决定 #25 加入脚：全景图“连接方式”改为脚，软件栈与协议图标出小脑、手、脚的归属；加读图约定，对应方案 v0.7.6 |
+| v0.3.1 | 2026-11-05 | 新增第 10 张图“投屏与多路信号”（方案第 3.11、4.5 节） |

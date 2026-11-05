@@ -518,7 +518,7 @@
    {
     "ref": "U6",
     "value": "显示与重投影处理器（原型 FPGA，占位）",
-    "note": "扭曲、畸变与色差校正、缩放、60→90 Hz 以上补帧；型号 M1 定"
+    "note": "扭曲、畸变与色差校正、缩放、60→90 Hz 以上补帧；两路 MIPI 输入（主 SoC、DP 桥）+ 一路来自 MCU 的低速叠加层（DP 层 + 气泡叠加，方案 §4.5）；型号 M1 定"
    },
    {
     "ref": "U10",
@@ -560,9 +560,9 @@
    "copper_edge_clearance": 3,
    "silk_overlap": 21,
    "silk_over_copper": 26,
-   "unconnected_items": 429
+   "unconnected_items": 433
   },
-  "unconnected": 429,
+  "unconnected": 433,
   "roles": {
    "器官 · 眼睛": [
     {
@@ -969,7 +969,7 @@
    {
     "ref": "U6",
     "value": "显示与重投影处理器（原型 FPGA，占位）",
-    "note": "扭曲、畸变与色差校正、缩放、60→90 Hz 以上补帧；型号 M1 定",
+    "note": "扭曲、畸变与色差校正、缩放、60→90 Hz 以上补帧；两路 MIPI 输入（主 SoC、DP 桥）+ 一路来自 MCU 的低速叠加层（DP 层 + 气泡叠加，方案 §4.5）；型号 M1 定",
     "role": "小脑"
    },
    {

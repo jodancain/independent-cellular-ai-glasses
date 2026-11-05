@@ -518,7 +518,7 @@
    "rot": 0,
    "group": "dpu",
    "dnp": false,
-   "note": "扭曲、畸变与色差校正、缩放、60→90 Hz 以上补帧；型号 M1 定",
+   "note": "扭曲、畸变与色差校正、缩放、60→90 Hz 以上补帧；两路 MIPI 输入（主 SoC、DP 桥）+ 一路来自 MCU 的低速叠加层（DP 层 + 气泡叠加，方案 §4.5）；型号 M1 定",
    "pads": {
     "1": "VDD_DPU_CORE",
     "2": "+1V8_IO",
@@ -567,11 +567,15 @@
     "45": "IMU_MISO",
     "46": "IMU_CS",
     "47": "IMU_INT1",
-    "48": "DPU_RST_N",
-    "49": "DPU_CFG_SCK",
-    "50": "DPU_CFG_IO0",
-    "51": "DPU_CFG_IO1",
-    "52": "DPU_CFG_CS"
+    "48": "DISP_LS_SCK",
+    "49": "DISP_LS_MOSI",
+    "50": "DISP_LS_CS",
+    "51": "DISP_LS_DC",
+    "52": "DPU_RST_N",
+    "53": "DPU_CFG_SCK",
+    "54": "DPU_CFG_IO0",
+    "55": "DPU_CFG_IO1",
+    "56": "DPU_CFG_CS"
    }
   },
   "U7": {

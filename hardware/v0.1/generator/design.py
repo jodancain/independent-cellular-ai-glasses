@@ -315,9 +315,10 @@ def board_b():
         dpu += [(f'TX{eye}_CKP', f'DPU_{eye}_CKP', 'output'), (f'TX{eye}_CKN', f'DPU_{eye}_CKN', 'output')] + sum([[(f'TX{eye}_D{l}P', f'DPU_{eye}_D{l}P', 'output'), (f'TX{eye}_D{l}N', f'DPU_{eye}_D{l}N', 'output')] for l in range(2)], [])
     dpu += [('SPI_SCK', 'DPU_SPI_SCK', 'input'), ('SPI_MOSI', 'DPU_SPI_MOSI', 'input'), ('SPI_MISO', 'DPU_SPI_MISO', 'output'), ('SPI_CS', 'DPU_SPI_CS', 'input'),
             ('IMU_SCK', 'IMU_SCK', 'output'), ('IMU_MOSI', 'IMU_MOSI', 'output'), ('IMU_MISO', 'IMU_MISO', 'input'), ('IMU_CS', 'IMU_CS', 'output'), ('IMU_INT', 'IMU_INT1', 'input'),
+            ('OVL_SCK', 'DISP_LS_SCK', 'input'), ('OVL_MOSI', 'DISP_LS_MOSI', 'input'), ('OVL_CS', 'DISP_LS_CS', 'input'), ('OVL_DC', 'DISP_LS_DC', 'input'),
             ('RESET_N', 'DPU_RST_N', 'input'), ('CFG_SCK', 'DPU_CFG_SCK', 'output'), ('CFG_SO', 'DPU_CFG_IO0', 'bidirectional'), ('CFG_SI', 'DPU_CFG_IO1', 'bidirectional'), ('CFG_CS', 'DPU_CFG_CS', 'output')]
     placeholder(b, 'U6', 'DPU_FPGA_PLACEHOLDER', '显示与重投影处理器（原型 FPGA，占位）', (10, 10), dpu, pos=(40, 15), group='dpu',
-                note='扭曲、畸变与色差校正、缩放、60→90 Hz 以上补帧；型号 M1 定')
+                note='扭曲、畸变与色差校正、缩放、60→90 Hz 以上补帧；两路 MIPI 输入（主 SoC、DP 桥）+ 一路来自 MCU 的低速叠加层（DP 层 + 气泡叠加，方案 §4.5）；型号 M1 定')
     b.add('U7', 'W25Q128JW_WSON8', 'Package_SON:WSON-8-1EP_6x5mm_P1.27mm_EP3.4x4.3mm', 'FPGA 配置 Flash',
           {'1': 'DPU_CFG_CS', '2': 'DPU_CFG_IO1', '3': None, '4': 'GND', '5': 'DPU_CFG_IO0', '6': 'DPU_CFG_SCK', '7': None, '8': '+1V8_IO', '9': 'GND'},
           custom={'sym': FLASH_SYM}, side='B', pos=(48, 10), group='dpu')

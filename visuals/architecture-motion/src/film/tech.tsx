@@ -161,6 +161,16 @@ export const CHAPTERS: Chapter[] = [
     ],
   },
   {
+    en: "CAST · MULTI-SIGNAL", t: "投屏与多路信号", role: "小脑 · 脚 · 手", diagram: "CastMulti", points: [
+      ["实时视频只解 1 路全帧率", "被挤到边上的流改用手发来的低帧率缩略图"],
+      ["多屏打包成一路", "PC 多块虚拟屏拼进一路视频，小脑拆层分别锚定"],
+      ["多人通话由手合成", "宫格在主机或云上合成，眼镜只解一路"],
+      ["一次采集多处使用", "主摄同时供取景、识别、通话编码"],
+      ["投屏操作回传", "手势、点击、文字走控制面回到手；有线时作 USB HID"],
+      ["A1 也能出气泡", "显示处理器把 DP 层和 MCU 叠加层合成后上屏"],
+    ],
+  },
+  {
     en: "HANDS · AGENT", t: "手的接入：手机 Agent", role: "手", V: VHand, points: [
       ["参考 Mika（Apache-2.0）", "虚拟显示后台操作、无障碍读屏、目标化输入注入"],
       ["统一执行入口", "守卫 → 锁屏检查 → 不可逆检查 → 确认"],
@@ -348,7 +358,7 @@ const Outro: React.FC = () => {
         <KineticTitle text="脑在眼镜和云上，小脑在眼镜里，手是所有主机，脚是每一种连接" start={10} size={50} stagger={1} />
       </div>
       <div style={{ marginTop: 40, fontFamily: MONO, fontSize: 30, opacity: inn(f, 60, 90) }}>glasses.youngtuo.win</div>
-      <div style={{ marginTop: 12, fontSize: 20, color: C.dim, opacity: inn(f, 70, 100) }}>完整文档与 10 张动态架构图见网站 · 型号为候选，数值为设计目标</div>
+      <div style={{ marginTop: 12, fontSize: 20, color: C.dim, opacity: inn(f, 70, 100) }}>完整文档与 11 张动态架构图见网站 · 型号为候选，数值为设计目标</div>
     </AbsoluteFill>
   );
 };
