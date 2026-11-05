@@ -1,0 +1,358 @@
+{
+ "mcu_board": {
+  "title": "MCU 常驻板（脑的反射 · 常醒 · 听音 · BLE）",
+  "notes": [
+   "右镜腿形 78×16 mm，6 层，双面贴装",
+   "MCU A 案：STM32N657 + nRF52832（常驻 BLE）",
+   "去耦电容为初版代表值，须按各芯片手册补全",
+   "未布线：只有布局与飞线"
+  ],
+  "layers": 6,
+  "parts": 84,
+  "nets": 95,
+  "placeholders": [],
+  "erc": {
+   "pin_to_pin": 2
+  },
+  "drc": {
+   "hole_clearance": 5,
+   "isolated_copper": 1,
+   "silk_edge_clearance": 4,
+   "text_height": 1,
+   "silk_overlap": 99,
+   "silk_over_copper": 105,
+   "unconnected_items": 335
+  },
+  "unconnected": 335,
+  "ics": [
+   {
+    "ref": "AE1",
+    "value": "2.4GHz 片状天线",
+    "note": ""
+   },
+   {
+    "ref": "J1",
+    "value": "板间 DF40 40P（至主板）",
+    "note": ""
+   },
+   {
+    "ref": "J2",
+    "value": "右侧电池",
+    "note": "两块电池分置左右耳后"
+   },
+   {
+    "ref": "J3",
+    "value": "扬声器",
+    "note": ""
+   },
+   {
+    "ref": "J4",
+    "value": "SWD（N6 + nRF）",
+    "note": "第 6 脚复用 nRF SWDIO 只为初版调试，正式版分开"
+   },
+   {
+    "ref": "MK1",
+    "value": "PDM 麦克风 L",
+    "note": ""
+   },
+   {
+    "ref": "MK2",
+    "value": "PDM 麦克风 R",
+    "note": ""
+   },
+   {
+    "ref": "U1",
+    "value": "STM32N657X0H3Q",
+    "note": "MCU A 案；引脚来自 ST 官方 open pin data"
+   },
+   {
+    "ref": "U2",
+    "value": "APS6404L 64Mb PSRAM 1.8V",
+    "note": "方案要求外挂 PSRAM 放录像缓冲；容量待按录像需求放大"
+   },
+   {
+    "ref": "U3",
+    "value": "W25Q128JW 1.8V NOR",
+    "note": "手表模式录制存储；方案写小容量 NAND，初版先用 NOR，待定"
+   },
+   {
+    "ref": "U4",
+    "value": "nRF52832-QFAA",
+    "note": "常驻收手机这只手的气泡 / 看板描述"
+   },
+   {
+    "ref": "U5",
+    "value": "MAX98357A",
+    "note": "开放式扬声器；防漏音靠结构与算法"
+   },
+   {
+    "ref": "U6",
+    "value": "BQ24075",
+    "note": "USB 输入 → 系统电源路径 + 右侧电池充电"
+   },
+   {
+    "ref": "U7",
+    "value": "TPS62823 1.8V",
+    "note": ""
+   },
+   {
+    "ref": "U8",
+    "value": "TLV75533 3.3V",
+    "note": "接近传感器供电"
+   },
+   {
+    "ref": "U9",
+    "value": "APDS-9160 佩戴检测",
+    "note": "电平匹配待核（3.3V 供电、1.8V I2C）"
+   }
+  ]
+ },
+ "main_board": {
+  "title": "主板（小脑：主 SoC + 显示处理器 + RedCap + 接口）",
+  "notes": [
+   "M1 桌面载板形态 100×70 mm，8 层 HDI",
+   "主 SoC / Wi-Fi 7 / LT7911UXC / FPGA / RedCap / 开关 为占位：引脚待供应商资料或 NDA",
+   "RedCap 模组外形尺寸待按移远硬件设计手册核实",
+   "未布线：只有布局与飞线"
+  ],
+  "layers": 8,
+  "parts": 55,
+  "nets": 207,
+  "placeholders": [
+   {
+    "ref": "U1",
+    "value": "Snapdragon AR2 Gen 1（占位）",
+    "note": "主选 AR2 Gen 1；引脚与封装需与高通签 NDA 后替换；有条件备选 AR1+ Gen 1"
+   },
+   {
+    "ref": "U2",
+    "value": "SoC 配套 PMIC（占位）",
+    "note": "随 SoC 平台选定"
+   },
+   {
+    "ref": "U3",
+    "value": "Wi-Fi 7 + 蓝牙连接芯片（占位）",
+    "note": "AR2 / AR1+ 平台配套连接芯片"
+   },
+   {
+    "ref": "U4",
+    "value": "Quectel RG255C-GL（X35，占位）",
+    "note": "引脚编号按移远《RG255C-GL 硬件设计手册》替换；外形尺寸待核"
+   },
+   {
+    "ref": "J12",
+    "value": "Nano SIM 卡座（M2 期间保留）",
+    "note": "选型待定"
+   },
+   {
+    "ref": "U5",
+    "value": "eSIM（MFF2，占位）",
+    "note": "与卡座二选一贴装"
+   },
+   {
+    "ref": "U6",
+    "value": "显示与重投影处理器（原型 FPGA，占位）",
+    "note": "扭曲、畸变与色差校正、缩放、60→90 Hz 以上补帧；型号 M1 定"
+   },
+   {
+    "ref": "U10",
+    "value": "LT7911UXC DP→MIPI（占位）",
+    "note": "A1 有线原始画面入口；引脚待龙迅资料"
+   },
+   {
+    "ref": "U11",
+    "value": "Type-C DP/USB3 复用开关（占位）",
+    "note": "A1 时 4 路 DP；A2 时 USB 3"
+   },
+   {
+    "ref": "U12",
+    "value": "USB PD + DP Alt 控制器（占位）",
+    "note": "受电 + DP Alt 协商"
+   },
+   {
+    "ref": "U16",
+    "value": "主摄 MIPI 二选一（占位）",
+    "note": "同一时刻只给 MCU 或主 SoC；MCU 仲裁"
+   },
+   {
+    "ref": "U17",
+    "value": "显示开关 L（占位）",
+    "note": "正常接显示处理器；手表模式切到 MCU 低速显示"
+   },
+   {
+    "ref": "U18",
+    "value": "显示开关 R（占位）",
+    "note": "正常接显示处理器；手表模式切到 MCU 低速显示"
+   }
+  ],
+  "erc": {
+   "isolated_pin_label": 1,
+   "pin_to_pin": 1
+  },
+  "drc": {
+   "hole_clearance": 2,
+   "copper_edge_clearance": 3,
+   "silk_overlap": 21,
+   "silk_over_copper": 26,
+   "unconnected_items": 429
+  },
+  "unconnected": 429,
+  "ics": [
+   {
+    "ref": "J1",
+    "value": "USB-C（DP Alt / USB 3 / PD）",
+    "note": ""
+   },
+   {
+    "ref": "J10",
+    "value": "蜂窝主天线",
+    "note": ""
+   },
+   {
+    "ref": "J11",
+    "value": "蜂窝分集天线",
+    "note": ""
+   },
+   {
+    "ref": "J12",
+    "value": "Nano SIM 卡座（M2 期间保留）",
+    "note": "选型待定"
+   },
+   {
+    "ref": "J13",
+    "value": "左侧电池",
+    "note": ""
+   },
+   {
+    "ref": "J2",
+    "value": "板间 DF40 40P（至 MCU 板）",
+    "note": ""
+   },
+   {
+    "ref": "J3",
+    "value": "追踪相机 L",
+    "note": ""
+   },
+   {
+    "ref": "J4",
+    "value": "追踪相机 R",
+    "note": ""
+   },
+   {
+    "ref": "J5",
+    "value": "主摄（1080p30 起）",
+    "note": ""
+   },
+   {
+    "ref": "J6",
+    "value": "眼动相机（预留）",
+    "note": "眼动只预留，不贴"
+   },
+   {
+    "ref": "J7",
+    "value": "光机 L（光波导）",
+    "note": "光机 LCoS / 全彩 microLED 在 M1 定案，引脚按光机重排"
+   },
+   {
+    "ref": "J8",
+    "value": "光机 R（光波导）",
+    "note": "光机 LCoS / 全彩 microLED 在 M1 定案，引脚按光机重排"
+   },
+   {
+    "ref": "J9",
+    "value": "Wi-Fi 天线",
+    "note": ""
+   },
+   {
+    "ref": "U1",
+    "value": "Snapdragon AR2 Gen 1（占位）",
+    "note": "主选 AR2 Gen 1；引脚与封装需与高通签 NDA 后替换；有条件备选 AR1+ Gen 1"
+   },
+   {
+    "ref": "U10",
+    "value": "LT7911UXC DP→MIPI（占位）",
+    "note": "A1 有线原始画面入口；引脚待龙迅资料"
+   },
+   {
+    "ref": "U11",
+    "value": "Type-C DP/USB3 复用开关（占位）",
+    "note": "A1 时 4 路 DP；A2 时 USB 3"
+   },
+   {
+    "ref": "U12",
+    "value": "USB PD + DP Alt 控制器（占位）",
+    "note": "受电 + DP Alt 协商"
+   },
+   {
+    "ref": "U13",
+    "value": "ESD",
+    "note": ""
+   },
+   {
+    "ref": "U14",
+    "value": "BQ24075 左侧",
+    "note": ""
+   },
+   {
+    "ref": "U15",
+    "value": "TLV75533 3.3V 射频",
+    "note": ""
+   },
+   {
+    "ref": "U16",
+    "value": "主摄 MIPI 二选一（占位）",
+    "note": "同一时刻只给 MCU 或主 SoC；MCU 仲裁"
+   },
+   {
+    "ref": "U17",
+    "value": "显示开关 L（占位）",
+    "note": "正常接显示处理器；手表模式切到 MCU 低速显示"
+   },
+   {
+    "ref": "U18",
+    "value": "显示开关 R（占位）",
+    "note": "正常接显示处理器；手表模式切到 MCU 低速显示"
+   },
+   {
+    "ref": "U2",
+    "value": "SoC 配套 PMIC（占位）",
+    "note": "随 SoC 平台选定"
+   },
+   {
+    "ref": "U3",
+    "value": "Wi-Fi 7 + 蓝牙连接芯片（占位）",
+    "note": "AR2 / AR1+ 平台配套连接芯片"
+   },
+   {
+    "ref": "U4",
+    "value": "Quectel RG255C-GL（X35，占位）",
+    "note": "引脚编号按移远《RG255C-GL 硬件设计手册》替换；外形尺寸待核"
+   },
+   {
+    "ref": "U5",
+    "value": "eSIM（MFF2，占位）",
+    "note": "与卡座二选一贴装"
+   },
+   {
+    "ref": "U6",
+    "value": "显示与重投影处理器（原型 FPGA，占位）",
+    "note": "扭曲、畸变与色差校正、缩放、60→90 Hz 以上补帧；型号 M1 定"
+   },
+   {
+    "ref": "U7",
+    "value": "FPGA 配置 Flash",
+    "note": ""
+   },
+   {
+    "ref": "U8",
+    "value": "TPS62823 DPU 内核",
+    "note": ""
+   },
+   {
+    "ref": "U9",
+    "value": "LSM6DSM 6 轴 IMU（≥1 kHz）",
+    "note": "型号待选（方案要求 6 轴、采样 ≥1 kHz）"
+   }
+  ]
+ }
+}

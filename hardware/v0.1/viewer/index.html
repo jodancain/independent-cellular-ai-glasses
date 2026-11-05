@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>独立蜂窝 AI 眼镜 · 初版原理图与 PCB（three.js）</title>
+<style>
+  :root { --bg:#07090c; --panel:rgba(14,17,22,.92); --line:rgba(232,226,212,.16); --text:#eceae4; --dim:#8f96a3; --acc:#e8e2d4; }
+  * { box-sizing:border-box; }
+  html,body { margin:0; height:100%; background:var(--bg); color:var(--text); font:14px/1.5 "PingFang SC","Noto Sans SC",system-ui,sans-serif; overflow:hidden; }
+  #stage { position:fixed; inset:0; }
+  header { position:fixed; top:0; left:0; right:0; display:flex; align-items:center; gap:18px; padding:12px 18px; background:linear-gradient(var(--bg),rgba(7,9,12,0)); z-index:5; }
+  header h1 { font-size:15px; font-weight:700; margin:0; letter-spacing:.5px; white-space:nowrap; }
+  nav { display:flex; gap:6px; flex-wrap:wrap; }
+  nav button { background:transparent; color:var(--dim); border:1px solid var(--line); border-radius:999px; padding:6px 14px; font:inherit; cursor:pointer; }
+  nav button.on { color:#07090c; background:var(--acc); border-color:var(--acc); font-weight:700; }
+  aside { position:fixed; right:14px; top:64px; bottom:14px; width:330px; background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:16px 18px; overflow:auto; z-index:5; }
+  aside h2 { font-size:16px; margin:0 0 4px; }
+  aside h3 { font-size:12px; letter-spacing:2px; color:var(--dim); margin:18px 0 6px; font-weight:600; }
+  aside p, aside li { color:#c9ccd4; margin:4px 0; }
+  aside ul { padding-left:16px; margin:4px 0; }
+  .kv { display:grid; grid-template-columns:auto 1fr; gap:3px 12px; }
+  .kv b { color:var(--text); font-weight:600; }
+  .warn { color:#e8c27a; }
+  .tools { position:fixed; left:14px; bottom:14px; display:flex; gap:8px; z-index:5; flex-wrap:wrap; max-width:calc(100% - 380px); }
+  .tools button, .tools input { background:var(--panel); color:var(--text); border:1px solid var(--line); border-radius:10px; padding:7px 12px; font:inherit; }
+  .tools button { cursor:pointer; }
+  .tools input { width:220px; }
+  #hits { position:fixed; left:14px; bottom:60px; max-height:40vh; overflow:auto; background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:6px; display:none; z-index:6; min-width:260px; }
+  #hits div { padding:4px 8px; border-radius:6px; cursor:pointer; color:#c9ccd4; }
+  #hits div:hover { background:rgba(232,226,212,.1); }
+  #loading { position:fixed; inset:0; display:flex; align-items:center; justify-content:center; color:var(--dim); z-index:4; pointer-events:none; }
+  .tag { display:inline-block; font-size:11px; padding:1px 8px; border-radius:999px; border:1px solid var(--line); color:var(--dim); margin-left:6px; }
+</style>
+<script type="importmap">
+{ "imports": { "three": "./vendor/three/build/three.module.js", "three/addons/": "./vendor/three/examples/jsm/" } }
+</script>
+</head>
+<body>
+<div id="stage"></div>
+<div id="loading">加载中…</div>
+<header>
+  <h1>独立蜂窝 AI 眼镜 · 初版原理图与 PCB <span class="tag">v0.1 · 未布线</span></h1>
+  <nav id="tabs">
+    <button data-v="sch:mcu_board" class="on">原理图 · MCU 常驻板</button>
+    <button data-v="sch:main_board">原理图 · 主板</button>
+    <button data-v="pcb:mcu_board">PCB 3D · MCU 常驻板</button>
+    <button data-v="pcb:main_board">PCB 3D · 主板</button>
+    <button data-v="glasses">装进眼镜</button>
+  </nav>
+</header>
+<aside id="info"></aside>
+<div class="tools" id="tools"></div>
+<div id="hits"></div>
+<script type="module" src="./app.js"></script>
+</body>
+</html>

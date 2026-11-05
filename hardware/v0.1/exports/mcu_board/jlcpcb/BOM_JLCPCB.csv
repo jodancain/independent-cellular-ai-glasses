@@ -1,0 +1,49 @@
+﻿Comment,Designator,Footprint,LCSC,Qty,DNP,备注
+2.4GHz 片状天线,AE1,Johanson_2450AT18x100,,1,,待填立创商城编号
+10uF,"C1,C11,C55,C63",C_0402_1005Metric,,4,,待填立创商城编号
+4.7uF,"C2,C12,C44,C61,C62,C64",C_0402_1005Metric,,6,,待填立创商城编号
+1uF,"C3,C13,C60",C_0402_1005Metric,,3,,待填立创商城编号
+100nF,"C4-C6,C14-C18,C22,C30,C31,C40,C42,C45,C50,C51,C56,C70",C_0201_0603Metric,,18,,待填立创商城编号
+2.2uF,C21,C_0201_0603Metric,,1,,待填立创商城编号
+8pF,"C23,C24",C_0201_0603Metric,,2,,待填立创商城编号
+6pF,"C25,C26",C_0201_0603Metric,,2,,待填立创商城编号
+1uF,"C41,C65",C_0201_0603Metric,,2,,待填立创商城编号
+47nF,C43,C_0201_0603Metric,,1,,待填立创商城编号
+12pF,"C46,C47",C_0201_0603Metric,,2,,待填立创商城编号
+0.8pF,C48,C_0201_0603Metric,,1,,待填立创商城编号
+状态灯,D1,LED_0402_1005Metric,,1,,待填立创商城编号
+板间 DF40 40P（至主板）,J1,Hirose_DF40C-40DS-0.4V_2x20_P0.4mm,,1,,待填立创商城编号
+右侧电池,J2,JST_SH_SM03B-SRSS-TB_1x03-1MP_P1.00mm_Horizontal,,1,,待填立创商城编号
+扬声器,J3,JST_SH_SM02B-SRSS-TB_1x02-1MP_P1.00mm_Horizontal,,1,,待填立创商城编号
+SWD（N6 + nRF）,J4,Tag-Connect_TC2030-IDC-NL_2x03_P1.27mm_Vertical,,1,,待填立创商城编号
+2.2uH,L1,L_0805_2012Metric,,1,,待填立创商城编号
+10uH,L2,L_0603_1608Metric,,1,,待填立创商城编号
+15nH,L3,L_0402_1005Metric,,1,,待填立创商城编号
+3.9nH,L4,L_0201_0603Metric,,1,,待填立创商城编号
+0.47uH,L5,L_0805_2012Metric,,1,,待填立创商城编号
+PDM 麦克风 L,MK1,Knowles_LGA-5_3.5x2.65mm,,1,,待填立创商城编号
+PDM 麦克风 R,MK2,Knowles_LGA-5_3.5x2.65mm,,1,,待填立创商城编号
+10k,"R1,R22,R23",R_0201_0603Metric,,3,,待填立创商城编号
+4.02k 1%,R2,R_0201_0603Metric,,1,,待填立创商城编号
+1.13k,R10,R_0201_0603Metric,,1,,待填立创商城编号
+3.0k,R11,R_0201_0603Metric,,1,,待填立创商城编号
+46.4k,R12,R_0201_0603Metric,,1,,待填立创商城编号
+200k,R13,R_0201_0603Metric,,1,,待填立创商城编号
+100k,R14,R_0201_0603Metric,,1,,待填立创商城编号
+0,"R15,R25",R_0201_0603Metric,,2,DNP,待填立创商城编号
+1M,"R16,R17",R_0201_0603Metric,,2,,待填立创商城编号
+2.2k,"R20,R21",R_0201_0603Metric,,2,,待填立创商城编号
+1k,R24,R_0201_0603Metric,,1,,待填立创商城编号
+电源 / 唤醒键,SW1,SW_SPST_PTS810,,1,,待填立创商城编号
+STM32N657X0H3Q,U1,ST_VFBGA-264_14x14mm_P0.8mm,,1,,待填立创商城编号
+APS6404L 64Mb PSRAM 1.8V,U2,Winbond_USON-8-1EP_3x2mm_P0.5mm_EP0.2x1.6mm,,1,,待填立创商城编号
+W25Q128JW 1.8V NOR,U3,WSON-8-1EP_6x5mm_P1.27mm_EP3.4x4.3mm,,1,,待填立创商城编号
+nRF52832-QFAA,U4,QFN-48-1EP_6x6mm_P0.4mm_EP4.6x4.6mm,,1,,待填立创商城编号
+MAX98357A,U5,TQFN-16-1EP_3x3mm_P0.5mm_EP1.23x1.23mm,,1,,待填立创商城编号
+BQ24075,U6,VQFN-16-1EP_3x3mm_P0.5mm_EP1.6x1.6mm,,1,,待填立创商城编号
+TPS62823 1.8V,U7,Texas_VSON-HR-8_1.5x2mm_P0.5mm,,1,,待填立创商城编号
+TLV75533 3.3V,U8,SOT-23-5,,1,,待填立创商城编号
+APDS-9160 佩戴检测,U9,Broadcom_APDS-9160-003,,1,,待填立创商城编号
+48MHz,Y1,Crystal_SMD_2016-4Pin_2.0x1.6mm,,1,,待填立创商城编号
+32.768kHz,Y2,Crystal_SMD_2012-2Pin_2.0x1.2mm,,1,,待填立创商城编号
+32MHz,Y3,Crystal_SMD_2016-4Pin_2.0x1.6mm,,1,,待填立创商城编号

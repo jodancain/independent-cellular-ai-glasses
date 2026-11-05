@@ -1,0 +1,4 @@
+(fp_lib_table
+  (version 7)
+  (lib (name "glasses")(type "KiCad")(uri "${KIPRJMOD}/glasses.pretty")(options "")(descr "眼镜项目自建封装"))
+)

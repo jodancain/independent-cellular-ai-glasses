@@ -17,9 +17,12 @@ const docs = readdirSync(`${REPO}/docs`).filter((f) => f.endsWith(".md"));
 const titleOf = (md) => (md.match(/^#\s+(.+)$/m)?.[1] ?? "文档").trim();
 const hasFilm = existsSync("dist/plan-film.mp4");
 const hasTech = existsSync("dist/tech-film.mp4");
+const HW = `${REPO}/hardware/v0.1`;
+const hasHW = existsSync(`${HW}/viewer/app.js`);
 const NAV = [
   ["index.html", "首页"],
   ...(hasFilm ? [["film.html", "视频"]] : []),
+  ...(hasHW ? [["hardware.html", "硬件"]] : []),
   ["architecture-motion.html", "动态架构图"],
   ["system-architecture.html", "架构图"],
   ["technical-roadmap.html", "技术路线"],
@@ -138,6 +141,7 @@ const hero = `<section class="hero">
 <p class="cap">眼镜硬件：显示、计算与连接。光带是一路信号，线型代表信号类型。<a href="architecture-motion.html">看全部 10 张架构图</a></p>
 <div class="entries">
   ${hasFilm ? `<a href="film.html">视频<span>宣传片「她的进化」· 技术全解 24 章</span></a>` : ""}
+  ${hasHW ? `<a href="hardware.html">硬件 · 初版原理图与 PCB<span>three.js 三维查看 · KiCad 工程下载</span></a>` : ""}
   <a href="technical-roadmap.html">技术路线<span>小脑四芯片、MCU A/B 案、M0–M3</span></a>
   <a href="design-requirements.html">设计开发要求<span>191 条可验收要求</span></a>
   <a href="streaming-direction.html">方案<span>串流终端方向 v0.7.5</span></a>
@@ -164,5 +168,30 @@ if (hasFilm) {
 <p class="cap"><a href="${TECH}" download>下载 MP4</a> · 数字均取自方案文档，方案数值为设计目标，未实测</p>`;
   }
   writeFileSync(`${OUT}/film.html`, page("film.html", "视频", body + tech));
+}
+if (hasHW) {
+  // 硬件初版：three.js 查看页（站点为扁平目录，依赖文件改名平铺）
+  const V = `${HW}/viewer`, T = `${V}/vendor/three`;
+  copyFileSync(`${T}/build/three.module.js`, `${OUT}/three.module.js`);
+  copyFileSync(`${T}/build/three.core.js`, `${OUT}/three.core.js`);
+  copyFileSync(`${T}/examples/jsm/controls/OrbitControls.js`, `${OUT}/OrbitControls.js`);
+  copyFileSync(`${T}/examples/jsm/controls/MapControls.js`, `${OUT}/MapControls.js`);
+  copyFileSync(`${T}/examples/jsm/utils/BufferGeometryUtils.js`, `${OUT}/BufferGeometryUtils.js`);
+  writeFileSync(`${OUT}/GLTFLoader.js`, readFileSync(`${T}/examples/jsm/loaders/GLTFLoader.js`, "utf8").replace("../utils/BufferGeometryUtils.js", "./BufferGeometryUtils.js"));
+  if (existsSync(`${T}/LICENSE`)) copyFileSync(`${T}/LICENSE`, `${OUT}/three-LICENSE.txt`);
+  for (const f of readdirSync(`${V}/data`)) copyFileSync(`${V}/data/${f}`, `${OUT}/hw-${f}`);
+  copyFileSync(`${V}/app.js`, `${OUT}/hw-app.js`);
+  const dl = [];
+  for (const [src, name, label] of [
+    [`${HW}/exports/mcu_board/mcu_board-schematic.pdf`, "hw-mcu_board-schematic.pdf", "MCU 板原理图 PDF"],
+    [`${HW}/exports/main_board/main_board-schematic.pdf`, "hw-main_board-schematic.pdf", "主板原理图 PDF"],
+    [`${HW}/exports/kicad-projects-v0.1.zip`, "hw-kicad-projects-v0.1.zip", "KiCad 工程"],
+  ]) if (existsSync(src)) { copyFileSync(src, `${OUT}/${name}`); dl.push(`<a href="${name}" download>${label}</a>`); }
+  let html = readFileSync(`${V}/index.html`, "utf8")
+    .replace(/<script type="importmap">[\s\S]*?<\/script>/, `<script type="importmap">{ "imports": { "three": "./three.module.js", "three/addons/controls/": "./", "three/addons/loaders/": "./" } }</script>`)
+    .replace('<script type="module" src="./app.js"></script>', `<script>window.HW_DATA = "./hw-";</script><script type="module" src="./hw-app.js"></script>`)
+    .replace("</header>", `</header><div class="dl"><a href="index.html">← 返回网站</a>${dl.join("")}</div>`)
+    .replace("</style>", `  .dl { position:fixed; top:58px; right:14px; width:330px; display:flex; gap:14px; flex-wrap:wrap; font-size:12px; z-index:6; } .dl a { color:#8f96a3; text-decoration:none; } .dl a:hover { color:#eceae4; } aside { top:88px !important; } header { padding-right:360px !important; } header nav { flex-wrap:wrap; }\n</style>`);
+  writeFileSync(`${OUT}/hardware.html`, html);
 }
 console.log(readdirSync(OUT).join(" "));

@@ -1,0 +1,1540 @@
+{
+ "name": "mcu_board",
+ "title": "MCU 常驻板（脑的反射 · 常醒 · 听音 · BLE）",
+ "layers": 6,
+ "outline": [
+  [
+   0,
+   2
+  ],
+  [
+   2,
+   0
+  ],
+  [
+   74,
+   0
+  ],
+  [
+   78,
+   4
+  ],
+  [
+   78,
+   12
+  ],
+  [
+   74,
+   16
+  ],
+  [
+   2,
+   16
+  ],
+  [
+   0,
+   14
+  ]
+ ],
+ "notes": [
+  "右镜腿形 78×16 mm，6 层，双面贴装",
+  "MCU A 案：STM32N657 + nRF52832（常驻 BLE）",
+  "去耦电容为初版代表值，须按各芯片手册补全",
+  "未布线：只有布局与飞线"
+ ],
+ "parts": {
+  "U1": {
+   "fp": "glasses:ST_VFBGA-264_14x14mm_P0.8mm",
+   "value": "STM32N657X0H3Q",
+   "side": "F",
+   "pos": [
+    31,
+    8
+   ],
+   "rot": 0,
+   "group": "mcu",
+   "dnp": false,
+   "note": "MCU A 案；引脚来自 ST 官方 open pin data",
+   "pads": {
+    "G4": "N6_BOOT0",
+    "U3": "CAM_MCU_CKN",
+    "T3": "CAM_MCU_CKP",
+    "U5": "CAM_MCU_D0N",
+    "T5": "CAM_MCU_D0P",
+    "U4": "CAM_MCU_D1N",
+    "T4": "CAM_MCU_D1P",
+    "P5": "N6_CSI_REXT",
+    "G3": "N6_NRST",
+    "A1": "+1V8",
+    "F1": "N6_V08CAP",
+    "E1": "+1V8",
+    "G13": "+1V8",
+    "H12": "+1V8",
+    "H13": "+1V8",
+    "J12": "+1V8",
+    "J13": "+1V8",
+    "K13": "+1V8",
+    "A4": "+1V8",
+    "N6": "+1V8",
+    "F6": "+1V8",
+    "R5": "+1V8",
+    "M5": "+1V8",
+    "G1": "+1V8",
+    "C5": "+1V8",
+    "L6": "VCORE_0V8",
+    "L12": "VCORE_0V8",
+    "M7": "VCORE_0V8",
+    "M9": "VCORE_0V8",
+    "M11": "VCORE_0V8",
+    "N8": "VCORE_0V8",
+    "N10": "VCORE_0V8",
+    "N12": "VCORE_0V8",
+    "P11": "VCORE_0V8",
+    "R4": "VCORE_0V8",
+    "L13": "+1V8",
+    "L14": "+1V8",
+    "M14": "+1V8",
+    "M15": "+1V8",
+    "N13": "+1V8",
+    "P13": "+1V8",
+    "E8": "+1V8",
+    "F8": "+1V8",
+    "E9": "+1V8",
+    "F9": "+1V8",
+    "K1": "+1V8",
+    "K2": "+1V8",
+    "K3": "+1V8",
+    "K4": "+1V8",
+    "K5": "+1V8",
+    "K6": "+1V8",
+    "G2": "VCORE_0V8",
+    "J1": "N6_SMPS_LX",
+    "J2": "N6_SMPS_LX",
+    "J3": "N6_SMPS_LX",
+    "J4": "N6_SMPS_LX",
+    "J5": "N6_SMPS_LX",
+    "J6": "N6_SMPS_LX",
+    "T2": "GND",
+    "A17": "GND",
+    "F7": "GND",
+    "F10": "GND",
+    "F11": "GND",
+    "F12": "GND",
+    "G12": "GND",
+    "K12": "GND",
+    "M8": "GND",
+    "M10": "GND",
+    "M12": "GND",
+    "M13": "GND",
+    "N5": "GND",
+    "N7": "GND",
+    "N9": "GND",
+    "N11": "GND",
+    "U1": "GND",
+    "U17": "GND",
+    "M6": "GND",
+    "G6": "GND",
+    "F2": "GND",
+    "H1": "GND",
+    "H2": "GND",
+    "H3": "GND",
+    "H4": "GND",
+    "H5": "GND",
+    "H6": "GND",
+    "U10": "VBAT_SENSE",
+    "P9": "DISP_LS_CS",
+    "R7": "DISP_LS_DC",
+    "T7": "DISP_SEL",
+    "U7": "CAM_SEL",
+    "U6": "N6_SWDIO",
+    "T6": "N6_SWCLK",
+    "T8": "CELL_PWR_EN",
+    "R14": "WIFI_PWR_EN",
+    "U14": "BLE_IRQ",
+    "R8": "BLE_RESET_N",
+    "P8": "WEAR_DET",
+    "R12": "AMP_SD_MODE",
+    "U8": "CHG_PGOOD_N",
+    "P7": "CHG_STAT_N",
+    "E15": "I2S_LRCLK",
+    "R11": "BTN_PWR",
+    "U11": "LED_STAT",
+    "E17": "I2S_BCLK",
+    "A9": "I2C_PWR_SDA",
+    "C8": "DISP_LS_SCK",
+    "D1": "LSE_IN",
+    "C1": "LSE_OUT",
+    "D9": "BLE_UART_TX",
+    "C12": "I2S_DOUT",
+    "B15": "SOC_SPI_MISO",
+    "D14": "BLE_UART_RX",
+    "A12": "SOC_SPI_SCK",
+    "F15": "MIC_PDM_CLK",
+    "C11": "I2C_PWR_SCL",
+    "A15": "MIC_PDM_DAT",
+    "M2": "BLE_UART_CTS",
+    "R13": "MCU_IRQ_TO_SOC",
+    "R9": "SOC_WAKE_REQ",
+    "T10": "SOC_RESET_N",
+    "U13": "SOC_PWR_EN",
+    "P6": "DISP_LS_MOSI",
+    "M4": "BLE_UART_RTS",
+    "A7": "HSE_IN",
+    "B7": "HSE_OUT",
+    "B2": "SOC_SPI_CS",
+    "D2": "SOC_SPI_MOSI",
+    "R17": "FLASH_CS",
+    "T17": "FLASH_IO0",
+    "R15": "FLASH_IO1",
+    "N17": "FLASH_IO2",
+    "R16": "FLASH_IO3",
+    "P15": "FLASH_CLK",
+    "M17": "PSRAM_CS",
+    "N16": "PSRAM_CLK",
+    "G17": "PSRAM_IO0",
+    "H16": "PSRAM_IO1",
+    "J17": "PSRAM_IO2",
+    "J16": "PSRAM_IO3"
+   }
+  },
+  "L1": {
+   "fp": "Inductor_SMD:L_0805_2012Metric",
+   "value": "2.2uH",
+   "side": "B",
+   "pos": null,
+   "rot": 0,
+   "group": "mcu",
+   "dnp": false,
+   "note": "",
+   "pads": {
+    "1": "N6_SMPS_LX",
+    "2": "VCORE_0V8"
+   }
+  },
+  "C1": {
+   "fp": "Capacitor_SMD:C_0402_1005Metric",
+   "value": "10uF",
+   "side": "B",
+   "pos": null,
+   "rot": 0,
+   "group": "mcu",
+   "dnp": false,
+   "note": "",
+   "pads": {
+    "1": "VCORE_0V8",
+    "2": "GND"
+   }
+  },
+  "C2": {
+   "fp": "Capacitor_SMD:C_0402_1005Metric",
+   "value": "4.7uF",
+   "side": "B",
+   "pos": null,
+   "rot": 0,
+   "group": "mcu",
+   "dnp": false,
+   "note": "",
+   "pads": {
+    "1": "VCORE_0V8",
+    "2": "GND"
+   }
+  },
+  "C3": {
+   "fp": "Capacitor_SMD:C_0402_1005Metric",
+   "value": "1uF",
+   "side": "B",
+   "pos": null,
+   "rot": 0,
+   "group": "mcu",
+   "dnp": false,
+   "note": "",
+   "pads": {
+    "1": "VCORE_0V8",
+    "2": "GND"
+   }
+  },
+  "C4": {
+   "fp": "Capacitor_SMD:C_0201_0603Metric",
+   "value": "100nF",
+   "side": "B",
+   "pos": null,
+   "rot": 0,
+   "group": "mcu",
+   "dnp": false,
+   "note": "",
+   "pads": {
+    "1": "VCORE_0V8",
+    "2": "GND"
+   }
+  },
+  "C5": {
+   "fp": "Capacitor_SMD:C_0201_0603Metric",
+   "value": "100nF",
+   "side": "B",
+   "pos": null,
+   "rot": 0,
+   "group": "mcu",
+   "dnp": false,
+   "note": "",
+   "pads": {
+    "1": "VCORE_0V8",
+    "2": "GND"
+   }
+  },
+  "C6": {
+   "fp": "Capacitor_SMD:C_0201_0603Metric",
+   "value": "100nF",
+   "side": "B",
+   "pos": null,
+   "rot": 0,
+   "group": "mcu",
+   "dnp": false,
+   "note": "",
+   "pads": {
+    "1": "VCORE_0V8",
+    "2": "GND"
+   }
+  },
+  "C11": {
+   "fp": "Capacitor_SMD:C_0402_1005Metric",
+   "value": "10uF",
+   "side": "B",
+   "pos": null,
+   "rot": 0,
+   "group": "mcu",
+   "dnp": false,
+   "note": "",
+   "pads": {
+    "1": "+1V8",
+    "2": "GND"
+   }
+  },
+  "C12": {
+   "fp": "Capacitor_SMD:C_0402_1005Metric",
+   "value": "4.7uF",
+   "side": "B",
+   "pos": null,
+   "rot": 0,
+   "group": "mcu",
+   "dnp": false,
+   "note": "",
+   "pads": {
+    "1": "+1V8",
+    "2": "GND"
+   }
+  },
+  "C13": {
+   "fp": "Capacitor_SMD:C_0402_1005Metric",
+   "value": "1uF",
+   "side": "B",
+   "pos": null,
+   "rot": 0,
+   "group": "mcu",
+   "dnp": false,
+   "note": "",
+   "pads": {
+    "1": "+1V8",
+    "2": "GND"
+   }
+  },
+  "C14": {
+   "fp": "Capacitor_SMD:C_0201_0603Metric",
+   "value": "100nF",
+   "side": "B",
+   "pos": null,
+   "rot": 0,
+   "group": "mcu",
+   "dnp": false,
+   "note": "",
+   "pads": {
+    "1": "+1V8",
+    "2": "GND"
+   }
+  },
+  "C15": {
+   "fp": "Capacitor_SMD:C_0201_0603Metric",
+   "value": "100nF",
+   "side": "B",
+   "pos": null,
+   "rot": 0,
+   "group": "mcu",
+   "dnp": false,
+   "note": "",
+   "pads": {
+    "1": "+1V8",
+    "2": "GND"
+   }
+  },
+  "C16": {
+   "fp": "Capacitor_SMD:C_0201_0603Metric",
+   "value": "100nF",
+   "side": "B",
+   "pos": null,
+   "rot": 0,
+   "group": "mcu",
+   "dnp": false,
+   "note": "",
+   "pads": {
+    "1": "+1V8",
+    "2": "GND"
+   }
+  },
+  "C17": {
+   "fp": "Capacitor_SMD:C_0201_0603Metric",
+   "value": "100nF",
+   "side": "B",
+   "pos": null,
+   "rot": 0,
+   "group": "mcu",
+   "dnp": false,
+   "note": "",
+   "pads": {
+    "1": "+1V8",
+    "2": "GND"
+   }
+  },
+  "C18": {
+   "fp": "Capacitor_SMD:C_0201_0603Metric",
+   "value": "100nF",
+   "side": "B",
+   "pos": null,
+   "rot": 0,
+   "group": "mcu",
+   "dnp": false,
+   "note": "",
+   "pads": {
+    "1": "+1V8",
+    "2": "GND"
+   }
+  },
+  "C21": {
+   "fp": "Capacitor_SMD:C_0201_0603Metric",
+   "value": "2.2uF",
+   "side": "B",
+   "pos": null,
+   "rot": 0,
+   "group": "mcu",
+   "dnp": false,
+   "note": "",
+   "pads": {
+    "1": "N6_V08CAP",
+    "2": "GND"
+   }
+  },
+  "R1": {
+   "fp": "Resistor_SMD:R_0201_0603Metric",
+   "value": "10k",
+   "side": "B",
+   "pos": null,
+   "rot": 0,
+   "group": "mcu",
+   "dnp": false,
+   "note": "",
+   "pads": {
+    "1": "N6_BOOT0",
+    "2": "GND"
+   }
+  },
+  "C22": {
+   "fp": "Capacitor_SMD:C_0201_0603Metric",
+   "value": "100nF",
+   "side": "B",
+   "pos": null,
+   "rot": 0,
+   "group": "mcu",
+   "dnp": false,
+   "note": "",
+   "pads": {
+    "1": "N6_NRST",
+    "2": "GND"
+   }
+  },
+  "R2": {
+   "fp": "Resistor_SMD:R_0201_0603Metric",
+   "value": "4.02k 1%",
+   "side": "B",
+   "pos": null,
+   "rot": 0,
+   "group": "mcu",
+   "dnp": false,
+   "note": "CSI 参考电阻，阻值待核",
+   "pads": {
+    "1": "N6_CSI_REXT",
+    "2": "GND"
+   }
+  },
+  "Y1": {
+   "fp": "Crystal:Crystal_SMD_2016-4Pin_2.0x1.6mm",
+   "value": "48MHz",
+   "side": "B",
+   "pos": null,
+   "rot": 0,
+   "group": "mcu",
+   "dnp": false,
+   "note": "",
+   "pads": {
+    "1": "HSE_IN",
+    "2": "GND",
+    "3": "HSE_OUT",
+    "4": "GND"
+   }
+  },
+  "C23": {
+   "fp": "Capacitor_SMD:C_0201_0603Metric",
+   "value": "8pF",
+   "side": "B",
+   "pos": null,
+   "rot": 0,
+   "group": "mcu",
+   "dnp": false,
+   "note": "",
+   "pads": {
+    "1": "HSE_IN",
+    "2": "GND"
+   }
+  },
+  "C24": {
+   "fp": "Capacitor_SMD:C_0201_0603Metric",
+   "value": "8pF",
+   "side": "B",
+   "pos": null,
+   "rot": 0,
+   "group": "mcu",
+   "dnp": false,
+   "note": "",
+   "pads": {
+    "1": "HSE_OUT",
+    "2": "GND"
+   }
+  },
+  "Y2": {
+   "fp": "Crystal:Crystal_SMD_2012-2Pin_2.0x1.2mm",
+   "value": "32.768kHz",
+   "side": "B",
+   "pos": null,
+   "rot": 0,
+   "group": "mcu",
+   "dnp": false,
+   "note": "",
+   "pads": {
+    "1": "LSE_IN",
+    "2": "LSE_OUT"
+   }
+  },
+  "C25": {
+   "fp": "Capacitor_SMD:C_0201_0603Metric",
+   "value": "6pF",
+   "side": "B",
+   "pos": null,
+   "rot": 0,
+   "group": "mcu",
+   "dnp": false,
+   "note": "",
+   "pads": {
+    "1": "LSE_IN",
+    "2": "GND"
+   }
+  },
+  "C26": {
+   "fp": "Capacitor_SMD:C_0201_0603Metric",
+   "value": "6pF",
+   "side": "B",
+   "pos": null,
+   "rot": 0,
+   "group": "mcu",
+   "dnp": false,
+   "note": "",
+   "pads": {
+    "1": "LSE_OUT",
+    "2": "GND"
+   }
+  },
+  "U2": {
+   "fp": "Package_SON:Winbond_USON-8-1EP_3x2mm_P0.5mm_EP0.2x1.6mm",
+   "value": "APS6404L 64Mb PSRAM 1.8V",
+   "side": "B",
+   "pos": [
+    42,
+    4
+   ],
+   "rot": 0,
+   "group": "mem",
+   "dnp": false,
+   "note": "方案要求外挂 PSRAM 放录像缓冲；容量待按录像需求放大",
+   "pads": {
+    "1": "PSRAM_CS",
+    "2": "PSRAM_IO1",
+    "3": "PSRAM_IO2",
+    "4": "GND",
+    "5": "PSRAM_IO0",
+    "6": "PSRAM_CLK",
+    "7": "PSRAM_IO3",
+    "8": "+1V8",
+    "9": "GND"
+   }
+  },
+  "C30": {
+   "fp": "Capacitor_SMD:C_0201_0603Metric",
+   "value": "100nF",
+   "side": "B",
+   "pos": null,
+   "rot": 0,
+   "group": "mem",
+   "dnp": false,
+   "note": "",
+   "pads": {
+    "1": "+1V8",
+    "2": "GND"
+   }
+  },
+  "U3": {
+   "fp": "Package_SON:WSON-8-1EP_6x5mm_P1.27mm_EP3.4x4.3mm",
+   "value": "W25Q128JW 1.8V NOR",
+   "side": "B",
+   "pos": [
+    50,
+    8
+   ],
+   "rot": 0,
+   "group": "mem",
+   "dnp": false,
+   "note": "手表模式录制存储；方案写小容量 NAND，初版先用 NOR，待定",
+   "pads": {
+    "1": "FLASH_CS",
+    "2": "FLASH_IO1",
+    "3": "FLASH_IO2",
+    "4": "GND",
+    "5": "FLASH_IO0",
+    "6": "FLASH_CLK",
+    "7": "FLASH_IO3",
+    "8": "+1V8",
+    "9": "GND"
+   }
+  },
+  "C31": {
+   "fp": "Capacitor_SMD:C_0201_0603Metric",
+   "value": "100nF",
+   "side": "B",
+   "pos": null,
+   "rot": 0,
+   "group": "mem",
+   "dnp": false,
+   "note": "",
+   "pads": {
+    "1": "+1V8",
+    "2": "GND"
+   }
+  },
+  "U4": {
+   "fp": "Package_DFN_QFN:QFN-48-1EP_6x6mm_P0.4mm_EP4.6x4.6mm",
+   "value": "nRF52832-QFAA",
+   "side": "F",
+   "pos": [
+    58,
+    8
+   ],
+   "rot": 0,
+   "group": "ble",
+   "dnp": false,
+   "note": "常驻收手机这只手的气泡 / 看板描述",
+   "pads": {
+    "1": "BLE_DEC1",
+    "7": "BLE_UART_RTS",
+    "8": "BLE_UART_TX",
+    "9": "BLE_UART_CTS",
+    "10": "BLE_UART_RX",
+    "13": "+1V8",
+    "14": "BLE_IRQ",
+    "24": "BLE_RESET_N",
+    "25": "BLE_SWCLK",
+    "26": "BLE_SWDIO",
+    "30": "BLE_ANT",
+    "31": "GND",
+    "32": "BLE_DEC2",
+    "33": "BLE_DEC3",
+    "34": "BLE_XC1",
+    "35": "BLE_XC2",
+    "36": "+1V8",
+    "45": "GND",
+    "46": "BLE_DEC4",
+    "47": "BLE_DCC",
+    "48": "+1V8",
+    "49": "GND"
+   }
+  },
+  "C40": {
+   "fp": "Capacitor_SMD:C_0201_0603Metric",
+   "value": "100nF",
+   "side": "B",
+   "pos": null,
+   "rot": 0,
+   "group": "ble",
+   "dnp": false,
+   "note": "",
+   "pads": {
+    "1": "BLE_DEC1",
+    "2": "GND"
+   }
+  },
+  "C41": {
+   "fp": "Capacitor_SMD:C_0201_0603Metric",
+   "value": "1uF",
+   "side": "B",
+   "pos": null,
+   "rot": 0,
+   "group": "ble",
+   "dnp": false,
+   "note": "",
+   "pads": {
+    "1": "BLE_DEC4",
+    "2": "GND"
+   }
+  },
+  "C42": {
+   "fp": "Capacitor_SMD:C_0201_0603Metric",
+   "value": "100nF",
+   "side": "B",
+   "pos": null,
+   "rot": 0,
+   "group": "ble",
+   "dnp": false,
+   "note": "",
+   "pads": {
+    "1": "BLE_DEC2",
+    "2": "GND"
+   }
+  },
+  "C43": {
+   "fp": "Capacitor_SMD:C_0201_0603Metric",
+   "value": "47nF",
+   "side": "B",
+   "pos": null,
+   "rot": 0,
+   "group": "ble",
+   "dnp": false,
+   "note": "",
+   "pads": {
+    "1": "BLE_DEC3",
+    "2": "GND"
+   }
+  },
+  "L2": {
+   "fp": "Inductor_SMD:L_0603_1608Metric",
+   "value": "10uH",
+   "side": "B",
+   "pos": null,
+   "rot": 0,
+   "group": "ble",
+   "dnp": false,
+   "note": "",
+   "pads": {
+    "1": "BLE_DCC",
+    "2": "BLE_DCC_L"
+   }
+  },
+  "L3": {
+   "fp": "Inductor_SMD:L_0402_1005Metric",
+   "value": "15nH",
+   "side": "B",
+   "pos": null,
+   "rot": 0,
+   "group": "ble",
+   "dnp": false,
+   "note": "",
+   "pads": {
+    "1": "BLE_DCC_L",
+    "2": "BLE_DEC4"
+   }
+  },
+  "C44": {
+   "fp": "Capacitor_SMD:C_0402_1005Metric",
+   "value": "4.7uF",
+   "side": "B",
+   "pos": null,
+   "rot": 0,
+   "group": "ble",
+   "dnp": false,
+   "note": "",
+   "pads": {
+    "1": "+1V8",
+    "2": "GND"
+   }
+  },
+  "C45": {
+   "fp": "Capacitor_SMD:C_0201_0603Metric",
+   "value": "100nF",
+   "side": "B",
+   "pos": null,
+   "rot": 0,
+   "group": "ble",
+   "dnp": false,
+   "note": "",
+   "pads": {
+    "1": "+1V8",
+    "2": "GND"
+   }
+  },
+  "Y3": {
+   "fp": "Crystal:Crystal_SMD_2016-4Pin_2.0x1.6mm",
+   "value": "32MHz",
+   "side": "F",
+   "pos": [
+    63.5,
+    4
+   ],
+   "rot": 0,
+   "group": "ble",
+   "dnp": false,
+   "note": "",
+   "pads": {
+    "1": "BLE_XC1",
+    "2": "GND",
+    "3": "BLE_XC2",
+    "4": "GND"
+   }
+  },
+  "C46": {
+   "fp": "Capacitor_SMD:C_0201_0603Metric",
+   "value": "12pF",
+   "side": "F",
+   "pos": null,
+   "rot": 0,
+   "group": "ble",
+   "dnp": false,
+   "note": "",
+   "pads": {
+    "1": "BLE_XC1",
+    "2": "GND"
+   }
+  },
+  "C47": {
+   "fp": "Capacitor_SMD:C_0201_0603Metric",
+   "value": "12pF",
+   "side": "F",
+   "pos": null,
+   "rot": 0,
+   "group": "ble",
+   "dnp": false,
+   "note": "",
+   "pads": {
+    "1": "BLE_XC2",
+    "2": "GND"
+   }
+  },
+  "L4": {
+   "fp": "Inductor_SMD:L_0201_0603Metric",
+   "value": "3.9nH",
+   "side": "F",
+   "pos": null,
+   "rot": 0,
+   "group": "ble",
+   "dnp": false,
+   "note": "",
+   "pads": {
+    "1": "BLE_ANT",
+    "2": "BLE_RF"
+   }
+  },
+  "C48": {
+   "fp": "Capacitor_SMD:C_0201_0603Metric",
+   "value": "0.8pF",
+   "side": "F",
+   "pos": null,
+   "rot": 0,
+   "group": "ble",
+   "dnp": false,
+   "note": "π 型匹配，数值按 Nordic 参考设计待调",
+   "pads": {
+    "1": "BLE_RF",
+    "2": "GND"
+   }
+  },
+  "AE1": {
+   "fp": "RF_Antenna:Johanson_2450AT18x100",
+   "value": "2.4GHz 片状天线",
+   "side": "F",
+   "pos": [
+    73,
+    8
+   ],
+   "rot": 90,
+   "group": "ble",
+   "dnp": false,
+   "note": "",
+   "pads": {
+    "1": "BLE_RF"
+   }
+  },
+  "MK1": {
+   "fp": "Sensor_Audio:Knowles_LGA-5_3.5x2.65mm",
+   "value": "PDM 麦克风 L",
+   "side": "F",
+   "pos": [
+    3.4,
+    8
+   ],
+   "rot": 0,
+   "group": "mic",
+   "dnp": false,
+   "note": "",
+   "pads": {
+    "1": "MIC_PDM_DAT",
+    "2": "GND",
+    "3": "GND",
+    "4": "MIC_PDM_CLK",
+    "5": "+1V8"
+   }
+  },
+  "MK2": {
+   "fp": "Sensor_Audio:Knowles_LGA-5_3.5x2.65mm",
+   "value": "PDM 麦克风 R",
+   "side": "F",
+   "pos": [
+    48,
+    13
+   ],
+   "rot": 0,
+   "group": "mic",
+   "dnp": false,
+   "note": "",
+   "pads": {
+    "1": "MIC_PDM_DAT",
+    "2": "+1V8",
+    "3": "GND",
+    "4": "MIC_PDM_CLK",
+    "5": "+1V8"
+   }
+  },
+  "C50": {
+   "fp": "Capacitor_SMD:C_0201_0603Metric",
+   "value": "100nF",
+   "side": "F",
+   "pos": null,
+   "rot": 0,
+   "group": "mic",
+   "dnp": false,
+   "note": "",
+   "pads": {
+    "1": "+1V8",
+    "2": "GND"
+   }
+  },
+  "C51": {
+   "fp": "Capacitor_SMD:C_0201_0603Metric",
+   "value": "100nF",
+   "side": "F",
+   "pos": null,
+   "rot": 0,
+   "group": "mic",
+   "dnp": false,
+   "note": "",
+   "pads": {
+    "1": "+1V8",
+    "2": "GND"
+   }
+  },
+  "U5": {
+   "fp": "Package_DFN_QFN:TQFN-16-1EP_3x3mm_P0.5mm_EP1.23x1.23mm",
+   "value": "MAX98357A",
+   "side": "B",
+   "pos": [
+    64,
+    10
+   ],
+   "rot": 0,
+   "group": "amp",
+   "dnp": false,
+   "note": "开放式扬声器；防漏音靠结构与算法",
+   "pads": {
+    "1": "I2S_DOUT",
+    "3": "GND",
+    "4": "AMP_SD_MODE",
+    "7": "VSYS",
+    "8": "VSYS",
+    "9": "SPK_P",
+    "10": "SPK_N",
+    "11": "GND",
+    "14": "I2S_LRCLK",
+    "15": "GND",
+    "16": "I2S_BCLK",
+    "17": "GND"
+   }
+  },
+  "C55": {
+   "fp": "Capacitor_SMD:C_0402_1005Metric",
+   "value": "10uF",
+   "side": "B",
+   "pos": null,
+   "rot": 0,
+   "group": "amp",
+   "dnp": false,
+   "note": "",
+   "pads": {
+    "1": "VSYS",
+    "2": "GND"
+   }
+  },
+  "C56": {
+   "fp": "Capacitor_SMD:C_0201_0603Metric",
+   "value": "100nF",
+   "side": "B",
+   "pos": null,
+   "rot": 0,
+   "group": "amp",
+   "dnp": false,
+   "note": "",
+   "pads": {
+    "1": "VSYS",
+    "2": "GND"
+   }
+  },
+  "J3": {
+   "fp": "Connector_JST:JST_SH_SM02B-SRSS-TB_1x02-1MP_P1.00mm_Horizontal",
+   "value": "扬声器",
+   "side": "B",
+   "pos": [
+    70,
+    12.5
+   ],
+   "rot": 0,
+   "group": "amp",
+   "dnp": false,
+   "note": "",
+   "pads": {
+    "1": "SPK_P",
+    "2": "SPK_N"
+   }
+  },
+  "U6": {
+   "fp": "Package_DFN_QFN:VQFN-16-1EP_3x3mm_P0.5mm_EP1.6x1.6mm",
+   "value": "BQ24075",
+   "side": "B",
+   "pos": [
+    19,
+    4
+   ],
+   "rot": 0,
+   "group": "pwr",
+   "dnp": false,
+   "note": "USB 输入 → 系统电源路径 + 右侧电池充电",
+   "pads": {
+    "1": "BAT_NTC",
+    "2": "VBAT",
+    "3": "VBAT",
+    "4": "GND",
+    "5": "+1V8_AON",
+    "6": "GND",
+    "7": "CHG_PGOOD_N",
+    "8": "GND",
+    "9": "CHG_STAT_N",
+    "10": "VSYS",
+    "11": "VSYS",
+    "12": "CHG_ILIM",
+    "13": "VBUS",
+    "14": "CHG_TMR",
+    "15": "GND",
+    "16": "CHG_ISET",
+    "17": "GND"
+   }
+  },
+  "R10": {
+   "fp": "Resistor_SMD:R_0201_0603Metric",
+   "value": "1.13k",
+   "side": "B",
+   "pos": null,
+   "rot": 0,
+   "group": "pwr",
+   "dnp": false,
+   "note": "",
+   "pads": {
+    "1": "CHG_ILIM",
+    "2": "GND"
+   }
+  },
+  "R11": {
+   "fp": "Resistor_SMD:R_0201_0603Metric",
+   "value": "3.0k",
+   "side": "B",
+   "pos": null,
+   "rot": 0,
+   "group": "pwr",
+   "dnp": false,
+   "note": "充电电流按电池容量定",
+   "pads": {
+    "1": "CHG_ISET",
+    "2": "GND"
+   }
+  },
+  "R12": {
+   "fp": "Resistor_SMD:R_0201_0603Metric",
+   "value": "46.4k",
+   "side": "B",
+   "pos": null,
+   "rot": 0,
+   "group": "pwr",
+   "dnp": false,
+   "note": "",
+   "pads": {
+    "1": "CHG_TMR",
+    "2": "GND"
+   }
+  },
+  "C60": {
+   "fp": "Capacitor_SMD:C_0402_1005Metric",
+   "value": "1uF",
+   "side": "B",
+   "pos": null,
+   "rot": 0,
+   "group": "pwr",
+   "dnp": false,
+   "note": "",
+   "pads": {
+    "1": "VBUS",
+    "2": "GND"
+   }
+  },
+  "C61": {
+   "fp": "Capacitor_SMD:C_0402_1005Metric",
+   "value": "4.7uF",
+   "side": "B",
+   "pos": null,
+   "rot": 0,
+   "group": "pwr",
+   "dnp": false,
+   "note": "",
+   "pads": {
+    "1": "VSYS",
+    "2": "GND"
+   }
+  },
+  "C62": {
+   "fp": "Capacitor_SMD:C_0402_1005Metric",
+   "value": "4.7uF",
+   "side": "B",
+   "pos": null,
+   "rot": 0,
+   "group": "pwr",
+   "dnp": false,
+   "note": "",
+   "pads": {
+    "1": "VBAT",
+    "2": "GND"
+   }
+  },
+  "U7": {
+   "fp": "Package_SON:Texas_VSON-HR-8_1.5x2mm_P0.5mm",
+   "value": "TPS62823 1.8V",
+   "side": "B",
+   "pos": [
+    24,
+    11.5
+   ],
+   "rot": 0,
+   "group": "pwr",
+   "dnp": false,
+   "note": "",
+   "pads": {
+    "1": "VSYS",
+    "2": "BUCK_FB",
+    "3": "GND",
+    "5": "GND",
+    "6": "BUCK_SW",
+    "7": "VSYS"
+   }
+  },
+  "L5": {
+   "fp": "Inductor_SMD:L_0805_2012Metric",
+   "value": "0.47uH",
+   "side": "B",
+   "pos": null,
+   "rot": 0,
+   "group": "pwr",
+   "dnp": false,
+   "note": "",
+   "pads": {
+    "1": "BUCK_SW",
+    "2": "+1V8"
+   }
+  },
+  "R13": {
+   "fp": "Resistor_SMD:R_0201_0603Metric",
+   "value": "200k",
+   "side": "B",
+   "pos": null,
+   "rot": 0,
+   "group": "pwr",
+   "dnp": false,
+   "note": "",
+   "pads": {
+    "1": "+1V8",
+    "2": "BUCK_FB"
+   }
+  },
+  "R14": {
+   "fp": "Resistor_SMD:R_0201_0603Metric",
+   "value": "100k",
+   "side": "B",
+   "pos": null,
+   "rot": 0,
+   "group": "pwr",
+   "dnp": false,
+   "note": "FB 0.6 V → 1.8 V",
+   "pads": {
+    "1": "BUCK_FB",
+    "2": "GND"
+   }
+  },
+  "C63": {
+   "fp": "Capacitor_SMD:C_0402_1005Metric",
+   "value": "10uF",
+   "side": "B",
+   "pos": null,
+   "rot": 0,
+   "group": "pwr",
+   "dnp": false,
+   "note": "",
+   "pads": {
+    "1": "+1V8",
+    "2": "GND"
+   }
+  },
+  "C64": {
+   "fp": "Capacitor_SMD:C_0402_1005Metric",
+   "value": "4.7uF",
+   "side": "B",
+   "pos": null,
+   "rot": 0,
+   "group": "pwr",
+   "dnp": false,
+   "note": "",
+   "pads": {
+    "1": "VSYS",
+    "2": "GND"
+   }
+  },
+  "R15": {
+   "fp": "Resistor_SMD:R_0201_0603Metric",
+   "value": "0",
+   "side": "B",
+   "pos": null,
+   "rot": 0,
+   "group": "pwr",
+   "dnp": false,
+   "note": "常醒域，后续可换负载开关",
+   "pads": {
+    "1": "+1V8",
+    "2": "+1V8_AON"
+   }
+  },
+  "U8": {
+   "fp": "Package_TO_SOT_SMD:SOT-23-5",
+   "value": "TLV75533 3.3V",
+   "side": "B",
+   "pos": [
+    25.5,
+    4
+   ],
+   "rot": 0,
+   "group": "pwr",
+   "dnp": false,
+   "note": "接近传感器供电",
+   "pads": {
+    "1": "VSYS",
+    "2": "GND",
+    "3": "VSYS",
+    "5": "+3V3"
+   }
+  },
+  "C65": {
+   "fp": "Capacitor_SMD:C_0201_0603Metric",
+   "value": "1uF",
+   "side": "B",
+   "pos": null,
+   "rot": 0,
+   "group": "pwr",
+   "dnp": false,
+   "note": "",
+   "pads": {
+    "1": "+3V3",
+    "2": "GND"
+   }
+  },
+  "R16": {
+   "fp": "Resistor_SMD:R_0201_0603Metric",
+   "value": "1M",
+   "side": "B",
+   "pos": null,
+   "rot": 0,
+   "group": "pwr",
+   "dnp": false,
+   "note": "",
+   "pads": {
+    "1": "VBAT",
+    "2": "VBAT_SENSE"
+   }
+  },
+  "R17": {
+   "fp": "Resistor_SMD:R_0201_0603Metric",
+   "value": "1M",
+   "side": "B",
+   "pos": null,
+   "rot": 0,
+   "group": "pwr",
+   "dnp": false,
+   "note": "",
+   "pads": {
+    "1": "VBAT_SENSE",
+    "2": "GND"
+   }
+  },
+  "J2": {
+   "fp": "Connector_JST:JST_SH_SM03B-SRSS-TB_1x03-1MP_P1.00mm_Horizontal",
+   "value": "右侧电池",
+   "side": "B",
+   "pos": [
+    72,
+    4
+   ],
+   "rot": 0,
+   "group": "pwr",
+   "dnp": false,
+   "note": "两块电池分置左右耳后",
+   "pads": {
+    "1": "VBAT",
+    "2": "BAT_NTC",
+    "3": "GND"
+   }
+  },
+  "U9": {
+   "fp": "OptoDevice:Broadcom_APDS-9160-003",
+   "value": "APDS-9160 佩戴检测",
+   "side": "F",
+   "pos": [
+    44,
+    2.6
+   ],
+   "rot": 0,
+   "group": "wear",
+   "dnp": false,
+   "note": "电平匹配待核（3.3V 供电、1.8V I2C）",
+   "pads": {
+    "1": "GND",
+    "2": "WEAR_DET",
+    "3": "PROX_LDR",
+    "4": "PROX_LDR",
+    "5": "+3V3",
+    "6": "+3V3",
+    "7": "I2C_PWR_SDA",
+    "8": "I2C_PWR_SCL"
+   }
+  },
+  "C70": {
+   "fp": "Capacitor_SMD:C_0201_0603Metric",
+   "value": "100nF",
+   "side": "F",
+   "pos": null,
+   "rot": 0,
+   "group": "wear",
+   "dnp": false,
+   "note": "",
+   "pads": {
+    "1": "+3V3",
+    "2": "GND"
+   }
+  },
+  "R20": {
+   "fp": "Resistor_SMD:R_0201_0603Metric",
+   "value": "2.2k",
+   "side": "F",
+   "pos": null,
+   "rot": 0,
+   "group": "wear",
+   "dnp": false,
+   "note": "",
+   "pads": {
+    "1": "I2C_PWR_SCL",
+    "2": "+1V8_AON"
+   }
+  },
+  "R21": {
+   "fp": "Resistor_SMD:R_0201_0603Metric",
+   "value": "2.2k",
+   "side": "F",
+   "pos": null,
+   "rot": 0,
+   "group": "wear",
+   "dnp": false,
+   "note": "",
+   "pads": {
+    "1": "I2C_PWR_SDA",
+    "2": "+1V8_AON"
+   }
+  },
+  "R22": {
+   "fp": "Resistor_SMD:R_0201_0603Metric",
+   "value": "10k",
+   "side": "F",
+   "pos": null,
+   "rot": 0,
+   "group": "wear",
+   "dnp": false,
+   "note": "",
+   "pads": {
+    "1": "WEAR_DET",
+    "2": "+1V8_AON"
+   }
+  },
+  "SW1": {
+   "fp": "Button_Switch_SMD:SW_SPST_PTS810",
+   "value": "电源 / 唤醒键",
+   "side": "F",
+   "pos": [
+    20.7,
+    12.6
+   ],
+   "rot": 0,
+   "group": "ui",
+   "dnp": false,
+   "note": "",
+   "pads": {
+    "1": "BTN_PWR",
+    "2": "GND"
+   }
+  },
+  "R23": {
+   "fp": "Resistor_SMD:R_0201_0603Metric",
+   "value": "10k",
+   "side": "B",
+   "pos": null,
+   "rot": 0,
+   "group": "ui",
+   "dnp": false,
+   "note": "",
+   "pads": {
+    "1": "BTN_PWR",
+    "2": "+1V8_AON"
+   }
+  },
+  "D1": {
+   "fp": "LED_SMD:LED_0402_1005Metric",
+   "value": "状态灯",
+   "side": "F",
+   "pos": [
+    19.5,
+    2.2
+   ],
+   "rot": 0,
+   "group": "ui",
+   "dnp": false,
+   "note": "",
+   "pads": {
+    "1": "LED_K",
+    "2": "+1V8"
+   }
+  },
+  "R24": {
+   "fp": "Resistor_SMD:R_0201_0603Metric",
+   "value": "1k",
+   "side": "F",
+   "pos": null,
+   "rot": 0,
+   "group": "ui",
+   "dnp": false,
+   "note": "",
+   "pads": {
+    "1": "LED_K",
+    "2": "LED_STAT"
+   }
+  },
+  "J4": {
+   "fp": "Connector:Tag-Connect_TC2030-IDC-NL_2x03_P1.27mm_Vertical",
+   "value": "SWD（N6 + nRF）",
+   "side": "B",
+   "pos": [
+    14.5,
+    10.5
+   ],
+   "rot": 0,
+   "group": "ui",
+   "dnp": false,
+   "note": "第 6 脚复用 nRF SWDIO 只为初版调试，正式版分开",
+   "pads": {
+    "1": "+1V8",
+    "2": "N6_SWDIO",
+    "3": "N6_NRST",
+    "4": "N6_SWCLK",
+    "5": "GND",
+    "6": "BLE_SWDIO"
+   }
+  },
+  "R25": {
+   "fp": "Resistor_SMD:R_0201_0603Metric",
+   "value": "0",
+   "side": "B",
+   "pos": null,
+   "rot": 0,
+   "group": "ui",
+   "dnp": true,
+   "note": "调试跳线，量产不贴",
+   "pads": {
+    "1": "BLE_SWCLK",
+    "2": "N6_SWCLK"
+   }
+  },
+  "J1": {
+   "fp": "Connector_Hirose_DF40:Hirose_DF40C-40DS-0.4V_2x20_P0.4mm",
+   "value": "板间 DF40 40P（至主板）",
+   "side": "F",
+   "pos": [
+    8,
+    8
+   ],
+   "rot": 90,
+   "group": "b2b",
+   "dnp": false,
+   "note": "",
+   "pads": {
+    "1": "VBUS",
+    "2": "VBUS",
+    "3": "GND",
+    "4": "GND",
+    "5": "+1V8_AON",
+    "6": "GND",
+    "7": "SOC_SPI_SCK",
+    "8": "SOC_SPI_MISO",
+    "9": "SOC_SPI_MOSI",
+    "10": "SOC_SPI_CS",
+    "11": "MCU_IRQ_TO_SOC",
+    "12": "SOC_WAKE_REQ",
+    "13": "SOC_RESET_N",
+    "14": "SOC_PWR_EN",
+    "15": "CELL_PWR_EN",
+    "16": "WIFI_PWR_EN",
+    "17": "DISP_SEL",
+    "18": "CAM_SEL",
+    "19": "GND",
+    "20": "DISP_LS_SCK",
+    "21": "DISP_LS_MOSI",
+    "22": "DISP_LS_CS",
+    "23": "DISP_LS_DC",
+    "24": "GND",
+    "25": "CAM_MCU_CKP",
+    "26": "CAM_MCU_CKN",
+    "27": "GND",
+    "28": "CAM_MCU_D0P",
+    "29": "CAM_MCU_D0N",
+    "30": "GND",
+    "31": "CAM_MCU_D1P",
+    "32": "CAM_MCU_D1N",
+    "33": "GND",
+    "34": "I2C_PWR_SCL",
+    "35": "I2C_PWR_SDA",
+    "36": "WEAR_DET",
+    "37": "MIC_PDM_CLK",
+    "38": "MIC_PDM_DAT",
+    "39": "GND",
+    "40": "GND"
+   }
+  }
+ }
+}

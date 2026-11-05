@@ -1,0 +1,46 @@
+﻿Comment,Designator,Footprint,LCSC,Qty,DNP,备注
+22uF,C1,C_0402_1005Metric,,1,,待填立创商城编号
+1uF,"C2,C6,C40",C_0402_1005Metric,,3,,待填立创商城编号
+10uF,"C3-C5,C21,C30,C41",C_0402_1005Metric,,6,,待填立创商城编号
+100uF,C20,C_0603_1608Metric,,1,,待填立创商城编号
+100nF,"C22,C31,C32,C35",C_0201_0603Metric,,4,,待填立创商城编号
+4.7uF,C42,C_0402_1005Metric,,1,,待填立创商城编号
+1uF,C43,C_0201_0603Metric,,1,,待填立创商城编号
+USB-C（DP Alt / USB 3 / PD）,J1,USB_C_Receptacle_Amphenol_12401610E4-2A,,1,,待填立创商城编号
+板间 DF40 40P（至 MCU 板）,J2,Hirose_DF40C-40DS-0.4V_2x20_P0.4mm,,1,,待填立创商城编号
+追踪相机 L,J3,Hirose_FH26-15S-0.3SHW_2Rows-15Pins-1MP_P0.60mm_Horizontal,,1,,待填立创商城编号
+追踪相机 R,J4,Hirose_FH26-15S-0.3SHW_2Rows-15Pins-1MP_P0.60mm_Horizontal,,1,,待填立创商城编号
+主摄（1080p30 起）,J5,Hirose_FH26-15S-0.3SHW_2Rows-15Pins-1MP_P0.60mm_Horizontal,,1,,待填立创商城编号
+眼动相机（预留）,J6,Hirose_FH26-15S-0.3SHW_2Rows-15Pins-1MP_P0.60mm_Horizontal,,1,DNP,待填立创商城编号
+光机 L（光波导）,J7,Hirose_FH26-25S-0.3SHW_2Rows-25Pins-1MP_P0.60mm_Horizontal,,1,,待填立创商城编号
+光机 R（光波导）,J8,Hirose_FH26-25S-0.3SHW_2Rows-25Pins-1MP_P0.60mm_Horizontal,,1,,待填立创商城编号
+Wi-Fi 天线,J9,U.FL_Hirose_U.FL-R-SMT-1_Vertical,,1,,待填立创商城编号
+蜂窝主天线,J10,U.FL_Hirose_U.FL-R-SMT-1_Vertical,,1,,待填立创商城编号
+蜂窝分集天线,J11,U.FL_Hirose_U.FL-R-SMT-1_Vertical,,1,,待填立创商城编号
+Nano SIM 卡座（M2 期间保留）,J12,PH_NANO_SIM_HOLDER,,1,,占位器件，不能下单
+左侧电池,J13,JST_SH_SM03B-SRSS-TB_1x03-1MP_P1.00mm_Horizontal,,1,,待填立创商城编号
+0.47uH,L1,L_0805_2012Metric,,1,,待填立创商城编号
+100k,R1,R_0201_0603Metric,,1,,待填立创商城编号
+150k,R2,R_0201_0603Metric,,1,,待填立创商城编号
+1.13k,R10,R_0201_0603Metric,,1,,待填立创商城编号
+3.0k,R11,R_0201_0603Metric,,1,,待填立创商城编号
+46.4k,R12,R_0201_0603Metric,,1,,待填立创商城编号
+0,R20,R_0603_1608Metric,,1,,待填立创商城编号
+Snapdragon AR2 Gen 1（占位）,U1,PH_SOC_AR2_GEN1_PLACEHOLDER,,1,,占位器件，不能下单
+SoC 配套 PMIC（占位）,U2,PH_PMIC_SOC_PLACEHOLDER,,1,,占位器件，不能下单
+Wi-Fi 7 + 蓝牙连接芯片（占位）,U3,PH_WIFI7_COMBO_PLACEHOLDER,,1,,占位器件，不能下单
+Quectel RG255C-GL（X35，占位）,U4,PH_RG255C_GL_PLACEHOLDER,,1,,占位器件，不能下单
+eSIM（MFF2，占位）,U5,PH_ESIM_MFF2,,1,DNP,占位器件，不能下单
+显示与重投影处理器（原型 FPGA，占位）,U6,PH_DPU_FPGA_PLACEHOLDER,,1,,占位器件，不能下单
+FPGA 配置 Flash,U7,WSON-8-1EP_6x5mm_P1.27mm_EP3.4x4.3mm,,1,,待填立创商城编号
+TPS62823 DPU 内核,U8,Texas_VSON-HR-8_1.5x2mm_P0.5mm,,1,,待填立创商城编号
+LSM6DSM 6 轴 IMU（≥1 kHz）,U9,LGA-14_3x2.5mm_P0.5mm_LayoutBorder3x4y,,1,,待填立创商城编号
+LT7911UXC DP→MIPI（占位）,U10,PH_LT7911UXC_PLACEHOLDER,,1,,占位器件，不能下单
+Type-C DP/USB3 复用开关（占位）,U11,PH_TYPEC_DP_USB_MUX_PLACEHOLDER,,1,,占位器件，不能下单
+USB PD + DP Alt 控制器（占位）,U12,PH_PD_CONTROLLER_PLACEHOLDER,,1,,占位器件，不能下单
+ESD,U13,USON-10_2.5x1.0mm_P0.5mm,,1,,待填立创商城编号
+BQ24075 左侧,U14,VQFN-16-1EP_3x3mm_P0.5mm_EP1.6x1.6mm,,1,,待填立创商城编号
+TLV75533 3.3V 射频,U15,SOT-23-5,,1,,待填立创商城编号
+主摄 MIPI 二选一（占位）,U16,PH_MIPI_SWITCH_CAM_PLACEHOLDER,,1,,占位器件，不能下单
+显示开关 L（占位）,U17,PH_DISP_SWITCH_L_PLACEHOLDER,,1,,占位器件，不能下单
+显示开关 R（占位）,U18,PH_DISP_SWITCH_R_PLACEHOLDER,,1,,占位器件，不能下单
