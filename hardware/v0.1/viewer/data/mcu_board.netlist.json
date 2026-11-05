@@ -1,6 +1,6 @@
 {
  "name": "mcu_board",
- "title": "MCU 常驻板（脑的反射 · 常醒 · 听音 · BLE）",
+ "title": "MCU 常驻板（小脑常驻 · 脚的 BLE · 耳朵和嘴巴）",
  "layers": 6,
  "outline": [
   [
@@ -44,6 +44,7 @@
  ],
  "parts": {
   "U1": {
+   "role": "小脑常驻",
    "fp": "glasses:ST_VFBGA-264_14x14mm_P0.8mm",
    "value": "STM32N657X0H3Q",
    "side": "F",
@@ -198,6 +199,7 @@
    }
   },
   "L1": {
+   "role": "小脑常驻",
    "fp": "Inductor_SMD:L_0805_2012Metric",
    "value": "2.2uH",
    "side": "B",
@@ -212,6 +214,7 @@
    }
   },
   "C1": {
+   "role": "小脑常驻",
    "fp": "Capacitor_SMD:C_0402_1005Metric",
    "value": "10uF",
    "side": "B",
@@ -226,6 +229,7 @@
    }
   },
   "C2": {
+   "role": "小脑常驻",
    "fp": "Capacitor_SMD:C_0402_1005Metric",
    "value": "4.7uF",
    "side": "B",
@@ -240,6 +244,7 @@
    }
   },
   "C3": {
+   "role": "小脑常驻",
    "fp": "Capacitor_SMD:C_0402_1005Metric",
    "value": "1uF",
    "side": "B",
@@ -254,6 +259,7 @@
    }
   },
   "C4": {
+   "role": "小脑常驻",
    "fp": "Capacitor_SMD:C_0201_0603Metric",
    "value": "100nF",
    "side": "B",
@@ -268,6 +274,7 @@
    }
   },
   "C5": {
+   "role": "小脑常驻",
    "fp": "Capacitor_SMD:C_0201_0603Metric",
    "value": "100nF",
    "side": "B",
@@ -282,6 +289,7 @@
    }
   },
   "C6": {
+   "role": "小脑常驻",
    "fp": "Capacitor_SMD:C_0201_0603Metric",
    "value": "100nF",
    "side": "B",
@@ -296,6 +304,7 @@
    }
   },
   "C11": {
+   "role": "小脑常驻",
    "fp": "Capacitor_SMD:C_0402_1005Metric",
    "value": "10uF",
    "side": "B",
@@ -310,6 +319,7 @@
    }
   },
   "C12": {
+   "role": "小脑常驻",
    "fp": "Capacitor_SMD:C_0402_1005Metric",
    "value": "4.7uF",
    "side": "B",
@@ -324,6 +334,7 @@
    }
   },
   "C13": {
+   "role": "小脑常驻",
    "fp": "Capacitor_SMD:C_0402_1005Metric",
    "value": "1uF",
    "side": "B",
@@ -338,6 +349,7 @@
    }
   },
   "C14": {
+   "role": "小脑常驻",
    "fp": "Capacitor_SMD:C_0201_0603Metric",
    "value": "100nF",
    "side": "B",
@@ -352,6 +364,7 @@
    }
   },
   "C15": {
+   "role": "小脑常驻",
    "fp": "Capacitor_SMD:C_0201_0603Metric",
    "value": "100nF",
    "side": "B",
@@ -366,6 +379,7 @@
    }
   },
   "C16": {
+   "role": "小脑常驻",
    "fp": "Capacitor_SMD:C_0201_0603Metric",
    "value": "100nF",
    "side": "B",
@@ -380,6 +394,7 @@
    }
   },
   "C17": {
+   "role": "小脑常驻",
    "fp": "Capacitor_SMD:C_0201_0603Metric",
    "value": "100nF",
    "side": "B",
@@ -394,6 +409,7 @@
    }
   },
   "C18": {
+   "role": "小脑常驻",
    "fp": "Capacitor_SMD:C_0201_0603Metric",
    "value": "100nF",
    "side": "B",
@@ -408,6 +424,7 @@
    }
   },
   "C21": {
+   "role": "小脑常驻",
    "fp": "Capacitor_SMD:C_0201_0603Metric",
    "value": "2.2uF",
    "side": "B",
@@ -422,6 +439,7 @@
    }
   },
   "R1": {
+   "role": "小脑常驻",
    "fp": "Resistor_SMD:R_0201_0603Metric",
    "value": "10k",
    "side": "B",
@@ -436,6 +454,7 @@
    }
   },
   "C22": {
+   "role": "小脑常驻",
    "fp": "Capacitor_SMD:C_0201_0603Metric",
    "value": "100nF",
    "side": "B",
@@ -450,6 +469,7 @@
    }
   },
   "R2": {
+   "role": "小脑常驻",
    "fp": "Resistor_SMD:R_0201_0603Metric",
    "value": "4.02k 1%",
    "side": "B",
@@ -464,6 +484,7 @@
    }
   },
   "Y1": {
+   "role": "小脑常驻",
    "fp": "Crystal:Crystal_SMD_2016-4Pin_2.0x1.6mm",
    "value": "48MHz",
    "side": "B",
@@ -480,6 +501,7 @@
    }
   },
   "C23": {
+   "role": "小脑常驻",
    "fp": "Capacitor_SMD:C_0201_0603Metric",
    "value": "8pF",
    "side": "B",
@@ -494,6 +516,7 @@
    }
   },
   "C24": {
+   "role": "小脑常驻",
    "fp": "Capacitor_SMD:C_0201_0603Metric",
    "value": "8pF",
    "side": "B",
@@ -508,6 +531,7 @@
    }
   },
   "Y2": {
+   "role": "小脑常驻",
    "fp": "Crystal:Crystal_SMD_2012-2Pin_2.0x1.2mm",
    "value": "32.768kHz",
    "side": "B",
@@ -522,6 +546,7 @@
    }
   },
   "C25": {
+   "role": "小脑常驻",
    "fp": "Capacitor_SMD:C_0201_0603Metric",
    "value": "6pF",
    "side": "B",
@@ -536,6 +561,7 @@
    }
   },
   "C26": {
+   "role": "小脑常驻",
    "fp": "Capacitor_SMD:C_0201_0603Metric",
    "value": "6pF",
    "side": "B",
@@ -550,6 +576,7 @@
    }
   },
   "U2": {
+   "role": "小脑常驻",
    "fp": "Package_SON:Winbond_USON-8-1EP_3x2mm_P0.5mm_EP0.2x1.6mm",
    "value": "APS6404L 64Mb PSRAM 1.8V",
    "side": "B",
@@ -574,6 +601,7 @@
    }
   },
   "C30": {
+   "role": "小脑常驻",
    "fp": "Capacitor_SMD:C_0201_0603Metric",
    "value": "100nF",
    "side": "B",
@@ -588,6 +616,7 @@
    }
   },
   "U3": {
+   "role": "小脑常驻",
    "fp": "Package_SON:WSON-8-1EP_6x5mm_P1.27mm_EP3.4x4.3mm",
    "value": "W25Q128JW 1.8V NOR",
    "side": "B",
@@ -612,6 +641,7 @@
    }
   },
   "C31": {
+   "role": "小脑常驻",
    "fp": "Capacitor_SMD:C_0201_0603Metric",
    "value": "100nF",
    "side": "B",
@@ -626,6 +656,7 @@
    }
   },
   "U4": {
+   "role": "脚",
    "fp": "Package_DFN_QFN:QFN-48-1EP_6x6mm_P0.4mm_EP4.6x4.6mm",
    "value": "nRF52832-QFAA",
    "side": "F",
@@ -663,6 +694,7 @@
    }
   },
   "C40": {
+   "role": "脚",
    "fp": "Capacitor_SMD:C_0201_0603Metric",
    "value": "100nF",
    "side": "B",
@@ -677,6 +709,7 @@
    }
   },
   "C41": {
+   "role": "脚",
    "fp": "Capacitor_SMD:C_0201_0603Metric",
    "value": "1uF",
    "side": "B",
@@ -691,6 +724,7 @@
    }
   },
   "C42": {
+   "role": "脚",
    "fp": "Capacitor_SMD:C_0201_0603Metric",
    "value": "100nF",
    "side": "B",
@@ -705,6 +739,7 @@
    }
   },
   "C43": {
+   "role": "脚",
    "fp": "Capacitor_SMD:C_0201_0603Metric",
    "value": "47nF",
    "side": "B",
@@ -719,6 +754,7 @@
    }
   },
   "L2": {
+   "role": "脚",
    "fp": "Inductor_SMD:L_0603_1608Metric",
    "value": "10uH",
    "side": "B",
@@ -733,6 +769,7 @@
    }
   },
   "L3": {
+   "role": "脚",
    "fp": "Inductor_SMD:L_0402_1005Metric",
    "value": "15nH",
    "side": "B",
@@ -747,6 +784,7 @@
    }
   },
   "C44": {
+   "role": "脚",
    "fp": "Capacitor_SMD:C_0402_1005Metric",
    "value": "4.7uF",
    "side": "B",
@@ -761,6 +799,7 @@
    }
   },
   "C45": {
+   "role": "脚",
    "fp": "Capacitor_SMD:C_0201_0603Metric",
    "value": "100nF",
    "side": "B",
@@ -775,6 +814,7 @@
    }
   },
   "Y3": {
+   "role": "脚",
    "fp": "Crystal:Crystal_SMD_2016-4Pin_2.0x1.6mm",
    "value": "32MHz",
    "side": "F",
@@ -794,6 +834,7 @@
    }
   },
   "C46": {
+   "role": "脚",
    "fp": "Capacitor_SMD:C_0201_0603Metric",
    "value": "12pF",
    "side": "F",
@@ -808,6 +849,7 @@
    }
   },
   "C47": {
+   "role": "脚",
    "fp": "Capacitor_SMD:C_0201_0603Metric",
    "value": "12pF",
    "side": "F",
@@ -822,6 +864,7 @@
    }
   },
   "L4": {
+   "role": "脚",
    "fp": "Inductor_SMD:L_0201_0603Metric",
    "value": "3.9nH",
    "side": "F",
@@ -836,6 +879,7 @@
    }
   },
   "C48": {
+   "role": "脚",
    "fp": "Capacitor_SMD:C_0201_0603Metric",
    "value": "0.8pF",
    "side": "F",
@@ -850,6 +894,7 @@
    }
   },
   "AE1": {
+   "role": "脚",
    "fp": "RF_Antenna:Johanson_2450AT18x100",
    "value": "2.4GHz 片状天线",
    "side": "F",
@@ -866,6 +911,7 @@
    }
   },
   "MK1": {
+   "role": "器官 · 嘴巴",
    "fp": "Sensor_Audio:Knowles_LGA-5_3.5x2.65mm",
    "value": "PDM 麦克风 L",
    "side": "F",
@@ -886,6 +932,7 @@
    }
   },
   "MK2": {
+   "role": "器官 · 嘴巴",
    "fp": "Sensor_Audio:Knowles_LGA-5_3.5x2.65mm",
    "value": "PDM 麦克风 R",
    "side": "F",
@@ -906,6 +953,7 @@
    }
   },
   "C50": {
+   "role": "器官 · 嘴巴",
    "fp": "Capacitor_SMD:C_0201_0603Metric",
    "value": "100nF",
    "side": "F",
@@ -920,6 +968,7 @@
    }
   },
   "C51": {
+   "role": "器官 · 嘴巴",
    "fp": "Capacitor_SMD:C_0201_0603Metric",
    "value": "100nF",
    "side": "F",
@@ -934,6 +983,7 @@
    }
   },
   "U5": {
+   "role": "器官 · 耳朵",
    "fp": "Package_DFN_QFN:TQFN-16-1EP_3x3mm_P0.5mm_EP1.23x1.23mm",
    "value": "MAX98357A",
    "side": "B",
@@ -961,6 +1011,7 @@
    }
   },
   "C55": {
+   "role": "器官 · 耳朵",
    "fp": "Capacitor_SMD:C_0402_1005Metric",
    "value": "10uF",
    "side": "B",
@@ -975,6 +1026,7 @@
    }
   },
   "C56": {
+   "role": "器官 · 耳朵",
    "fp": "Capacitor_SMD:C_0201_0603Metric",
    "value": "100nF",
    "side": "B",
@@ -989,6 +1041,7 @@
    }
   },
   "J3": {
+   "role": "器官 · 耳朵",
    "fp": "Connector_JST:JST_SH_SM02B-SRSS-TB_1x02-1MP_P1.00mm_Horizontal",
    "value": "扬声器",
    "side": "B",
@@ -1006,6 +1059,7 @@
    }
   },
   "U6": {
+   "role": "身体 · 电源",
    "fp": "Package_DFN_QFN:VQFN-16-1EP_3x3mm_P0.5mm_EP1.6x1.6mm",
    "value": "BQ24075",
    "side": "B",
@@ -1038,6 +1092,7 @@
    }
   },
   "R10": {
+   "role": "身体 · 电源",
    "fp": "Resistor_SMD:R_0201_0603Metric",
    "value": "1.13k",
    "side": "B",
@@ -1052,6 +1107,7 @@
    }
   },
   "R11": {
+   "role": "身体 · 电源",
    "fp": "Resistor_SMD:R_0201_0603Metric",
    "value": "3.0k",
    "side": "B",
@@ -1066,6 +1122,7 @@
    }
   },
   "R12": {
+   "role": "身体 · 电源",
    "fp": "Resistor_SMD:R_0201_0603Metric",
    "value": "46.4k",
    "side": "B",
@@ -1080,6 +1137,7 @@
    }
   },
   "C60": {
+   "role": "身体 · 电源",
    "fp": "Capacitor_SMD:C_0402_1005Metric",
    "value": "1uF",
    "side": "B",
@@ -1094,6 +1152,7 @@
    }
   },
   "C61": {
+   "role": "身体 · 电源",
    "fp": "Capacitor_SMD:C_0402_1005Metric",
    "value": "4.7uF",
    "side": "B",
@@ -1108,6 +1167,7 @@
    }
   },
   "C62": {
+   "role": "身体 · 电源",
    "fp": "Capacitor_SMD:C_0402_1005Metric",
    "value": "4.7uF",
    "side": "B",
@@ -1122,6 +1182,7 @@
    }
   },
   "U7": {
+   "role": "身体 · 电源",
    "fp": "Package_SON:Texas_VSON-HR-8_1.5x2mm_P0.5mm",
    "value": "TPS62823 1.8V",
    "side": "B",
@@ -1143,6 +1204,7 @@
    }
   },
   "L5": {
+   "role": "身体 · 电源",
    "fp": "Inductor_SMD:L_0805_2012Metric",
    "value": "0.47uH",
    "side": "B",
@@ -1157,6 +1219,7 @@
    }
   },
   "R13": {
+   "role": "身体 · 电源",
    "fp": "Resistor_SMD:R_0201_0603Metric",
    "value": "200k",
    "side": "B",
@@ -1171,6 +1234,7 @@
    }
   },
   "R14": {
+   "role": "身体 · 电源",
    "fp": "Resistor_SMD:R_0201_0603Metric",
    "value": "100k",
    "side": "B",
@@ -1185,6 +1249,7 @@
    }
   },
   "C63": {
+   "role": "身体 · 电源",
    "fp": "Capacitor_SMD:C_0402_1005Metric",
    "value": "10uF",
    "side": "B",
@@ -1199,6 +1264,7 @@
    }
   },
   "C64": {
+   "role": "身体 · 电源",
    "fp": "Capacitor_SMD:C_0402_1005Metric",
    "value": "4.7uF",
    "side": "B",
@@ -1213,6 +1279,7 @@
    }
   },
   "R15": {
+   "role": "身体 · 电源",
    "fp": "Resistor_SMD:R_0201_0603Metric",
    "value": "0",
    "side": "B",
@@ -1227,6 +1294,7 @@
    }
   },
   "U8": {
+   "role": "身体 · 电源",
    "fp": "Package_TO_SOT_SMD:SOT-23-5",
    "value": "TLV75533 3.3V",
    "side": "B",
@@ -1246,6 +1314,7 @@
    }
   },
   "C65": {
+   "role": "身体 · 电源",
    "fp": "Capacitor_SMD:C_0201_0603Metric",
    "value": "1uF",
    "side": "B",
@@ -1260,6 +1329,7 @@
    }
   },
   "R16": {
+   "role": "身体 · 电源",
    "fp": "Resistor_SMD:R_0201_0603Metric",
    "value": "1M",
    "side": "B",
@@ -1274,6 +1344,7 @@
    }
   },
   "R17": {
+   "role": "身体 · 电源",
    "fp": "Resistor_SMD:R_0201_0603Metric",
    "value": "1M",
    "side": "B",
@@ -1288,6 +1359,7 @@
    }
   },
   "J2": {
+   "role": "身体 · 电源",
    "fp": "Connector_JST:JST_SH_SM03B-SRSS-TB_1x03-1MP_P1.00mm_Horizontal",
    "value": "右侧电池",
    "side": "B",
@@ -1306,6 +1378,7 @@
    }
   },
   "U9": {
+   "role": "小脑常驻",
    "fp": "OptoDevice:Broadcom_APDS-9160-003",
    "value": "APDS-9160 佩戴检测",
    "side": "F",
@@ -1329,6 +1402,7 @@
    }
   },
   "C70": {
+   "role": "小脑常驻",
    "fp": "Capacitor_SMD:C_0201_0603Metric",
    "value": "100nF",
    "side": "F",
@@ -1343,6 +1417,7 @@
    }
   },
   "R20": {
+   "role": "小脑常驻",
    "fp": "Resistor_SMD:R_0201_0603Metric",
    "value": "2.2k",
    "side": "F",
@@ -1357,6 +1432,7 @@
    }
   },
   "R21": {
+   "role": "小脑常驻",
    "fp": "Resistor_SMD:R_0201_0603Metric",
    "value": "2.2k",
    "side": "F",
@@ -1371,6 +1447,7 @@
    }
   },
   "R22": {
+   "role": "小脑常驻",
    "fp": "Resistor_SMD:R_0201_0603Metric",
    "value": "10k",
    "side": "F",
@@ -1385,6 +1462,7 @@
    }
   },
   "SW1": {
+   "role": "小脑常驻",
    "fp": "Button_Switch_SMD:SW_SPST_PTS810",
    "value": "电源 / 唤醒键",
    "side": "F",
@@ -1402,6 +1480,7 @@
    }
   },
   "R23": {
+   "role": "小脑常驻",
    "fp": "Resistor_SMD:R_0201_0603Metric",
    "value": "10k",
    "side": "B",
@@ -1416,6 +1495,7 @@
    }
   },
   "D1": {
+   "role": "小脑常驻",
    "fp": "LED_SMD:LED_0402_1005Metric",
    "value": "状态灯",
    "side": "F",
@@ -1433,6 +1513,7 @@
    }
   },
   "R24": {
+   "role": "小脑常驻",
    "fp": "Resistor_SMD:R_0201_0603Metric",
    "value": "1k",
    "side": "F",
@@ -1447,6 +1528,7 @@
    }
   },
   "J4": {
+   "role": "小脑常驻",
    "fp": "Connector:Tag-Connect_TC2030-IDC-NL_2x03_P1.27mm_Vertical",
    "value": "SWD（N6 + nRF）",
    "side": "B",
@@ -1468,6 +1550,7 @@
    }
   },
   "R25": {
+   "role": "小脑常驻",
    "fp": "Resistor_SMD:R_0201_0603Metric",
    "value": "0",
    "side": "B",
@@ -1482,6 +1565,7 @@
    }
   },
   "J1": {
+   "role": "板间连接",
    "fp": "Connector_Hirose_DF40:Hirose_DF40C-40DS-0.4V_2x20_P0.4mm",
    "value": "板间 DF40 40P（至主板）",
    "side": "F",

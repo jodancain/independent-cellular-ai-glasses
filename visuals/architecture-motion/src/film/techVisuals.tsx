@@ -76,6 +76,7 @@ const ROLES: { icon: GlyphName; t: string; who: string; items: string[] }[] = [
   { icon: "brain", t: "脑", who: "眼镜 + 云端 LLM", items: ["理解意图", "派哪只手", "决定显示什么"] },
   { icon: "chip", t: "小脑", who: "主 SoC + 显示处理器 + MCU", items: ["追踪 · 解码 · 合成", "重投影 · 畸变校正", "轻卡片 · 条件反射", "手表模式 · 显示分配"] },
   { icon: "monitor", t: "手", who: "手机 · PC · 车机 · 云主机", items: ["运行应用", "按自己的界面渲染", "云端 GPU 也是手"] },
+  { icon: "signal", t: "脚", who: "蜂窝 · Wi-Fi 7 · BLE · USB-C", items: ["把脑带到每只手", "有线 > 局域网 > 云", "BLE 细步 · Wi-Fi 大步", "四条腿都断 = 手表"] },
 ];
 const ORGANS: { a: GlyphName; b: GlyphName; t: string }[] = [
   { a: "camera", b: "eye", t: "摄像头 = 眼睛" },
@@ -87,17 +88,17 @@ export const VRoles: React.FC = () => {
   const f = useCurrentFrame();
   return (
     <>
-      <div style={{ position: "absolute", left: 0, top: 20, width: BW, display: "flex", gap: 26 }}>
+      <div style={{ position: "absolute", left: 0, top: 20, width: BW, display: "flex", gap: 16 }}>
         {ROLES.map((r, i) => {
           const p = inn(f, 6 + i * 10, 24 + i * 10);
           return (
-            <div key={r.t} style={{ flex: 1, height: 420, border: line, borderRadius: 18, padding: "26px 26px", boxSizing: "border-box", opacity: p, transform: `translateY(${(1 - p) * 24}px)`, background: i === 1 ? "rgba(232,226,212,.05)" : "transparent" }}>
+            <div key={r.t} style={{ flex: 1, height: 420, border: line, borderRadius: 18, padding: "22px 18px", boxSizing: "border-box", opacity: p, transform: `translateY(${(1 - p) * 24}px)`, background: i === 1 ? "rgba(232,226,212,.05)" : "transparent" }}>
               <Icon name={r.icon} size={82} color={C.cyan} strokeWidth={3} />
               <div style={{ fontSize: 46, fontWeight: 800, marginTop: 14 }}>{r.t}</div>
-              <div style={{ fontSize: 20, color: C.dim, marginTop: 6 }}>{r.who}</div>
+              <div style={{ fontSize: 17, color: C.dim, marginTop: 6, minHeight: 44 }}>{r.who}</div>
               <div style={{ marginTop: 22, display: "flex", flexDirection: "column", gap: 12 }}>
                 {r.items.map((t) => (
-                  <div key={t} style={{ fontSize: 22, display: "flex", alignItems: "center", gap: 10 }}>
+                  <div key={t} style={{ fontSize: 19, display: "flex", alignItems: "center", gap: 8 }}>
                     <span style={{ width: 6, height: 6, borderRadius: 3, background: C.cyan, opacity: 0.7 }} />
                     {t}
                   </div>
@@ -122,7 +123,7 @@ export const VRoles: React.FC = () => {
           );
         })}
       </div>
-      <Box x={0} y={650} w={BW} h={50} style={{ textAlign: "center", fontSize: 24, fontWeight: 700, letterSpacing: 2 }}>“算法就是视频渲染”：谁是手谁渲染，重渲染永远不在眼镜上</Box>
+      <Box x={0} y={650} w={BW} h={50} style={{ textAlign: "center", fontSize: 24, fontWeight: 700, letterSpacing: 2 }}>谁是手谁渲染，重渲染不在眼镜上；脚让脑不靠手机走到每一只手</Box>
     </>
   );
 };

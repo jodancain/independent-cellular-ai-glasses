@@ -417,7 +417,7 @@ export const SEvolve: React.FC = () => {
         <Icon name="signal" size={80} color={C.cyan} strokeWidth={4} />
       </Abs>
       <Abs x={cx + 160} y={gy + 270} o={feet} style={{ fontSize: 30, fontWeight: 700, letterSpacing: 3, whiteSpace: "nowrap" }}>
-        脚 <span style={{ fontSize: 22, fontWeight: 400, color: C.dim }}>· 独立蜂窝</span>
+        脚 <span style={{ fontSize: 22, fontWeight: 400, color: C.dim }}>· 蜂窝 · Wi-Fi · 蓝牙</span>
       </Abs>
       {/* 器官小标签 */}
       {[
@@ -695,7 +695,7 @@ export const SBody: React.FC = () => {
 const PILLARS: { icon: GlyphName; t: string; s: string }[] = [
   { icon: "image", t: "看得清", s: "手渲染 · 投到眼前" },
   { icon: "cursor", t: "做得到", s: "Agent 替你操作" },
-  { icon: "signal", t: "走得远", s: "独立蜂窝" },
+  { icon: "signal", t: "走得远", s: "脚：蜂窝 · Wi-Fi · 蓝牙" },
 ];
 export const SFinale: React.FC<{ pulse: number }> = ({ pulse }) => {
   const f = useCurrentFrame();

@@ -138,7 +138,8 @@ def build(board, projdir):
             nm, n, (w, h) = p.custom['fp']
             open(os.path.join(pretty, nm + '.kicad_mod'), 'w').write(grid_footprint(nm, n, w, h, desc=p.note, text='PLACEHOLDER 引脚待资料'))
     # 网表（供 PCB 生成）
-    net = {p.ref: {'fp': p.fp, 'value': p.value, 'side': p.side, 'pos': p.pos, 'rot': p.rot, 'group': p.group, 'dnp': p.dnp, 'note': p.note,
+    from design import role_of
+    net = {p.ref: {'role': role_of(board.name, p.group), 'fp': p.fp, 'value': p.value, 'side': p.side, 'pos': p.pos, 'rot': p.rot, 'group': p.group, 'dnp': p.dnp, 'note': p.note,
                    'pads': {t[1]: t[7] for t in p.pinlist if t[7]}} for p in board.parts}
     json.dump({'name': board.name, 'title': board.title, 'layers': board.layers, 'outline': board.outline, 'notes': board.notes, 'parts': net},
               open(os.path.join(projdir, f'{board.name}.netlist.json'), 'w', encoding='utf8'), ensure_ascii=False, indent=1)

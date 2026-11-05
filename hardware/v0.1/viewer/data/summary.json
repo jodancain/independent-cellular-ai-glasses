@@ -1,6 +1,6 @@
 {
  "mcu_board": {
-  "title": "MCU 常驻板（脑的反射 · 常醒 · 听音 · BLE）",
+  "title": "MCU 常驻板（小脑常驻 · 脚的 BLE · 耳朵和嘴巴）",
   "notes": [
    "右镜腿形 78×16 mm，6 层，双面贴装",
    "MCU A 案：STM32N657 + nRF52832（常驻 BLE）",
@@ -24,91 +24,457 @@
    "unconnected_items": 335
   },
   "unconnected": 335,
+  "roles": {
+   "器官 · 嘴巴": [
+    {
+     "ref": "C50",
+     "value": "100nF"
+    },
+    {
+     "ref": "C51",
+     "value": "100nF"
+    },
+    {
+     "ref": "MK1",
+     "value": "PDM 麦克风 L"
+    },
+    {
+     "ref": "MK2",
+     "value": "PDM 麦克风 R"
+    }
+   ],
+   "器官 · 耳朵": [
+    {
+     "ref": "C55",
+     "value": "10uF"
+    },
+    {
+     "ref": "C56",
+     "value": "100nF"
+    },
+    {
+     "ref": "J3",
+     "value": "扬声器"
+    },
+    {
+     "ref": "U5",
+     "value": "MAX98357A"
+    }
+   ],
+   "小脑常驻": [
+    {
+     "ref": "C1",
+     "value": "10uF"
+    },
+    {
+     "ref": "C11",
+     "value": "10uF"
+    },
+    {
+     "ref": "C12",
+     "value": "4.7uF"
+    },
+    {
+     "ref": "C13",
+     "value": "1uF"
+    },
+    {
+     "ref": "C14",
+     "value": "100nF"
+    },
+    {
+     "ref": "C15",
+     "value": "100nF"
+    },
+    {
+     "ref": "C16",
+     "value": "100nF"
+    },
+    {
+     "ref": "C17",
+     "value": "100nF"
+    },
+    {
+     "ref": "C18",
+     "value": "100nF"
+    },
+    {
+     "ref": "C2",
+     "value": "4.7uF"
+    },
+    {
+     "ref": "C21",
+     "value": "2.2uF"
+    },
+    {
+     "ref": "C22",
+     "value": "100nF"
+    },
+    {
+     "ref": "C23",
+     "value": "8pF"
+    },
+    {
+     "ref": "C24",
+     "value": "8pF"
+    },
+    {
+     "ref": "C25",
+     "value": "6pF"
+    },
+    {
+     "ref": "C26",
+     "value": "6pF"
+    },
+    {
+     "ref": "C3",
+     "value": "1uF"
+    },
+    {
+     "ref": "C30",
+     "value": "100nF"
+    },
+    {
+     "ref": "C31",
+     "value": "100nF"
+    },
+    {
+     "ref": "C4",
+     "value": "100nF"
+    },
+    {
+     "ref": "C5",
+     "value": "100nF"
+    },
+    {
+     "ref": "C6",
+     "value": "100nF"
+    },
+    {
+     "ref": "C70",
+     "value": "100nF"
+    },
+    {
+     "ref": "D1",
+     "value": "状态灯"
+    },
+    {
+     "ref": "J4",
+     "value": "SWD（N6 + nRF）"
+    },
+    {
+     "ref": "L1",
+     "value": "2.2uH"
+    },
+    {
+     "ref": "R1",
+     "value": "10k"
+    },
+    {
+     "ref": "R2",
+     "value": "4.02k 1%"
+    },
+    {
+     "ref": "R20",
+     "value": "2.2k"
+    },
+    {
+     "ref": "R21",
+     "value": "2.2k"
+    },
+    {
+     "ref": "R22",
+     "value": "10k"
+    },
+    {
+     "ref": "R23",
+     "value": "10k"
+    },
+    {
+     "ref": "R24",
+     "value": "1k"
+    },
+    {
+     "ref": "R25",
+     "value": "0"
+    },
+    {
+     "ref": "SW1",
+     "value": "电源 / 唤醒键"
+    },
+    {
+     "ref": "U1",
+     "value": "STM32N657X0H3Q"
+    },
+    {
+     "ref": "U2",
+     "value": "APS6404L 64Mb PSRAM 1.8V"
+    },
+    {
+     "ref": "U3",
+     "value": "W25Q128JW 1.8V NOR"
+    },
+    {
+     "ref": "U9",
+     "value": "APDS-9160 佩戴检测"
+    },
+    {
+     "ref": "Y1",
+     "value": "48MHz"
+    },
+    {
+     "ref": "Y2",
+     "value": "32.768kHz"
+    }
+   ],
+   "板间连接": [
+    {
+     "ref": "J1",
+     "value": "板间 DF40 40P（至主板）"
+    }
+   ],
+   "脚": [
+    {
+     "ref": "AE1",
+     "value": "2.4GHz 片状天线"
+    },
+    {
+     "ref": "C40",
+     "value": "100nF"
+    },
+    {
+     "ref": "C41",
+     "value": "1uF"
+    },
+    {
+     "ref": "C42",
+     "value": "100nF"
+    },
+    {
+     "ref": "C43",
+     "value": "47nF"
+    },
+    {
+     "ref": "C44",
+     "value": "4.7uF"
+    },
+    {
+     "ref": "C45",
+     "value": "100nF"
+    },
+    {
+     "ref": "C46",
+     "value": "12pF"
+    },
+    {
+     "ref": "C47",
+     "value": "12pF"
+    },
+    {
+     "ref": "C48",
+     "value": "0.8pF"
+    },
+    {
+     "ref": "L2",
+     "value": "10uH"
+    },
+    {
+     "ref": "L3",
+     "value": "15nH"
+    },
+    {
+     "ref": "L4",
+     "value": "3.9nH"
+    },
+    {
+     "ref": "U4",
+     "value": "nRF52832-QFAA"
+    },
+    {
+     "ref": "Y3",
+     "value": "32MHz"
+    }
+   ],
+   "身体 · 电源": [
+    {
+     "ref": "C60",
+     "value": "1uF"
+    },
+    {
+     "ref": "C61",
+     "value": "4.7uF"
+    },
+    {
+     "ref": "C62",
+     "value": "4.7uF"
+    },
+    {
+     "ref": "C63",
+     "value": "10uF"
+    },
+    {
+     "ref": "C64",
+     "value": "4.7uF"
+    },
+    {
+     "ref": "C65",
+     "value": "1uF"
+    },
+    {
+     "ref": "J2",
+     "value": "右侧电池"
+    },
+    {
+     "ref": "L5",
+     "value": "0.47uH"
+    },
+    {
+     "ref": "R10",
+     "value": "1.13k"
+    },
+    {
+     "ref": "R11",
+     "value": "3.0k"
+    },
+    {
+     "ref": "R12",
+     "value": "46.4k"
+    },
+    {
+     "ref": "R13",
+     "value": "200k"
+    },
+    {
+     "ref": "R14",
+     "value": "100k"
+    },
+    {
+     "ref": "R15",
+     "value": "0"
+    },
+    {
+     "ref": "R16",
+     "value": "1M"
+    },
+    {
+     "ref": "R17",
+     "value": "1M"
+    },
+    {
+     "ref": "U6",
+     "value": "BQ24075"
+    },
+    {
+     "ref": "U7",
+     "value": "TPS62823 1.8V"
+    },
+    {
+     "ref": "U8",
+     "value": "TLV75533 3.3V"
+    }
+   ]
+  },
   "ics": [
    {
     "ref": "AE1",
     "value": "2.4GHz 片状天线",
-    "note": ""
+    "note": "",
+    "role": "脚"
    },
    {
     "ref": "J1",
     "value": "板间 DF40 40P（至主板）",
-    "note": ""
+    "note": "",
+    "role": "板间连接"
    },
    {
     "ref": "J2",
     "value": "右侧电池",
-    "note": "两块电池分置左右耳后"
+    "note": "两块电池分置左右耳后",
+    "role": "身体 · 电源"
    },
    {
     "ref": "J3",
     "value": "扬声器",
-    "note": ""
+    "note": "",
+    "role": "器官 · 耳朵"
    },
    {
     "ref": "J4",
     "value": "SWD（N6 + nRF）",
-    "note": "第 6 脚复用 nRF SWDIO 只为初版调试，正式版分开"
+    "note": "第 6 脚复用 nRF SWDIO 只为初版调试，正式版分开",
+    "role": "小脑常驻"
    },
    {
     "ref": "MK1",
     "value": "PDM 麦克风 L",
-    "note": ""
+    "note": "",
+    "role": "器官 · 嘴巴"
    },
    {
     "ref": "MK2",
     "value": "PDM 麦克风 R",
-    "note": ""
+    "note": "",
+    "role": "器官 · 嘴巴"
    },
    {
     "ref": "U1",
     "value": "STM32N657X0H3Q",
-    "note": "MCU A 案；引脚来自 ST 官方 open pin data"
+    "note": "MCU A 案；引脚来自 ST 官方 open pin data",
+    "role": "小脑常驻"
    },
    {
     "ref": "U2",
     "value": "APS6404L 64Mb PSRAM 1.8V",
-    "note": "方案要求外挂 PSRAM 放录像缓冲；容量待按录像需求放大"
+    "note": "方案要求外挂 PSRAM 放录像缓冲；容量待按录像需求放大",
+    "role": "小脑常驻"
    },
    {
     "ref": "U3",
     "value": "W25Q128JW 1.8V NOR",
-    "note": "手表模式录制存储；方案写小容量 NAND，初版先用 NOR，待定"
+    "note": "手表模式录制存储；方案写小容量 NAND，初版先用 NOR，待定",
+    "role": "小脑常驻"
    },
    {
     "ref": "U4",
     "value": "nRF52832-QFAA",
-    "note": "常驻收手机这只手的气泡 / 看板描述"
+    "note": "常驻收手机这只手的气泡 / 看板描述",
+    "role": "脚"
    },
    {
     "ref": "U5",
     "value": "MAX98357A",
-    "note": "开放式扬声器；防漏音靠结构与算法"
+    "note": "开放式扬声器；防漏音靠结构与算法",
+    "role": "器官 · 耳朵"
    },
    {
     "ref": "U6",
     "value": "BQ24075",
-    "note": "USB 输入 → 系统电源路径 + 右侧电池充电"
+    "note": "USB 输入 → 系统电源路径 + 右侧电池充电",
+    "role": "身体 · 电源"
    },
    {
     "ref": "U7",
     "value": "TPS62823 1.8V",
-    "note": ""
+    "note": "",
+    "role": "身体 · 电源"
    },
    {
     "ref": "U8",
     "value": "TLV75533 3.3V",
-    "note": "接近传感器供电"
+    "note": "接近传感器供电",
+    "role": "身体 · 电源"
    },
    {
     "ref": "U9",
     "value": "APDS-9160 佩戴检测",
-    "note": "电平匹配待核（3.3V 供电、1.8V I2C）"
+    "note": "电平匹配待核（3.3V 供电、1.8V I2C）",
+    "role": "小脑常驻"
    }
   ]
  },
  "main_board": {
-  "title": "主板（小脑：主 SoC + 显示处理器 + RedCap + 接口）",
+  "title": "主板（小脑：主 SoC + 显示处理器；脚：RedCap + Wi-Fi 7 + USB-C）",
   "notes": [
    "M1 桌面载板形态 100×70 mm，8 层 HDI",
    "主 SoC / Wi-Fi 7 / LT7911UXC / FPGA / RedCap / 开关 为占位：引脚待供应商资料或 NDA",
@@ -197,161 +563,432 @@
    "unconnected_items": 429
   },
   "unconnected": 429,
+  "roles": {
+   "器官 · 眼睛": [
+    {
+     "ref": "J3",
+     "value": "追踪相机 L"
+    },
+    {
+     "ref": "J4",
+     "value": "追踪相机 R"
+    },
+    {
+     "ref": "J5",
+     "value": "主摄（1080p30 起）"
+    },
+    {
+     "ref": "J6",
+     "value": "眼动相机（预留）"
+    },
+    {
+     "ref": "U16",
+     "value": "主摄 MIPI 二选一（占位）"
+    }
+   ],
+   "器官 · 视网膜": [
+    {
+     "ref": "J7",
+     "value": "光机 L（光波导）"
+    },
+    {
+     "ref": "J8",
+     "value": "光机 R（光波导）"
+    },
+    {
+     "ref": "U17",
+     "value": "显示开关 L（占位）"
+    },
+    {
+     "ref": "U18",
+     "value": "显示开关 R（占位）"
+    }
+   ],
+   "小脑": [
+    {
+     "ref": "C30",
+     "value": "10uF"
+    },
+    {
+     "ref": "C31",
+     "value": "100nF"
+    },
+    {
+     "ref": "C32",
+     "value": "100nF"
+    },
+    {
+     "ref": "C35",
+     "value": "100nF"
+    },
+    {
+     "ref": "L1",
+     "value": "0.47uH"
+    },
+    {
+     "ref": "R1",
+     "value": "100k"
+    },
+    {
+     "ref": "R2",
+     "value": "150k"
+    },
+    {
+     "ref": "U6",
+     "value": "显示与重投影处理器（原型 FPGA，占位）"
+    },
+    {
+     "ref": "U7",
+     "value": "FPGA 配置 Flash"
+    },
+    {
+     "ref": "U8",
+     "value": "TPS62823 DPU 内核"
+    },
+    {
+     "ref": "U9",
+     "value": "LSM6DSM 6 轴 IMU（≥1 kHz）"
+    }
+   ],
+   "小脑（含脑的端侧入口）": [
+    {
+     "ref": "C1",
+     "value": "22uF"
+    },
+    {
+     "ref": "C2",
+     "value": "1uF"
+    },
+    {
+     "ref": "C3",
+     "value": "10uF"
+    },
+    {
+     "ref": "C4",
+     "value": "10uF"
+    },
+    {
+     "ref": "C5",
+     "value": "10uF"
+    },
+    {
+     "ref": "C6",
+     "value": "1uF"
+    },
+    {
+     "ref": "U1",
+     "value": "Snapdragon AR2 Gen 1（占位）"
+    }
+   ],
+   "板间连接": [
+    {
+     "ref": "J2",
+     "value": "板间 DF40 40P（至 MCU 板）"
+    }
+   ],
+   "脚": [
+    {
+     "ref": "C20",
+     "value": "100uF"
+    },
+    {
+     "ref": "C21",
+     "value": "10uF"
+    },
+    {
+     "ref": "C22",
+     "value": "100nF"
+    },
+    {
+     "ref": "C43",
+     "value": "1uF"
+    },
+    {
+     "ref": "J10",
+     "value": "蜂窝主天线"
+    },
+    {
+     "ref": "J11",
+     "value": "蜂窝分集天线"
+    },
+    {
+     "ref": "J12",
+     "value": "Nano SIM 卡座（M2 期间保留）"
+    },
+    {
+     "ref": "J9",
+     "value": "Wi-Fi 天线"
+    },
+    {
+     "ref": "R20",
+     "value": "0"
+    },
+    {
+     "ref": "U15",
+     "value": "TLV75533 3.3V 射频"
+    },
+    {
+     "ref": "U3",
+     "value": "Wi-Fi 7 + 蓝牙连接芯片（占位）"
+    },
+    {
+     "ref": "U4",
+     "value": "Quectel RG255C-GL（X35，占位）"
+    },
+    {
+     "ref": "U5",
+     "value": "eSIM（MFF2，占位）"
+    }
+   ],
+   "脚（有线 A1）": [
+    {
+     "ref": "U10",
+     "value": "LT7911UXC DP→MIPI（占位）"
+    }
+   ],
+   "脚（有线）": [
+    {
+     "ref": "J1",
+     "value": "USB-C（DP Alt / USB 3 / PD）"
+    },
+    {
+     "ref": "U11",
+     "value": "Type-C DP/USB3 复用开关（占位）"
+    },
+    {
+     "ref": "U12",
+     "value": "USB PD + DP Alt 控制器（占位）"
+    },
+    {
+     "ref": "U13",
+     "value": "ESD"
+    }
+   ],
+   "身体 · 电源": [
+    {
+     "ref": "C40",
+     "value": "1uF"
+    },
+    {
+     "ref": "C41",
+     "value": "10uF"
+    },
+    {
+     "ref": "C42",
+     "value": "4.7uF"
+    },
+    {
+     "ref": "J13",
+     "value": "左侧电池"
+    },
+    {
+     "ref": "R10",
+     "value": "1.13k"
+    },
+    {
+     "ref": "R11",
+     "value": "3.0k"
+    },
+    {
+     "ref": "R12",
+     "value": "46.4k"
+    },
+    {
+     "ref": "U14",
+     "value": "BQ24075 左侧"
+    },
+    {
+     "ref": "U2",
+     "value": "SoC 配套 PMIC（占位）"
+    }
+   ]
+  },
   "ics": [
    {
     "ref": "J1",
     "value": "USB-C（DP Alt / USB 3 / PD）",
-    "note": ""
+    "note": "",
+    "role": "脚（有线）"
    },
    {
     "ref": "J10",
     "value": "蜂窝主天线",
-    "note": ""
+    "note": "",
+    "role": "脚"
    },
    {
     "ref": "J11",
     "value": "蜂窝分集天线",
-    "note": ""
+    "note": "",
+    "role": "脚"
    },
    {
     "ref": "J12",
     "value": "Nano SIM 卡座（M2 期间保留）",
-    "note": "选型待定"
+    "note": "选型待定",
+    "role": "脚"
    },
    {
     "ref": "J13",
     "value": "左侧电池",
-    "note": ""
+    "note": "",
+    "role": "身体 · 电源"
    },
    {
     "ref": "J2",
     "value": "板间 DF40 40P（至 MCU 板）",
-    "note": ""
+    "note": "",
+    "role": "板间连接"
    },
    {
     "ref": "J3",
     "value": "追踪相机 L",
-    "note": ""
+    "note": "",
+    "role": "器官 · 眼睛"
    },
    {
     "ref": "J4",
     "value": "追踪相机 R",
-    "note": ""
+    "note": "",
+    "role": "器官 · 眼睛"
    },
    {
     "ref": "J5",
     "value": "主摄（1080p30 起）",
-    "note": ""
+    "note": "",
+    "role": "器官 · 眼睛"
    },
    {
     "ref": "J6",
     "value": "眼动相机（预留）",
-    "note": "眼动只预留，不贴"
+    "note": "眼动只预留，不贴",
+    "role": "器官 · 眼睛"
    },
    {
     "ref": "J7",
     "value": "光机 L（光波导）",
-    "note": "光机 LCoS / 全彩 microLED 在 M1 定案，引脚按光机重排"
+    "note": "光机 LCoS / 全彩 microLED 在 M1 定案，引脚按光机重排",
+    "role": "器官 · 视网膜"
    },
    {
     "ref": "J8",
     "value": "光机 R（光波导）",
-    "note": "光机 LCoS / 全彩 microLED 在 M1 定案，引脚按光机重排"
+    "note": "光机 LCoS / 全彩 microLED 在 M1 定案，引脚按光机重排",
+    "role": "器官 · 视网膜"
    },
    {
     "ref": "J9",
     "value": "Wi-Fi 天线",
-    "note": ""
+    "note": "",
+    "role": "脚"
    },
    {
     "ref": "U1",
     "value": "Snapdragon AR2 Gen 1（占位）",
-    "note": "主选 AR2 Gen 1；引脚与封装需与高通签 NDA 后替换；有条件备选 AR1+ Gen 1"
+    "note": "主选 AR2 Gen 1；引脚与封装需与高通签 NDA 后替换；有条件备选 AR1+ Gen 1",
+    "role": "小脑（含脑的端侧入口）"
    },
    {
     "ref": "U10",
     "value": "LT7911UXC DP→MIPI（占位）",
-    "note": "A1 有线原始画面入口；引脚待龙迅资料"
+    "note": "A1 有线原始画面入口；引脚待龙迅资料",
+    "role": "脚（有线 A1）"
    },
    {
     "ref": "U11",
     "value": "Type-C DP/USB3 复用开关（占位）",
-    "note": "A1 时 4 路 DP；A2 时 USB 3"
+    "note": "A1 时 4 路 DP；A2 时 USB 3",
+    "role": "脚（有线）"
    },
    {
     "ref": "U12",
     "value": "USB PD + DP Alt 控制器（占位）",
-    "note": "受电 + DP Alt 协商"
+    "note": "受电 + DP Alt 协商",
+    "role": "脚（有线）"
    },
    {
     "ref": "U13",
     "value": "ESD",
-    "note": ""
+    "note": "",
+    "role": "脚（有线）"
    },
    {
     "ref": "U14",
     "value": "BQ24075 左侧",
-    "note": ""
+    "note": "",
+    "role": "身体 · 电源"
    },
    {
     "ref": "U15",
     "value": "TLV75533 3.3V 射频",
-    "note": ""
+    "note": "",
+    "role": "脚"
    },
    {
     "ref": "U16",
     "value": "主摄 MIPI 二选一（占位）",
-    "note": "同一时刻只给 MCU 或主 SoC；MCU 仲裁"
+    "note": "同一时刻只给 MCU 或主 SoC；MCU 仲裁",
+    "role": "器官 · 眼睛"
    },
    {
     "ref": "U17",
     "value": "显示开关 L（占位）",
-    "note": "正常接显示处理器；手表模式切到 MCU 低速显示"
+    "note": "正常接显示处理器；手表模式切到 MCU 低速显示",
+    "role": "器官 · 视网膜"
    },
    {
     "ref": "U18",
     "value": "显示开关 R（占位）",
-    "note": "正常接显示处理器；手表模式切到 MCU 低速显示"
+    "note": "正常接显示处理器；手表模式切到 MCU 低速显示",
+    "role": "器官 · 视网膜"
    },
    {
     "ref": "U2",
     "value": "SoC 配套 PMIC（占位）",
-    "note": "随 SoC 平台选定"
+    "note": "随 SoC 平台选定",
+    "role": "身体 · 电源"
    },
    {
     "ref": "U3",
     "value": "Wi-Fi 7 + 蓝牙连接芯片（占位）",
-    "note": "AR2 / AR1+ 平台配套连接芯片"
+    "note": "AR2 / AR1+ 平台配套连接芯片",
+    "role": "脚"
    },
    {
     "ref": "U4",
     "value": "Quectel RG255C-GL（X35，占位）",
-    "note": "引脚编号按移远《RG255C-GL 硬件设计手册》替换；外形尺寸待核"
+    "note": "引脚编号按移远《RG255C-GL 硬件设计手册》替换；外形尺寸待核",
+    "role": "脚"
    },
    {
     "ref": "U5",
     "value": "eSIM（MFF2，占位）",
-    "note": "与卡座二选一贴装"
+    "note": "与卡座二选一贴装",
+    "role": "脚"
    },
    {
     "ref": "U6",
     "value": "显示与重投影处理器（原型 FPGA，占位）",
-    "note": "扭曲、畸变与色差校正、缩放、60→90 Hz 以上补帧；型号 M1 定"
+    "note": "扭曲、畸变与色差校正、缩放、60→90 Hz 以上补帧；型号 M1 定",
+    "role": "小脑"
    },
    {
     "ref": "U7",
     "value": "FPGA 配置 Flash",
-    "note": ""
+    "note": "",
+    "role": "小脑"
    },
    {
     "ref": "U8",
     "value": "TPS62823 DPU 内核",
-    "note": ""
+    "note": "",
+    "role": "小脑"
    },
    {
     "ref": "U9",
     "value": "LSM6DSM 6 轴 IMU（≥1 kHz）",
-    "note": "型号待选（方案要求 6 轴、采样 ≥1 kHz）"
+    "note": "型号待选（方案要求 6 轴、采样 ≥1 kHz）",
+    "role": "小脑"
    }
   ]
  }

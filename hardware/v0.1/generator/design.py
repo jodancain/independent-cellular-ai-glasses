@@ -91,7 +91,7 @@ B2B_FP = 'Connector_Hirose_DF40:Hirose_DF40C-40DS-0.4V_2x20_P0.4mm'
 
 
 def board_a():
-    b = Board('mcu_board', 'MCU 常驻板（脑的反射 · 常醒 · 听音 · BLE）', 6,
+    b = Board('mcu_board', 'MCU 常驻板（小脑常驻 · 脚的 BLE · 耳朵和嘴巴）', 6,
               [(0, 2), (2, 0), (74, 0), (78, 4), (78, 12), (74, 16), (2, 16), (0, 14)],
               ['右镜腿形 78×16 mm，6 层，双面贴装', 'MCU A 案：STM32N657 + nRF52832（常驻 BLE）',
                '去耦电容为初版代表值，须按各芯片手册补全', '未布线：只有布局与飞线'])
@@ -244,7 +244,7 @@ def board_a():
 
 
 def board_b():
-    b = Board('main_board', '主板（小脑：主 SoC + 显示处理器 + RedCap + 接口）', 8,
+    b = Board('main_board', '主板（小脑：主 SoC + 显示处理器；脚：RedCap + Wi-Fi 7 + USB-C）', 8,
               [(0, 3), (3, 0), (97, 0), (100, 3), (100, 67), (97, 70), (3, 70), (0, 67)],
               ['M1 桌面载板形态 100×70 mm，8 层 HDI', '主 SoC / Wi-Fi 7 / LT7911UXC / FPGA / RedCap / 开关 为占位：引脚待供应商资料或 NDA',
                'RedCap 模组外形尺寸待按移远硬件设计手册核实', '未布线：只有布局与飞线'])
@@ -393,6 +393,19 @@ def board_b():
     b.add('J2', 'Conn_02x20_Odd_Even', B2B_FP, '板间 DF40 40P（至 MCU 板）', {str(k): v for k, v in B2B.items()}, pos=(40, 52), rot=90, group='b2b')
     b.flags = ['VBUS', 'VBAT_L', 'VSYS_MAIN', 'VSYS_CELL', '+1V8_IO', '+1V8_AON', '+3V3_RF', 'VDD_SOC_CORE', 'VDD_SOC_MX', 'VDD_SOC_MEM', 'VDD_DPU_CORE', 'GND']
     return b
+
+
+# 按方案 §1.1（决定 #22、#25）给每组器件标角色
+ROLES = {
+    'mcu_board': {'mcu': '小脑常驻', 'mem': '小脑常驻', 'wear': '小脑常驻', 'ui': '小脑常驻', 'ble': '脚', 'b2b': '板间连接',
+                  'mic': '器官 · 嘴巴', 'amp': '器官 · 耳朵', 'pwr': '身体 · 电源'},
+    'main_board': {'soc': '小脑（含脑的端侧入口）', 'dpu': '小脑', 'wifi': '脚', 'cell': '脚', 'dp': '脚（有线 A1）', 'usb': '脚（有线）',
+                   'cam': '器官 · 眼睛', 'disp': '器官 · 视网膜', 'pwr': '身体 · 电源', 'b2b': '板间连接'},
+}
+
+
+def role_of(board, group):
+    return ROLES.get(board, {}).get(group, '其他')
 
 
 BOARDS = [board_a, board_b]

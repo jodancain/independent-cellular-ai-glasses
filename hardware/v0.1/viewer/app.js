@@ -232,6 +232,12 @@ function panel(key) {
   if (key === 'glasses') {
     info.innerHTML = `<h2>装进眼镜</h2>
     <p>右镜腿放 MCU 常驻板（真实器件，可以按现状继续布线）；左镜腿是主板将来的位置。</p>
+    <h3>脑、小脑、手、脚长在哪</h3>
+    <ul><li><b>脑</b>：云端 LLM + 眼镜端意图入口（跑在主 SoC 与 MCU 唤醒词上），没有单独的芯片。</li>
+    <li><b>小脑</b>：左镜腿主板的主 SoC 与显示处理器；右镜腿 MCU 是常醒的那部分小脑。</li>
+    <li><b>脚</b>：左边 RedCap、Wi-Fi 7、USB-C；右边 nRF52832 的 BLE 常连。</li>
+    <li><b>手</b>：不在眼镜上——手机、电脑、车机、云主机。</li>
+    <li><b>器官</b>：前框的光波导 + 光机（视网膜）与摄像头（眼睛）；右镜腿的麦克风（嘴巴）与扬声器（耳朵）。</li></ul>
     <h3>为什么主板还不是镜腿形</h3>
     <ul><li>主 SoC（AR2 Gen 1）引脚与封装要和高通签 NDA 才拿得到，现在只能占位。</li>
     <li>RedCap 用的是模组（原型主选），尺寸放不进镜腿；路线图里芯片级设计在第二代。</li>
@@ -247,8 +253,9 @@ function panel(key) {
   <p>ERC：${cnt(S.erc)}</p>
   <p>DRC：${cnt(Object.fromEntries(Object.entries(S.drc).filter(([k]) => k !== 'unconnected_items')))}</p>
   <p class="warn">未布线焊盘 ${S.unconnected} 个（初版只做布局，未布线）</p>
+  <h3>按角色（脑 · 小脑 · 手 · 脚 · 器官）</h3><ul>${Object.entries(S.roles).map(([r, ps]) => `<li><b>${r}</b>（${ps.length}）：${ps.filter(p => !/^[RCL]\d/.test(p.ref)).map(p => p.ref).join('、') || '阻容感'}${ps.some(p => /^[RCL]\d/.test(p.ref)) ? ' 等' : ''}</li>`).join('')}</ul>
   ${S.placeholders.length ? `<h3>占位器件（引脚待资料）</h3><ul>${S.placeholders.map(p => `<li><b>${p.ref}</b> ${p.value}</li>`).join('')}</ul>` : ''}
-  <h3>主要器件</h3><ul>${S.ics.map(p => `<li><b>${p.ref}</b> ${p.value}${p.note ? `<br><span style="color:#8f96a3">${p.note}</span>` : ''}</li>`).join('')}</ul>`;
+  <h3>主要器件</h3><ul>${S.ics.map(p => `<li><b>${p.ref}</b> ${p.value} <span class="tag">${p.role}</span>${p.note ? `<br><span style="color:#8f96a3">${p.note}</span>` : ''}</li>`).join('')}</ul>`;
 }
 
 // ---------------- 切换 ----------------

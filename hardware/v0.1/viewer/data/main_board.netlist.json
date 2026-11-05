@@ -1,6 +1,6 @@
 {
  "name": "main_board",
- "title": "主板（小脑：主 SoC + 显示处理器 + RedCap + 接口）",
+ "title": "主板（小脑：主 SoC + 显示处理器；脚：RedCap + Wi-Fi 7 + USB-C）",
  "layers": 8,
  "outline": [
   [
@@ -44,6 +44,7 @@
  ],
  "parts": {
   "U1": {
+   "role": "小脑（含脑的端侧入口）",
    "fp": "glasses:PH_SOC_AR2_GEN1_PLACEHOLDER",
    "value": "Snapdragon AR2 Gen 1（占位）",
    "side": "F",
@@ -152,6 +153,7 @@
    }
   },
   "C1": {
+   "role": "小脑（含脑的端侧入口）",
    "fp": "Capacitor_SMD:C_0402_1005Metric",
    "value": "22uF",
    "side": "B",
@@ -166,6 +168,7 @@
    }
   },
   "C2": {
+   "role": "小脑（含脑的端侧入口）",
    "fp": "Capacitor_SMD:C_0402_1005Metric",
    "value": "1uF",
    "side": "B",
@@ -180,6 +183,7 @@
    }
   },
   "C3": {
+   "role": "小脑（含脑的端侧入口）",
    "fp": "Capacitor_SMD:C_0402_1005Metric",
    "value": "10uF",
    "side": "B",
@@ -194,6 +198,7 @@
    }
   },
   "C4": {
+   "role": "小脑（含脑的端侧入口）",
    "fp": "Capacitor_SMD:C_0402_1005Metric",
    "value": "10uF",
    "side": "B",
@@ -208,6 +213,7 @@
    }
   },
   "C5": {
+   "role": "小脑（含脑的端侧入口）",
    "fp": "Capacitor_SMD:C_0402_1005Metric",
    "value": "10uF",
    "side": "B",
@@ -222,6 +228,7 @@
    }
   },
   "C6": {
+   "role": "小脑（含脑的端侧入口）",
    "fp": "Capacitor_SMD:C_0402_1005Metric",
    "value": "1uF",
    "side": "B",
@@ -236,6 +243,7 @@
    }
   },
   "U2": {
+   "role": "身体 · 电源",
    "fp": "glasses:PH_PMIC_SOC_PLACEHOLDER",
    "value": "SoC 配套 PMIC（占位）",
    "side": "F",
@@ -263,6 +271,7 @@
    }
   },
   "U3": {
+   "role": "脚",
    "fp": "glasses:PH_WIFI7_COMBO_PLACEHOLDER",
    "value": "Wi-Fi 7 + 蓝牙连接芯片（占位）",
    "side": "F",
@@ -297,6 +306,7 @@
    }
   },
   "J9": {
+   "role": "脚",
    "fp": "Connector_Coaxial:U.FL_Hirose_U.FL-R-SMT-1_Vertical",
    "value": "Wi-Fi 天线",
    "side": "F",
@@ -314,6 +324,7 @@
    }
   },
   "U4": {
+   "role": "脚",
    "fp": "glasses:PH_RG255C_GL_PLACEHOLDER",
    "value": "Quectel RG255C-GL（X35，占位）",
    "side": "F",
@@ -357,6 +368,7 @@
    }
   },
   "C20": {
+   "role": "脚",
    "fp": "Capacitor_SMD:C_0603_1608Metric",
    "value": "100uF",
    "side": "B",
@@ -371,6 +383,7 @@
    }
   },
   "C21": {
+   "role": "脚",
    "fp": "Capacitor_SMD:C_0402_1005Metric",
    "value": "10uF",
    "side": "B",
@@ -385,6 +398,7 @@
    }
   },
   "R20": {
+   "role": "脚",
    "fp": "Resistor_SMD:R_0603_1608Metric",
    "value": "0",
    "side": "F",
@@ -399,6 +413,7 @@
    }
   },
   "J10": {
+   "role": "脚",
    "fp": "Connector_Coaxial:U.FL_Hirose_U.FL-R-SMT-1_Vertical",
    "value": "蜂窝主天线",
    "side": "F",
@@ -416,6 +431,7 @@
    }
   },
   "J11": {
+   "role": "脚",
    "fp": "Connector_Coaxial:U.FL_Hirose_U.FL-R-SMT-1_Vertical",
    "value": "蜂窝分集天线",
    "side": "F",
@@ -433,6 +449,7 @@
    }
   },
   "J12": {
+   "role": "脚",
    "fp": "glasses:PH_NANO_SIM_HOLDER",
    "value": "Nano SIM 卡座（M2 期间保留）",
    "side": "F",
@@ -454,6 +471,7 @@
    }
   },
   "U5": {
+   "role": "脚",
    "fp": "glasses:PH_ESIM_MFF2",
    "value": "eSIM（MFF2，占位）",
    "side": "F",
@@ -474,6 +492,7 @@
    }
   },
   "C22": {
+   "role": "脚",
    "fp": "Capacitor_SMD:C_0201_0603Metric",
    "value": "100nF",
    "side": "F",
@@ -488,6 +507,7 @@
    }
   },
   "U6": {
+   "role": "小脑",
    "fp": "glasses:PH_DPU_FPGA_PLACEHOLDER",
    "value": "显示与重投影处理器（原型 FPGA，占位）",
    "side": "F",
@@ -555,6 +575,7 @@
    }
   },
   "U7": {
+   "role": "小脑",
    "fp": "Package_SON:WSON-8-1EP_6x5mm_P1.27mm_EP3.4x4.3mm",
    "value": "FPGA 配置 Flash",
    "side": "B",
@@ -577,6 +598,7 @@
    }
   },
   "U8": {
+   "role": "小脑",
    "fp": "Package_SON:Texas_VSON-HR-8_1.5x2mm_P0.5mm",
    "value": "TPS62823 DPU 内核",
    "side": "B",
@@ -598,6 +620,7 @@
    }
   },
   "L1": {
+   "role": "小脑",
    "fp": "Inductor_SMD:L_0805_2012Metric",
    "value": "0.47uH",
    "side": "B",
@@ -612,6 +635,7 @@
    }
   },
   "R1": {
+   "role": "小脑",
    "fp": "Resistor_SMD:R_0201_0603Metric",
    "value": "100k",
    "side": "B",
@@ -626,6 +650,7 @@
    }
   },
   "R2": {
+   "role": "小脑",
    "fp": "Resistor_SMD:R_0201_0603Metric",
    "value": "150k",
    "side": "B",
@@ -640,6 +665,7 @@
    }
   },
   "C30": {
+   "role": "小脑",
    "fp": "Capacitor_SMD:C_0402_1005Metric",
    "value": "10uF",
    "side": "B",
@@ -654,6 +680,7 @@
    }
   },
   "C31": {
+   "role": "小脑",
    "fp": "Capacitor_SMD:C_0201_0603Metric",
    "value": "100nF",
    "side": "B",
@@ -668,6 +695,7 @@
    }
   },
   "C32": {
+   "role": "小脑",
    "fp": "Capacitor_SMD:C_0201_0603Metric",
    "value": "100nF",
    "side": "B",
@@ -682,6 +710,7 @@
    }
   },
   "U9": {
+   "role": "小脑",
    "fp": "Package_LGA:LGA-14_3x2.5mm_P0.5mm_LayoutBorder3x4y",
    "value": "LSM6DSM 6 轴 IMU（≥1 kHz）",
    "side": "F",
@@ -708,6 +737,7 @@
    }
   },
   "C35": {
+   "role": "小脑",
    "fp": "Capacitor_SMD:C_0201_0603Metric",
    "value": "100nF",
    "side": "F",
@@ -722,6 +752,7 @@
    }
   },
   "U10": {
+   "role": "脚（有线 A1）",
    "fp": "glasses:PH_LT7911UXC_PLACEHOLDER",
    "value": "LT7911UXC DP→MIPI（占位）",
    "side": "F",
@@ -766,6 +797,7 @@
    }
   },
   "J1": {
+   "role": "脚（有线）",
    "fp": "Connector_USB:USB_C_Receptacle_Amphenol_12401610E4-2A",
    "value": "USB-C（DP Alt / USB 3 / PD）",
    "side": "F",
@@ -806,6 +838,7 @@
    }
   },
   "U11": {
+   "role": "脚（有线）",
    "fp": "glasses:PH_TYPEC_DP_USB_MUX_PLACEHOLDER",
    "value": "Type-C DP/USB3 复用开关（占位）",
    "side": "F",
@@ -850,6 +883,7 @@
    }
   },
   "U12": {
+   "role": "脚（有线）",
    "fp": "glasses:PH_PD_CONTROLLER_PLACEHOLDER",
    "value": "USB PD + DP Alt 控制器（占位）",
    "side": "F",
@@ -874,6 +908,7 @@
    }
   },
   "U13": {
+   "role": "脚（有线）",
    "fp": "Package_SON:USON-10_2.5x1.0mm_P0.5mm",
    "value": "ESD",
    "side": "F",
@@ -895,6 +930,7 @@
    }
   },
   "U14": {
+   "role": "身体 · 电源",
    "fp": "Package_DFN_QFN:VQFN-16-1EP_3x3mm_P0.5mm_EP1.6x1.6mm",
    "value": "BQ24075 左侧",
    "side": "B",
@@ -925,6 +961,7 @@
    }
   },
   "R10": {
+   "role": "身体 · 电源",
    "fp": "Resistor_SMD:R_0201_0603Metric",
    "value": "1.13k",
    "side": "B",
@@ -939,6 +976,7 @@
    }
   },
   "R11": {
+   "role": "身体 · 电源",
    "fp": "Resistor_SMD:R_0201_0603Metric",
    "value": "3.0k",
    "side": "B",
@@ -953,6 +991,7 @@
    }
   },
   "R12": {
+   "role": "身体 · 电源",
    "fp": "Resistor_SMD:R_0201_0603Metric",
    "value": "46.4k",
    "side": "B",
@@ -967,6 +1006,7 @@
    }
   },
   "C40": {
+   "role": "身体 · 电源",
    "fp": "Capacitor_SMD:C_0402_1005Metric",
    "value": "1uF",
    "side": "B",
@@ -981,6 +1021,7 @@
    }
   },
   "C41": {
+   "role": "身体 · 电源",
    "fp": "Capacitor_SMD:C_0402_1005Metric",
    "value": "10uF",
    "side": "B",
@@ -995,6 +1036,7 @@
    }
   },
   "C42": {
+   "role": "身体 · 电源",
    "fp": "Capacitor_SMD:C_0402_1005Metric",
    "value": "4.7uF",
    "side": "B",
@@ -1009,6 +1051,7 @@
    }
   },
   "J13": {
+   "role": "身体 · 电源",
    "fp": "Connector_JST:JST_SH_SM03B-SRSS-TB_1x03-1MP_P1.00mm_Horizontal",
    "value": "左侧电池",
    "side": "F",
@@ -1027,6 +1070,7 @@
    }
   },
   "U15": {
+   "role": "脚",
    "fp": "Package_TO_SOT_SMD:SOT-23-5",
    "value": "TLV75533 3.3V 射频",
    "side": "B",
@@ -1046,6 +1090,7 @@
    }
   },
   "C43": {
+   "role": "脚",
    "fp": "Capacitor_SMD:C_0201_0603Metric",
    "value": "1uF",
    "side": "B",
@@ -1060,6 +1105,7 @@
    }
   },
   "J3": {
+   "role": "器官 · 眼睛",
    "fp": "Connector_FFC-FPC:Hirose_FH26-15S-0.3SHW_2Rows-15Pins-1MP_P0.60mm_Horizontal",
    "value": "追踪相机 L",
    "side": "F",
@@ -1090,6 +1136,7 @@
    }
   },
   "J4": {
+   "role": "器官 · 眼睛",
    "fp": "Connector_FFC-FPC:Hirose_FH26-15S-0.3SHW_2Rows-15Pins-1MP_P0.60mm_Horizontal",
    "value": "追踪相机 R",
    "side": "F",
@@ -1120,6 +1167,7 @@
    }
   },
   "J6": {
+   "role": "器官 · 眼睛",
    "fp": "Connector_FFC-FPC:Hirose_FH26-15S-0.3SHW_2Rows-15Pins-1MP_P0.60mm_Horizontal",
    "value": "眼动相机（预留）",
    "side": "F",
@@ -1150,6 +1198,7 @@
    }
   },
   "U16": {
+   "role": "器官 · 眼睛",
    "fp": "glasses:PH_MIPI_SWITCH_CAM_PLACEHOLDER",
    "value": "主摄 MIPI 二选一（占位）",
    "side": "F",
@@ -1187,6 +1236,7 @@
    }
   },
   "J5": {
+   "role": "器官 · 眼睛",
    "fp": "Connector_FFC-FPC:Hirose_FH26-15S-0.3SHW_2Rows-15Pins-1MP_P0.60mm_Horizontal",
    "value": "主摄（1080p30 起）",
    "side": "F",
@@ -1217,6 +1267,7 @@
    }
   },
   "U17": {
+   "role": "器官 · 视网膜",
    "fp": "glasses:PH_DISP_SWITCH_L_PLACEHOLDER",
    "value": "显示开关 L（占位）",
    "side": "F",
@@ -1256,6 +1307,7 @@
    }
   },
   "J7": {
+   "role": "器官 · 视网膜",
    "fp": "Connector_FFC-FPC:Hirose_FH26-25S-0.3SHW_2Rows-25Pins-1MP_P0.60mm_Horizontal",
    "value": "光机 L（光波导）",
    "side": "F",
@@ -1296,6 +1348,7 @@
    }
   },
   "U18": {
+   "role": "器官 · 视网膜",
    "fp": "glasses:PH_DISP_SWITCH_R_PLACEHOLDER",
    "value": "显示开关 R（占位）",
    "side": "F",
@@ -1335,6 +1388,7 @@
    }
   },
   "J8": {
+   "role": "器官 · 视网膜",
    "fp": "Connector_FFC-FPC:Hirose_FH26-25S-0.3SHW_2Rows-25Pins-1MP_P0.60mm_Horizontal",
    "value": "光机 R（光波导）",
    "side": "F",
@@ -1375,6 +1429,7 @@
    }
   },
   "J2": {
+   "role": "板间连接",
    "fp": "Connector_Hirose_DF40:Hirose_DF40C-40DS-0.4V_2x20_P0.4mm",
    "value": "板间 DF40 40P（至 MCU 板）",
    "side": "F",

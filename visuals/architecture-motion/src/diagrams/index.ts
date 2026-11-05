@@ -1,6 +1,6 @@
 import { Diagram } from "../diagram/types";
 
-const SUB = "v0.2 · 2026-11-04 · 对应方案 v0.7.5 · 型号均为候选，数值为设计目标";
+const SUB = "v0.3 · 2026-11-05 · 对应方案 v0.7.6 · 型号均为候选，数值为设计目标";
 
 export const overview: Diagram = {
   id: "Overview",
@@ -10,7 +10,7 @@ export const overview: Diagram = {
   ranksep: 90,
   groups: [
     { id: "hosts", label: "手：所有主机（谁是手谁渲染）" },
-    { id: "links", label: "连接方式（有线 > 局域网 > 云 · BLE 常驻控制面）" },
+    { id: "links", label: "脚：连接方式（有线 > 局域网 > 云 · BLE 常驻控制面）" },
     { id: "brain", label: "脑" },
   ],
   nodes: [
@@ -60,20 +60,20 @@ export const hwCompute: Diagram = {
   nodes: [
     { id: "usbc", label: "USB-C\nDP Alt / USB 3 / PD" },
     { id: "dprx", label: "DP 接收桥接芯片\n候选 LT7911UXC 类" },
-    { id: "dpu", label: "① 显示与重投影处理器\n原型 FPGA\n扭曲 · 畸变 · 缩放 · 补帧", accent: true },
+    { id: "dpu", label: "① 显示与重投影处理器（小脑）\n原型 FPGA\n扭曲 · 畸变 · 缩放 · 补帧", accent: true },
     { id: "dsw", label: "显示开关" },
-    { id: "opt", label: "左右光波导 + 光机\n视场 30–50° · 光机待定" },
+    { id: "opt", label: "左右光波导 + 光机（视网膜）\n视场 30–50° · 光机待定" },
     { id: "soc", label: "② 主 SoC（小脑）\n主选 AR2 Gen 1\n有条件备选 AR1+ Gen 1\n解码 · 6DoF · 合成 · 看板光栅化 · 通话", accent: true },
-    { id: "wifi", label: "Wi-Fi 7 / 蓝牙" },
-    { id: "cell", label: "③ RedCap 模组\nRG255C-GL（X35）+ eSIM", accent: true },
+    { id: "wifi", label: "Wi-Fi 7 / 蓝牙（脚）" },
+    { id: "cell", label: "③ RedCap 模组（脚）\nRG255C-GL（X35）+ eSIM", accent: true },
     { id: "ufs", label: "UFS / eMMC" },
     { id: "imu", label: "IMU ≥ 1 kHz" },
     { id: "trk", label: "追踪相机 ×2\n全局快门" },
     { id: "eye", label: "眼动相机 ×2 + 红外（预留）" },
-    { id: "mcu", label: "④ 低功耗 MCU\n常驻 BLE · 唤醒词" },
+    { id: "mcu", label: "④ 低功耗 MCU（小脑常驻）\n常驻 BLE（脚）· 唤醒词" },
     { id: "csw", label: "主摄 MIPI 开关" },
-    { id: "mic", label: "多麦克风阵列" },
-    { id: "spk", label: "开放式扬声器" },
+    { id: "mic", label: "多麦克风阵列（嘴巴）" },
+    { id: "spk", label: "开放式扬声器（耳朵）" },
   ],
   edges: [
     { from: "usbc", to: "dprx", kind: "video", label: "DP 4 路 / 2 路 + DSC" },
@@ -107,8 +107,8 @@ export const hwPower: Diagram = {
   nodes: [
     { id: "soc", label: "② 主 SoC" },
     { id: "mcu", label: "④ 低功耗 MCU（M1 定 A/B 案）\nA：STM32N657 + PSRAM + 小 BLE\nB：BES2800BP（片内蓝牙）\n手表模式 · 状态机 · 电源 · 唤醒词", accent: true },
-    { id: "ble", label: "常驻 BLE\n手机的气泡 / 看板描述" },
-    { id: "rgb", label: "主摄 RGB\n1080p30 起 · 防抖" },
+    { id: "ble", label: "常驻 BLE（脚）\n手机的气泡 / 看板描述" },
+    { id: "rgb", label: "主摄 RGB（眼睛）\n1080p30 起 · 防抖" },
     { id: "csw", label: "主摄 MIPI 开关\nMCU 仲裁" },
     { id: "dsw", label: "显示开关" },
     { id: "wear", label: "佩戴检测" },
@@ -204,9 +204,9 @@ export const software: Diagram = {
   ranksep: 70,
   groups: [
     { id: "host", label: "手：主机侧" },
-    { id: "soc", label: "眼镜主 SoC（AOSP · 厂商 BSP）" },
-    { id: "dpu", label: "显示处理器固件" },
-    { id: "mcu", label: "MCU（Zephyr，备选 FreeRTOS）" },
+    { id: "soc", label: "小脑：眼镜主 SoC（AOSP · 厂商 BSP · 含脑的端侧入口）" },
+    { id: "dpu", label: "小脑：显示处理器固件" },
+    { id: "mcu", label: "小脑常驻：MCU（Zephyr · 含脚的 BLE）" },
     { id: "cloud", label: "云 / 自建（同构容器镜像 · 含脑）" },
   ],
   nodes: [
@@ -325,9 +325,9 @@ export const calls: Diagram = {
   subtitle: `视频通话是优先级最高的显示模式 · 虚拟形象由有 GPU 的手渲染（PC 优先，其次云）· ${SUB}`,
   rankdir: "LR",
   groups: [
-    { id: "gl", label: "眼镜" },
-    { id: "rd", label: "GPU 主机或云" },
-    { id: "pt", label: "三种接入方式" },
+    { id: "gl", label: "眼镜（小脑 + 器官）" },
+    { id: "rd", label: "手：GPU 主机或云" },
+    { id: "pt", label: "三种接入方式（脚）" },
   ],
   nodesep: 48,
   nodes: [

@@ -127,7 +127,7 @@ for (const f of docs) {
 const hero = `<section class="hero">
   <div class="eyebrow">Independent Cellular AI Glasses</div>
   <h1><span class="en">OPEN SIGNAL</span>开放的信号，永远在流动</h1>
-  <p class="lede">一副靠网络工作的眼镜，不依赖手机。眼镜和云端 LLM 是脑，电脑、手机、车机和云主机都是手：你说一句话，脑派一只手去做，手渲染好的看板就出现在眼前。断网时，它是一块表；摘下就睡，戴上一秒醒来。</p>
+  <p class="lede">一副靠网络工作的眼镜，不依赖手机。眼镜和云端 LLM 是脑，眼镜自身算力是小脑，电脑、手机、车机和云主机都是手，蜂窝、Wi-Fi、蓝牙和 USB-C 是脚：你说一句话，脑靠脚走到一只手那里，手渲染好的看板就出现在眼前。断网时，它是一块表；摘下就睡，戴上一秒醒来。</p>
   <div class="pillars">
     <div><span class="n">01</span><span class="k">快科技</span><p>信号先于目光抵达。转头的一瞬，画面已经在那里。</p></div>
     <div><span class="n">02</span><span class="k">潮流</span><p>轻得像一副寻常的眼镜，亮得像一块随身的屏幕。</p></div>
@@ -142,9 +142,9 @@ const hero = `<section class="hero">
 <div class="entries">
   ${hasFilm ? `<a href="film.html">视频<span>宣传片「她的进化」· 技术全解 24 章</span></a>` : ""}
   ${hasHW ? `<a href="hardware.html">硬件 · 初版原理图与 PCB<span>three.js 三维查看 · KiCad 工程下载</span></a>` : ""}
-  <a href="technical-roadmap.html">技术路线<span>小脑四芯片、MCU A/B 案、M0–M3</span></a>
-  <a href="design-requirements.html">设计开发要求<span>191 条可验收要求</span></a>
-  <a href="streaming-direction.html">方案<span>串流终端方向 v0.7.5</span></a>
+  <a href="technical-roadmap.html">技术路线<span>小脑与脚的四颗芯片、MCU A/B 案、M0–M3</span></a>
+  <a href="design-requirements.html">设计开发要求<span>194 条可验收要求</span></a>
+  <a href="streaming-direction.html">方案<span>串流终端方向 v0.7.6</span></a>
   <a href="validation-plan.html">验证计划<span>6 组现成硬件验证</span></a>
   <a href="sources.html">来源<span>58 条公开资料</span></a>
 </div>`;
@@ -163,7 +163,7 @@ if (hasFilm) {
   if (hasTech) {
     copyFileSync("dist/tech-film.mp4", `${OUT}/tech-film.mp4`);
     const TECH = `tech-film.mp4?v=${createHash("sha1").update(readFileSync("dist/tech-film.mp4")).digest("hex").slice(0, 8)}`;
-    tech = `<h2 id="tech">技术全解（约 8 分 30 秒）</h2><p class="lede">24 章把设计、架构、链路、功耗、协议、验证与路线讲透：脑 / 小脑 / 手、四颗主芯片与 MCU A/B 案、光波导、五种连接与网络指标、显示通路与延迟预算、软件栈与开放协议、兼容分层、六种显示模式、手机 Agent、通话与虚拟形象、功耗状态与 8 小时预算、重量、云、六道闸门、路线与风险。左侧为动态架构图或示意，右侧逐条要点。</p>
+    tech = `<h2 id="tech">技术全解（约 8 分 30 秒）</h2><p class="lede">24 章把设计、架构、链路、功耗、协议、验证与路线讲透，每章标出讲的是哪个角色：脑 / 小脑 / 手 / 脚、四颗主芯片与 MCU A/B 案、光波导、五种连接与网络指标、显示通路与延迟预算、软件栈与开放协议、兼容分层、六种显示模式、手机 Agent、通话与虚拟形象、功耗状态与 8 小时预算、重量、云、六道闸门、路线与风险。左侧为动态架构图或示意，右侧逐条要点。</p>
 <video src="${TECH}" controls playsinline preload="metadata" style="width:100%;border-radius:14px;border:1px solid #1b1f29;background:#000"></video>
 <p class="cap"><a href="${TECH}" download>下载 MP4</a> · 数字均取自方案文档，方案数值为设计目标，未实测</p>`;
   }

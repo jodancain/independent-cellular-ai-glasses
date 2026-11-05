@@ -13,11 +13,11 @@ const clamp = { extrapolateLeft: "clamp", extrapolateRight: "clamp" } as const;
 const inn = (f: number, a: number, b: number) => interpolate(f, [a, b], [0, 1], { ...clamp, easing: ease });
 
 type P = [string, string];
-type Chapter = { en: string; t: string; diagram?: string; V?: React.FC; points: P[] };
+type Chapter = { en: string; t: string; role: string; diagram?: string; V?: React.FC; points: P[] };
 
 export const CHAPTERS: Chapter[] = [
   {
-    en: "ONE LINE", t: "一句话方案", V: VOneLine, points: [
+    en: "ONE LINE", t: "一句话方案", role: "脑 · 小脑 · 手 · 脚", V: VOneLine, points: [
       ["依赖网络，不依赖手机", "机身自带 RedCap 蜂窝 + Wi-Fi 7，不带手机也是全功能"],
       ["联网 = 全功能", "串流显示、6DoF 叠加、软件兼容、云端 AI、视频通话"],
       ["断网 = 手表模式", "只留时间、拍照、录像、录音和极小本地程序"],
@@ -26,16 +26,17 @@ export const CHAPTERS: Chapter[] = [
     ],
   },
   {
-    en: "BRAIN · CEREBELLUM · HANDS", t: "脑、小脑、手", V: VRoles, points: [
+    en: "BRAIN · CEREBELLUM · HANDS · FEET", t: "脑、小脑、手、脚", role: "脑 · 小脑 · 手 · 脚", V: VRoles, points: [
       ["① 手渲染自己的内容", "QQ 看板由手机渲染，PC 应用由 PC 渲染"],
       ["② 轻内容由小脑本地画", "气泡、状态、简单卡片，不等网络"],
       ["③ 合成、锚定、重投影在小脑", "多图层合成目标 ≤5 ms"],
       ["④ 无主的重内容找最近的 GPU 手", "虚拟形象、3D 标注：PC 优先，其次云"],
       ["⑤ 看板默认发“描述”", "KB 级文字、头像、按钮、布局，小脑光栅化；图片兜底"],
+      ["⑥ 脚把脑带到每一只手", "有线 > 局域网 > 云；BLE 走细步，Wi-Fi / 蜂窝走大步"],
     ],
   },
   {
-    en: "SYSTEM", t: "系统全景", diagram: "Overview", points: [
+    en: "SYSTEM", t: "系统全景", role: "脑 · 小脑 · 手 · 脚", diagram: "Overview", points: [
       ["四类手", "PC、手机、车机、云主机，用同一套串流协议"],
       ["五种连接", "A1 有线 DP、A2 有线 USB 3、Wi-Fi 7、蜂窝、BLE 控制面"],
       ["主机优先级", "有线 > 同局域网 > 云；断线自动回到上次主机"],
@@ -44,7 +45,7 @@ export const CHAPTERS: Chapter[] = [
     ],
   },
   {
-    en: "FOUR CHIPS", t: "四颗主芯片", diagram: "HardwareCompute", points: [
+    en: "FOUR CHIPS", t: "四颗主芯片", role: "小脑 · 脚", diagram: "HardwareCompute", points: [
       ["① 显示与重投影处理器", "原型用 FPGA：扭曲、畸变与色差校正、缩放、补帧"],
       ["② 主 SoC", "主选 AR2 Gen 1；AR1+ Gen 1 为有条件备选"],
       ["③ RedCap 蜂窝", "原型主选 RG255C-GL（X35）+ eSIM"],
@@ -54,7 +55,7 @@ export const CHAPTERS: Chapter[] = [
     ],
   },
   {
-    en: "MCU A / B", t: "MCU 两案并行", V: VMcuAB, points: [
+    en: "MCU A / B", t: "MCU 两案并行", role: "小脑常驻 · 脚", V: VMcuAB, points: [
       ["A 案", "STM32N657 + 外挂 PSRAM + 小 BLE 芯片，保留拍录像通路"],
       ["B 案", "BES2800BP：蓝牙在片内、音频强；ISP / H.264 证据不完整"],
       ["闸门", "主 SoC 睡眠时，BLE 气泡 ≤0.1 s 上屏"],
@@ -63,7 +64,7 @@ export const CHAPTERS: Chapter[] = [
     ],
   },
   {
-    en: "POWER RAILS", t: "电源与低功耗硬件", diagram: "HardwarePower", points: [
+    en: "POWER RAILS", t: "电源与低功耗硬件", role: "身体", diagram: "HardwarePower", points: [
       ["两块电芯", "分置左右镜腿耳后，左右重量差 ≤3 g"],
       ["电源域分别可断", "显示、主 SoC、Wi-Fi、蜂窝、各相机，由 MCU 控制"],
       ["显示开关", "手表模式切到 MCU 低速显示，主 SoC 与显示处理器断电"],
@@ -73,7 +74,7 @@ export const CHAPTERS: Chapter[] = [
     ],
   },
   {
-    en: "OPTICS", t: "光学：只用光波导", V: VOptics, points: [
+    en: "OPTICS", t: "光学：只用光波导", role: "器官 · 视网膜", V: VOptics, points: [
       ["只用光波导", "birdbath、自由曲面棱镜已放弃，不再考虑"],
       ["主选几何反射式（阵列）", "候选 Lumus Z-30 系列；衍射式为备选，待调研"],
       ["光机 M1 定案", "LCoS 或全彩 microLED，按亮度、分辨率、功耗、重量切换"],
@@ -83,7 +84,7 @@ export const CHAPTERS: Chapter[] = [
     ],
   },
   {
-    en: "LINKS", t: "连接与 USB-C", V: VLinks, points: [
+    en: "LINKS", t: "脚：连接与 USB-C", role: "脚", V: VLinks, points: [
       ["A1 有线原始画面", "USB-C 4 路 DP + USB 2.0（UVC / UAC）+ 受电"],
       ["A2 有线编码串流", "USB 3，兼容没有 DP 输出的主机"],
       ["B Wi-Fi 7", "6 GHz 国内可用性待核实，否则 5 GHz 160 MHz"],
@@ -93,7 +94,7 @@ export const CHAPTERS: Chapter[] = [
     ],
   },
   {
-    en: "NETWORK", t: "串流最低网络要求", V: VNet, points: [
+    en: "NETWORK", t: "脚：串流最低网络要求", role: "脚", V: VNet, points: [
       ["云串流 1080p60", "下行 ≥30 Mbps、上行 ≥2 Mbps、RTT p95 ≤50 ms"],
       ["视频通话 1080p30", "双向 ≥5 Mbps、RTT p95 ≤100 ms"],
       ["串流 + 通话并发", "≥35 / 8 Mbps、RTT p95 ≤50 ms，最重负载"],
@@ -102,7 +103,7 @@ export const CHAPTERS: Chapter[] = [
     ],
   },
   {
-    en: "DATA PATHS", t: "显示数据通路", diagram: "DataPaths", points: [
+    en: "DATA PATHS", t: "显示数据通路", role: "小脑", diagram: "DataPaths", points: [
       ["A1-3DoF 省电", "主 SoC 休眠，显示处理器直读 IMU 只做旋转稳定"],
       ["A1-6DoF", "主 SoC 跑 VIO，把 6DoF 姿态交给显示处理器"],
       ["编码串流 A2 / B / C", "主 SoC 解码 → MIPI → 显示处理器扭曲上屏"],
@@ -111,7 +112,7 @@ export const CHAPTERS: Chapter[] = [
     ],
   },
   {
-    en: "LATENCY", t: "延迟预算", V: VLatency, points: [
+    en: "LATENCY", t: "延迟预算", role: "脚 · 小脑", V: VLatency, points: [
       ["编码 ≤5 ms", "无 B 帧、切片编码、帧内刷新"],
       ["传输", "A2 ≤2 ms，Wi-Fi 7 ≤5 ms（p95），蜂窝待测"],
       ["解码 ≤5 ms", "视芯片硬解能力；H.265 必选、AV1 优先"],
@@ -120,7 +121,7 @@ export const CHAPTERS: Chapter[] = [
     ],
   },
   {
-    en: "SOFTWARE", t: "软件栈", diagram: "SoftwareStack", points: [
+    en: "SOFTWARE", t: "软件栈", role: "脑 · 小脑 · 手 · 脚", diagram: "SoftwareStack", points: [
       ["主机侧", "虚拟显示驱动、统一串流服务、OpenXR、虚拟摄像头"],
       ["手的接入", "手机跑 Mika 改造版；PC / 车机 / 云各有 agent"],
       ["眼镜主 SoC", "AOSP + 自研空间合成器 + 小脑调度器 + 看板描述渲染"],
@@ -130,7 +131,7 @@ export const CHAPTERS: Chapter[] = [
     ],
   },
   {
-    en: "PROTOCOL", t: "开放协议 v0", diagram: "Protocol", points: [
+    en: "PROTOCOL", t: "开放协议 v0", role: "脚", diagram: "Protocol", points: [
       ["控制面", "QUIC 可靠流或 TCP + TLS；能力位握手、主机切换"],
       ["视频面必须不可靠", "QUIC DATAGRAM 或 RTP / UDP，不做整帧重传"],
       ["姿态上行", "6DoF + 时间戳的高频小包，供主机预测渲染"],
@@ -140,7 +141,7 @@ export const CHAPTERS: Chapter[] = [
     ],
   },
   {
-    en: "COMPATIBILITY", t: "串流纪律与兼容分层", V: VCompat, points: [
+    en: "COMPATIBILITY", t: "串流纪律与兼容分层", role: "手", V: VCompat, points: [
       ["只留最新一帧", "对端忙就丢帧，不排队；断流等关键帧，不花屏"],
       ["逐环节计数", "采集、编码、发送、解码、上屏分别计数"],
       ["ROI 局部放大", "在原始分辨率上先裁剪再缩放"],
@@ -150,7 +151,7 @@ export const CHAPTERS: Chapter[] = [
     ],
   },
   {
-    en: "DISPLAY MODES", t: "显示模式与小脑调度", diagram: "DisplayModes", points: [
+    en: "DISPLAY MODES", t: "显示模式与小脑调度", role: "小脑", diagram: "DisplayModes", points: [
       ["六种模式", "看板（含气泡）、图片、视频、投屏、实时拍照、视频通话"],
       ["同屏 1 主 + 2 气泡", "30–50° 视场下的上限"],
       ["优先级", "通话 > 投屏 > 视频 > 拍照 > 看板 > 气泡"],
@@ -160,7 +161,7 @@ export const CHAPTERS: Chapter[] = [
     ],
   },
   {
-    en: "HANDS · AGENT", t: "手的接入：手机 Agent", V: VHand, points: [
+    en: "HANDS · AGENT", t: "手的接入：手机 Agent", role: "手", V: VHand, points: [
       ["参考 Mika（Apache-2.0）", "虚拟显示后台操作、无障碍读屏、目标化输入注入"],
       ["统一执行入口", "守卫 → 锁屏检查 → 不可逆检查 → 确认"],
       ["任务接口", "MCP / REST：发目标、查状态、等待、回答、引导、取消"],
@@ -170,7 +171,7 @@ export const CHAPTERS: Chapter[] = [
     ],
   },
   {
-    en: "CALLS", t: "视频通话与虚拟形象", diagram: "Calls", points: [
+    en: "CALLS", t: "视频通话与虚拟形象", role: "手 · 器官", diagram: "Calls", points: [
       ["V1 主机通话", "眼镜注册为主机摄像头和麦克风，兼容 PC 上任何通话软件"],
       ["V2 眼镜独立通话", "本地 WebRTC，经蜂窝或 Wi-Fi"],
       ["V3 云端通话", "通话软件跑在云主机，串流到眼镜"],
@@ -180,7 +181,7 @@ export const CHAPTERS: Chapter[] = [
     ],
   },
   {
-    en: "POWER STATES", t: "功耗状态机", diagram: "PowerStates", points: [
+    en: "POWER STATES", t: "功耗状态机", role: "小脑 · 脚", diagram: "PowerStates", points: [
       ["S0 全功能", "功耗由串流负载决定"],
       ["S0' 手表模式", "主 SoC 关闭，拍录像时按需唤醒"],
       ["S0'' 看板态（新增）", "只画卡片 + 重投影；只有气泡时主 SoC 可睡"],
@@ -190,7 +191,7 @@ export const CHAPTERS: Chapter[] = [
     ],
   },
   {
-    en: "BATTERY", t: "8 小时续航预算", V: VBudget, points: [
+    en: "BATTERY", t: "8 小时续航预算", role: "身体", V: VBudget, points: [
       ["P1 机身混合剖面", "需求方认可，冻结为续航验收条件"],
       ["逐行预算合计约 5.9 Wh", "串流 ≤2.0 W、通话 ≤3.0 W、6DoF ≤2.0 W……"],
       ["电池 5–7 Wh", "按 7 Wh 计约有 15% 余量"],
@@ -199,7 +200,7 @@ export const CHAPTERS: Chapter[] = [
     ],
   },
   {
-    en: "ERGONOMICS", t: "重量与佩戴无感", V: VWeight, points: [
+    en: "ERGONOMICS", t: "重量与佩戴无感", role: "身体", V: VWeight, points: [
       ["整机约 115–130 g（估算）", "高于主流，续航优先"],
       ["前框只留光学", "主板、射频、电池全部后移到耳后"],
       ["左右差 ≤3 g", "处理器、射频、电池两侧对称"],
@@ -208,7 +209,7 @@ export const CHAPTERS: Chapter[] = [
     ],
   },
   {
-    en: "CLOUD", t: "云：全开放，可自建", diagram: "Deploy", points: [
+    en: "CLOUD", t: "云：全开放，可自建", role: "脑 · 手", diagram: "Deploy", points: [
       ["协议全部公开", "串流、同步、通话信令、设备管理、小程序分发"],
       ["参考服务端", "容器镜像，功能与官方云同构"],
       ["组件可替换", "通话 LiveKit、同步 WebDAV / S3、任意 GPU 主机"],
@@ -216,7 +217,7 @@ export const CHAPTERS: Chapter[] = [
     ],
   },
   {
-    en: "VALIDATION", t: "验证与六道闸门", V: VGates, points: [
+    en: "VALIDATION", t: "验证与六道闸门", role: "全部角色", V: VGates, points: [
       ["G1 串流体验", "有线与 Wi-Fi 延迟、画质；L0 兼容清单通过率"],
       ["G2 空间交互", "锚定漂移与手势成功率"],
       ["G3 独立联网", "RedCap 持续速率、RTT、模组休眠电流"],
@@ -226,7 +227,7 @@ export const CHAPTERS: Chapter[] = [
     ],
   },
   {
-    en: "ROADMAP", t: "阶段路线", V: VRoad, points: [
+    en: "ROADMAP", t: "阶段路线", role: "全部角色", V: VRoad, points: [
       ["M0 现成硬件验证（进行中）", "第 1、3、6 组先做"],
       ["M1 桌面功能样机", "开发板拼全链路；MCU A/B、光机、协议 v0 定案"],
       ["M2 完全版样机 EVT", "自研主板 + 眼镜结构 + 光波导"],
@@ -235,7 +236,7 @@ export const CHAPTERS: Chapter[] = [
     ],
   },
   {
-    en: "RISKS · OPEN", t: "风险与仍待确认", V: VRisks, points: [
+    en: "RISKS · OPEN", t: "风险与仍待确认", role: "全部角色", V: VRisks, points: [
       ["待确认 ①", "“Muse 那样的交互逻辑”具体指什么"],
       ["待确认 ②", "手机代理模式：眼镜离线但手机 BLE 可达时，是否代为联网"],
       ["待确认 ③", "MCU A / B 案，M1 并行评估后定案"],
@@ -301,6 +302,7 @@ const ChapterScene: React.FC<{ c: Chapter; idx: number; len: number }> = ({ c, i
         <span style={{ fontFamily: MONO, fontSize: 60, fontWeight: 600, color: C.cyan, letterSpacing: -1 }}>{String(idx + 1).padStart(2, "0")}</span>
         <KineticTitle text={c.t} start={2} size={56} stagger={1} />
         <span style={{ fontFamily: MONO, fontSize: 18, letterSpacing: 5, color: C.dim, opacity: inn(f, 10, 24) }}>{c.en}</span>
+        <span style={{ fontSize: 22, padding: "4px 14px", borderRadius: 999, border: "1px solid rgba(232,226,212,.55)", color: C.text, opacity: inn(f, 14, 28), whiteSpace: "nowrap" }}>{c.role}</span>
       </div>
       {/* 右：要点 */}
       <div style={{ position: "absolute", left: 1270, top: 220, width: 570, display: "flex", flexDirection: "column", gap: 16 }}>
@@ -343,7 +345,7 @@ const Outro: React.FC = () => {
     <AbsoluteFill style={{ fontFamily: FONT, color: C.text, alignItems: "center", justifyContent: "center", textAlign: "center", opacity: out }}>
       <Her width={560} openAt={10} glow={0.8} />
       <div style={{ marginTop: 40 }}>
-        <KineticTitle text="眼镜 + 云端 LLM 是脑，小脑在眼镜里，所有主机都是手" start={10} size={56} stagger={1} />
+        <KineticTitle text="脑在眼镜和云上，小脑在眼镜里，手是所有主机，脚是每一种连接" start={10} size={50} stagger={1} />
       </div>
       <div style={{ marginTop: 40, fontFamily: MONO, fontSize: 30, opacity: inn(f, 60, 90) }}>glasses.youngtuo.win</div>
       <div style={{ marginTop: 12, fontSize: 20, color: C.dim, opacity: inn(f, 70, 100) }}>完整文档与 10 张动态架构图见网站 · 型号为候选，数值为设计目标</div>

@@ -1,6 +1,6 @@
 # 系统架构图
 
-**v0.2 · 2026-11-04 · 依据 [串流终端方向](streaming-direction.md) v0.7.5、[技术路线](technical-roadmap.md) v0.1.1 · 配套 [设计开发要求](design-requirements.md)**
+**v0.3 · 2026-11-05 · 依据 [串流终端方向](streaming-direction.md) v0.7.6、[技术路线](technical-roadmap.md) v0.1.2 · 配套 [设计开发要求](design-requirements.md)**
 
 本页把方案和技术路线画成图，供评审和分工使用。
 
@@ -26,7 +26,9 @@
 
 ## 1 系统全景
 
-眼镜靠网络工作，不依赖手机。联网时，渲染交给 PC、手机、车机、云这四类主机中的任意一台；断网时，眼镜退化为手表级设备。按决定 #22，这四类主机都是**手**，眼镜 + 云端 LLM 是**脑**，眼镜自身算力只当**小脑**；谁的手谁渲染，重渲染不在眼镜上。
+眼镜靠网络工作，不依赖手机。联网时，渲染交给 PC、手机、车机、云这四类主机中的任意一台；断网时，眼镜退化为手表级设备。按决定 #22，这四类主机都是**手**，眼镜 + 云端 LLM 是**脑**，眼镜自身算力只当**小脑**；谁的手谁渲染，重渲染不在眼镜上。按决定 #25，所有连接方式是**脚**：脑靠脚走到每一只手。
+
+**读图约定**：每张图都按脑、小脑、手、脚和器官标出角色；对照表见[方案](streaming-direction.md)第 1.1 节，需求编号的归属见[设计开发要求](design-requirements.md)第 18 节。
 
 ```mermaid
 flowchart LR
@@ -41,7 +43,7 @@ flowchart LR
     LLM["云端 LLM<br/>理解意图 · 派哪只手 · 决定显示什么"]
   end
 
-  subgraph NET["连接方式"]
+  subgraph NET["脚：连接方式（有线 > 局域网 > 云）"]
     A1["A1 有线原始画面<br/>USB-C DP Alt"]
     A2["A2 有线编码串流<br/>USB 3"]
     B["B Wi-Fi 7"]
@@ -230,7 +232,7 @@ flowchart LR
     H6["手机手：Mika 改造<br/>任务接口 · 看板生成<br/>眼镜通道 · 发消息前确认"]
   end
 
-  subgraph SOCSW["眼镜主 SoC（AOSP，基于厂商 BSP）"]
+  subgraph SOCSW["小脑：眼镜主 SoC（AOSP，基于厂商 BSP；含脑的端侧意图入口）"]
     direction TB
     G1["串流客户端<br/>硬解 · 最新帧优先 · 关键帧恢复"]
     G2["空间合成器（自研）<br/>虚拟屏锚定 · 多屏"]
@@ -242,12 +244,12 @@ flowchart LR
     G8["小脑调度器<br/>六种显示模式 · 1 主 + 2 气泡 · 优先级 · 就地变形"]
   end
 
-  subgraph DPUSW["显示处理器固件"]
+  subgraph DPUSW["小脑：显示处理器固件"]
     direction TB
     D1["扭曲 · 畸变 / 色差校正 · 缩放 · 补帧 · 帧计数"]
   end
 
-  subgraph MCUSW["MCU（Zephyr，备选 FreeRTOS）"]
+  subgraph MCUSW["小脑常驻：MCU（Zephyr，备选 FreeRTOS；含脚的 BLE）"]
     direction TB
     M1["电源与状态机 S0–S3 · 看板态"]
     M2["手表模式内置程序<br/>时钟 · 相机 · 录音 · 提词卡 · 扫码"]
@@ -294,14 +296,14 @@ flowchart LR
 
 ```mermaid
 flowchart LR
-  subgraph H["主机 / 云"]
+  subgraph H["手：主机 / 云"]
     HC["会话管理"]
     HE["编码器"]
     HR["预测渲染"]
     HV["手 · 看板描述源"]
     HB["手机手 · BLE"]
   end
-  subgraph G["眼镜"]
+  subgraph G["眼镜：小脑"]
     GC["会话管理"]
     GD["解码 + 合成"]
     GT["6DoF 追踪"]
@@ -365,7 +367,7 @@ flowchart LR
     E5["麦克风阵列<br/>波束成形 · 降噪 · 回声消除"]
     E6["主摄（第一人称视角）"]
   end
-  subgraph RENDER["GPU 主机或云"]
+  subgraph RENDER["手：GPU 主机或云"]
     R1["虚拟形象渲染<br/>语音驱动口型 + 头部姿态<br/>（眼动参数接口预留）"]
     R2["输出一路视频<br/>角标注明“虚拟形象”"]
   end
@@ -464,3 +466,4 @@ flowchart LR
 | v0.1.1 | 2026-11-04 | 显示方案改为左右光波导 + 光机；① 增加可选硬解（视频与显示处理器）；对应方案 v0.7.4 |
 | v0.1.2 | 2026-11-04 | 同步决定 #22–#24：MCU 改 A/B 两案（A 案外加小 BLE），补 BLE 常驻与音频前级；L0/L3/L4 改为投屏 / 看板 / 看板兜底；对应方案 v0.7.5 |
 | v0.2 | 2026-11-04 | 全部图按脑 / 小脑 / 手重画：全景加脑与 BLE 控制面，硬件图加 MCU 常驻听音，数据通路与状态机加看板态，软件栈加 Mika 手与云端 LLM，协议加看板描述与 BLE，部署加自建 LLM；新增第 9 张图“显示模式与小脑调度” |
+| v0.3 | 2026-11-05 | 按决定 #25 加入脚：全景图“连接方式”改为脚，软件栈与协议图标出小脑、手、脚的归属；加读图约定，对应方案 v0.7.6 |
