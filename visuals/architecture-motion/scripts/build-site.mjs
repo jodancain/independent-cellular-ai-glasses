@@ -2,6 +2,7 @@
 // 仓库文档转网页；架构图页用定稿框图（直角走线 + 光束）替换 Mermaid；首页嵌入实时硬件框图。
 // 输出 dist-site/（扁平目录、不含子目录，避免出现目录列表）。
 import { marked } from "marked";
+import { createHash } from "node:crypto";
 import { copyFileSync, existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from "node:fs";
 
 const REPO = "../..";
@@ -148,9 +149,11 @@ writeFileSync(`${OUT}/index.html`, page("index.html", "独立蜂窝 AI 眼镜", 
 copyFileSync("dist/system-architecture-motion.html", `${OUT}/architecture-motion.html`);
 if (hasFilm) {
   copyFileSync("dist/plan-film.mp4", `${OUT}/plan-film.mp4`);
+  // 带内容哈希，换片后不被 CDN 旧缓存挡住
+  const FILM = `plan-film.mp4?v=${createHash("sha1").update(readFileSync("dist/plan-film.mp4")).digest("hex").slice(0, 8)}`;
   const body = `<div class="eyebrow">Open Signal · Film</div><h1>全流程宣传片</h1><p class="lede">从脑 / 小脑 / 手的设计、竞品、架构、连接、六种显示模式、睡眠续航、佩戴，到一天的使用体验和路线图。配乐为代码合成的原创音乐。</p>
-<video src="plan-film.mp4" controls playsinline preload="metadata" style="width:100%;border-radius:14px;border:1px solid #1b1f29;background:#000"></video>
-<p class="cap"><a href="plan-film.mp4" download>下载 MP4</a> · 型号均为候选，数值为设计目标</p>`;
+<video src="${FILM}" controls playsinline preload="metadata" style="width:100%;border-radius:14px;border:1px solid #1b1f29;background:#000"></video>
+<p class="cap"><a href="${FILM}" download>下载 MP4</a> · 型号均为候选，数值为设计目标</p>`;
   writeFileSync(`${OUT}/film.html`, page("film.html", "全流程宣传片", body));
 }
 console.log(readdirSync(OUT).join(" "));
