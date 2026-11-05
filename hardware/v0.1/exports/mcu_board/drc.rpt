@@ -1,16 +1,16 @@
 ** Drc report for mcu_board.kicad_pcb **
-** Created on 2026-11-05T07:26:32 **
+** Created on 2026-11-05T07:46:49 **
 ** Report includes: Errors, Warnings **
 
-** Found 224 DRC violations **
-[clearance]: Clearance violation ( clearance 0.0900 mm; actual 0.0670 mm)
-    Local override; error
-    @(129.1080 mm, 106.1080 mm): Via [+1V8] on F.Cu - B.Cu
-    @(128.6000 mm, 106.4000 mm): Track [GND] on F.Cu, length 0.9750 mm
+** Found 221 DRC violations **
 [starved_thermal]: Thermal relief connection to zone incomplete (layer B.Cu; zone min spoke count 2; actual 1)
     Local override; error
     @(100.4000 mm, 102.4000 mm): Zone [GND] on B.Cu, priority 0
     @(130.5200 mm, 108.0000 mm): Pad 2 [GND] of C1 on B.Cu
+[starved_thermal]: Thermal relief connection to zone incomplete (layer F.Cu; zone min spoke count 2; actual 1)
+    Local override; error
+    @(100.4000 mm, 102.4000 mm): Zone [GND] on F.Cu, priority 0
+    @(130.2000 mm, 110.4000 mm): Pad M8 [GND] of U1 on F.Cu
 [starved_thermal]: Thermal relief connection to zone incomplete (layer B.Cu; zone min spoke count 2; actual 1)
     Local override; error
     @(100.4000 mm, 102.4000 mm): Zone [GND] on B.Cu, priority 0
@@ -46,20 +46,10 @@
 [starved_thermal]: Thermal relief connection to zone incomplete (layer B.Cu; zone min spoke count 2; actual 1)
     Local override; error
     @(100.4000 mm, 102.4000 mm): Zone [GND] on B.Cu, priority 0
-    @(128.3500 mm, 108.5700 mm): Pad 2 [GND] of C22 on B.Cu
-[starved_thermal]: Thermal relief connection to zone incomplete (layer B.Cu; zone min spoke count 2; actual 1)
-    Local override; error
-    @(100.4000 mm, 102.4000 mm): Zone [GND] on B.Cu, priority 0
     @(165.4375 mm, 110.2500 mm): Pad 3 [GND] of U5 on B.Cu
 [track_dangling]: Track has unconnected end
     Local override; warning
-    @(131.6760 mm, 114.8140 mm): Track [HSE_OUT] on B.Cu, length 0.3430 mm
-[track_dangling]: Track has unconnected end
-    Local override; warning
-    @(135.5340 mm, 107.5500 mm): Track [PSRAM_IO3] on F.Cu, length 0.6160 mm
-[track_dangling]: Track has unconnected end
-    Local override; warning
-    @(125.4680 mm, 111.2500 mm): Track [BUCK_FB] on B.Cu, length 1.7374 mm
+    @(136.1500 mm, 107.5500 mm): Track [PSRAM_IO3] on F.Cu, length 0.6364 mm
 [silk_edge_clearance]: Silkscreen clipped by board edge
     Rule: board setup constraints silk; warning
     @(102.0000 mm, 100.0000 mm): Segment on Edge.Cuts
@@ -896,26 +886,26 @@
     @(167.1500 mm, 109.5000 mm): Reference field of C56
     @(165.4375 mm, 109.7500 mm): Pad 2 [<no net>] of U5 on B.Cu
 
-** Found 12 unconnected pads **
+** Found 7 unconnected pads **
 [unconnected_items]: Missing connection between items
     Local override; error
-    @(100.4000 mm, 102.4000 mm): Zone [GND] on B.Cu, priority 0
-    @(100.4000 mm, 102.4000 mm): Zone [GND] on B.Cu, priority 0
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(100.4000 mm, 102.4000 mm): Zone [GND] on B.Cu, priority 0
     @(100.4000 mm, 102.4000 mm): Zone [GND] on F.Cu, priority 0
+    @(100.4000 mm, 102.4000 mm): Zone [GND] on B.Cu, priority 0
 [unconnected_items]: Missing connection between items
     Local override; error
-    @(152.7000 mm, 109.9050 mm): Track [GND] on B.Cu, length 0.6000 mm
-    @(148.0000 mm, 114.4325 mm): Pad 3 [GND] of MK2 on F.Cu
+    @(100.4000 mm, 102.4000 mm): Zone [GND] on B.Cu, priority 0
+    @(100.4000 mm, 102.4000 mm): Zone [GND] on B.Cu, priority 0
 [unconnected_items]: Missing connection between items
     Local override; error
-    @(132.9100 mm, 109.6900 mm): Pad 1 [+1V8] of C17 on B.Cu
+    @(100.4000 mm, 102.4000 mm): Zone [GND] on F.Cu, priority 0
+    @(100.4000 mm, 102.4000 mm): Zone [GND] on B.Cu, priority 0
+[unconnected_items]: Missing connection between items
+    Local override; error
     @(133.1000 mm, 108.4800 mm): Track [+1V8] on B.Cu, length 0.6600 mm
+    @(132.9100 mm, 109.6900 mm): Pad 1 [+1V8] of C17 on B.Cu
 [unconnected_items]: Missing connection between items
     Local override; error
-    @(138.5600 mm, 102.2800 mm): Via [+1V8] on F.Cu - B.Cu
+    @(138.2000 mm, 102.3000 mm): Via [+1V8] on F.Cu - B.Cu
     @(136.7700 mm, 102.3300 mm): Pad 1 [+1V8] of R15 on B.Cu
 [unconnected_items]: Missing connection between items
     Local override; error
@@ -923,28 +913,8 @@
     @(161.7300 mm, 104.5700 mm): Track [+1V8] on B.Cu, length 2.7800 mm
 [unconnected_items]: Missing connection between items
     Local override; error
-    @(128.9390 mm, 112.3450 mm): Track [VCORE_0V8] on B.Cu, length 0.4300 mm
     @(127.0000 mm, 112.8000 mm): Pad R4 [VCORE_0V8] of U1 on F.Cu
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(130.3730 mm, 112.5470 mm): Track [VCORE_0V8] on B.Cu, length 1.0564 mm
-    @(131.8000 mm, 111.0300 mm): Track [VCORE_0V8] on F.Cu, length 0.1700 mm
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(131.4800 mm, 108.0000 mm): Pad 1 [VCORE_0V8] of C1 on B.Cu
-    @(129.4800 mm, 105.4000 mm): Pad 1 [VCORE_0V8] of C2 on B.Cu
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(122.7750 mm, 111.5250 mm): Track [BTN_PWR] on F.Cu, length 3.4730 mm
-    @(132.6000 mm, 112.8000 mm): Pad R11 [BTN_PWR] of U1 on F.Cu
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(125.4680 mm, 111.2500 mm): Track [BUCK_FB] on B.Cu, length 1.7374 mm
-    @(130.6920 mm, 103.5080 mm): Track [BUCK_FB] on In2.Cu, length 0.0700 mm
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(127.7170 mm, 104.2180 mm): Track [VSYS] on B.Cu, length 0.2100 mm
-    @(133.0900 mm, 104.4300 mm): Pad 1 [VSYS] of C64 on B.Cu
+    @(128.9390 mm, 112.3450 mm): Track [VCORE_0V8] on B.Cu, length 0.4300 mm
 
 ** Found 0 Footprint errors **
 
