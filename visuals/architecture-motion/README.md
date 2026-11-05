@@ -1,4 +1,4 @@
-# 动态架构图 · 网站 · 宣传片（Remotion）
+# 动态架构图 · 网站 · 宣传片 · 技术全解（Remotion）
 
 定稿视觉：暗场黑底、暖白单色信号，西文和数字用 Barlow，中文用思源黑体。框图按芯片手册的画法：直角走线、功能分区、标签压线。信号类型靠线型区分：视频粗实线、数据细实线、姿态长虚线、音频点线、无线点划线。每条线上的光带就是一路信号，每 4 秒一轮；光带到达后，目标芯片的框会亮一下。
 
@@ -6,6 +6,7 @@
 | --- | --- |
 | `dist/system-architecture-motion.html` | 10 张图的 Remotion 播放页，单文件，可直接打开：`node scripts/build-html.mjs` |
 | `dist/plan-film.mp4` | 112 秒全流程宣传片，配乐由代码合成：`npx remotion render PlanFilm dist/plan-film.mp4` |
+| `dist/tech-film.mp4` | 约 8 分 34 秒技术全解（24 章），配乐由代码合成：`npx remotion render TechFilm dist/tech-film.mp4 --timeout=400000` |
 | `dist-site/` | 公网站点（文档转网页 + 实时框图）：`node scripts/build-site.mjs` |
 
 ## 数据与代码
@@ -19,6 +20,7 @@
 - `src/diagram/FlowDiagram.tsx`：Remotion 版框图，用于播放页和视频。
 - `web/diagram.js`：网页版框图，用于网站首页和架构图页。两份代码用同一套样式。
 - `src/film/`：宣传片的场景（`story.tsx` 为“她的进化”主线，`persona.tsx` 为拟人化眼镜与第一人称字幕），配乐来自 `scripts/make_music.py`（只用 numpy 合成）。
+- `src/film/tech.tsx` + `techVisuals.tsx`：技术全解的章节、要点与示意图；章节时长按要点数自动算。改动章节后重做配乐：`python3 scripts/make_tech_music.py <总秒数> <各章起点秒数,逗号分隔>`。
 
 ```bash
 npm install

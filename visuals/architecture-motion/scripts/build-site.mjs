@@ -16,9 +16,10 @@ const ORDER = ["Overview", "HardwareCompute", "HardwarePower", "DataPaths", "Sof
 const docs = readdirSync(`${REPO}/docs`).filter((f) => f.endsWith(".md"));
 const titleOf = (md) => (md.match(/^#\s+(.+)$/m)?.[1] ?? "文档").trim();
 const hasFilm = existsSync("dist/plan-film.mp4");
+const hasTech = existsSync("dist/tech-film.mp4");
 const NAV = [
   ["index.html", "首页"],
-  ...(hasFilm ? [["film.html", "宣传片"]] : []),
+  ...(hasFilm ? [["film.html", "视频"]] : []),
   ["architecture-motion.html", "动态架构图"],
   ["system-architecture.html", "架构图"],
   ["technical-roadmap.html", "技术路线"],
@@ -136,12 +137,12 @@ const hero = `<section class="hero">
 <div class="live" data-live="HardwareCompute"></div>
 <p class="cap">眼镜硬件：显示、计算与连接。光带是一路信号，线型代表信号类型。<a href="architecture-motion.html">看全部 10 张架构图</a></p>
 <div class="entries">
-  ${hasFilm ? `<a href="film.html">全流程宣传片<span>从设计到一天的使用体验</span></a>` : ""}
+  ${hasFilm ? `<a href="film.html">视频<span>宣传片「她的进化」· 技术全解 24 章</span></a>` : ""}
   <a href="technical-roadmap.html">技术路线<span>小脑四芯片、MCU A/B 案、M0–M3</span></a>
-  <a href="design-requirements.html">设计开发要求<span>167 条可验收要求</span></a>
-  <a href="streaming-direction.html">方案<span>串流终端方向 v0.7.3</span></a>
+  <a href="design-requirements.html">设计开发要求<span>191 条可验收要求</span></a>
+  <a href="streaming-direction.html">方案<span>串流终端方向 v0.7.5</span></a>
   <a href="validation-plan.html">验证计划<span>6 组现成硬件验证</span></a>
-  <a href="sources.html">来源<span>48 条公开资料</span></a>
+  <a href="sources.html">来源<span>58 条公开资料</span></a>
 </div>`;
 const readme = readFileSync(`${REPO}/README.md`, "utf8").replace(/^#\s+.+\n/, "");
 const { html: readmeHtml } = render(readme, true);
@@ -154,6 +155,14 @@ if (hasFilm) {
   const body = `<div class="eyebrow">Open Signal · Film</div><h1>全流程宣传片</h1><p class="lede">以眼镜 Agent “她”的第一人称讲述：从戴在脸上的手表，进化到有脑、有手、有脚。与传统 AI 眼镜对比看、做、连、手四件事，演示 Agent 替你操作手机、手渲染再投到眼前、六种显示模式和一天的使用。配乐为代码合成的原创音乐。</p>
 <video src="${FILM}" controls playsinline preload="metadata" style="width:100%;border-radius:14px;border:1px solid #1b1f29;background:#000"></video>
 <p class="cap"><a href="${FILM}" download>下载 MP4</a> · 型号均为候选，数值为设计目标</p>`;
-  writeFileSync(`${OUT}/film.html`, page("film.html", "全流程宣传片", body));
+  let tech = "";
+  if (hasTech) {
+    copyFileSync("dist/tech-film.mp4", `${OUT}/tech-film.mp4`);
+    const TECH = `tech-film.mp4?v=${createHash("sha1").update(readFileSync("dist/tech-film.mp4")).digest("hex").slice(0, 8)}`;
+    tech = `<h2 id="tech">技术全解（约 8 分 30 秒）</h2><p class="lede">24 章把设计、架构、链路、功耗、协议、验证与路线讲透：脑 / 小脑 / 手、四颗主芯片与 MCU A/B 案、光波导、五种连接与网络指标、显示通路与延迟预算、软件栈与开放协议、兼容分层、六种显示模式、手机 Agent、通话与虚拟形象、功耗状态与 8 小时预算、重量、云、六道闸门、路线与风险。左侧为动态架构图或示意，右侧逐条要点。</p>
+<video src="${TECH}" controls playsinline preload="metadata" style="width:100%;border-radius:14px;border:1px solid #1b1f29;background:#000"></video>
+<p class="cap"><a href="${TECH}" download>下载 MP4</a> · 数字均取自方案文档，方案数值为设计目标，未实测</p>`;
+  }
+  writeFileSync(`${OUT}/film.html`, page("film.html", "视频", body + tech));
 }
 console.log(readdirSync(OUT).join(" "));
