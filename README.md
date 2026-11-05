@@ -24,7 +24,7 @@
 | [第 1、3、6 组设备准备清单](docs/equipment-groups-1-3-6.md) | 先做的三组验证的候选设备、共用关系与核实项（不含价格） |
 | [测试工具](tools/README.md) | 第 1、3、6 组的计时页、延迟统计、RedCap AT / 测速 / 电流分析、人体工学统计脚本（标准库，含单元测试） |
 | [供应商回复模板](docs/supplier-response.md) | 可复制的技术方案回复与偏差表 |
-| [硬件初版 v0.1](hardware/v0.1/README.md) | 两块板的 KiCad 原理图与初版布局（MCU 常驻板全真实器件；主板主 SoC 等为占位），网站 [硬件页](https://glasses.youngtuo.win/hardware.html) 用 three.js 三维查看；未布线，不能下单 |
+| [硬件初版 v0.1](hardware/v0.1/README.md) | 两块板的 KiCad 原理图与初版 PCB（MCU 常驻板全真实器件、已自动布线约 96%；主板主 SoC 等为占位、只有布局），网站 [硬件页](https://glasses.youngtuo.win/hardware.html) 用 three.js 三维查看；还不能下单 |
 | [完整来源](docs/sources.md) | 官方资料、公开参考项目及核验日期 |
 | [贡献指南](CONTRIBUTING.md) | Issue、Pull Request 和公开资料边界 |
 

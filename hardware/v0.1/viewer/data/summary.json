@@ -5,7 +5,7 @@
    "右镜腿形 78×16 mm，6 层，双面贴装",
    "MCU A 案：STM32N657 + nRF52832（常驻 BLE）",
    "去耦电容为初版代表值，须按各芯片手册补全",
-   "未布线：只有布局与飞线"
+   "已自动布线（Freerouting）：约 96% 连通，剩 12 处待人工补线；0 短路"
   ],
   "layers": 6,
   "parts": 84,
@@ -15,15 +15,16 @@
    "pin_to_pin": 2
   },
   "drc": {
-   "hole_clearance": 5,
-   "isolated_copper": 1,
+   "clearance": 1,
+   "starved_thermal": 11,
+   "track_dangling": 3,
    "silk_edge_clearance": 4,
    "text_height": 1,
    "silk_overlap": 99,
    "silk_over_copper": 105,
-   "unconnected_items": 335
+   "unconnected_items": 12
   },
-  "unconnected": 335,
+  "unconnected": 12,
   "roles": {
    "器官 · 嘴巴": [
     {
