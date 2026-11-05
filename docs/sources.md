@@ -361,3 +361,15 @@ Synaptics VS680 产品简介（AV1 / HEVC / H.264 硬解、MIPI DSI 输出）
 BusinessWire：芯原 VC9800D 视频 IP 支持 AV1 / AV2 等（2026-06）
 
 <https://secure.businesswire.com/news/home/20260605153030/en/VeriSilicon-Drives-Commercial-Adoption-of-AV2-Across-Next-Generation-Video-and-Streaming-Applications>
+
+## S57
+
+Mika：开源 Android 手机 agent（Apache-2.0，Kotlin），本项目 2026-11-04 读源码评估
+
+<https://github.com/wangzan101/Mika>
+
+## S58
+
+dsh-Go：开源手机控制项目（AGPL-3.0，Flutter + Kotlin），本项目 2026-11-04 读源码评估
+
+<https://github.com/ccch1mneyyy/dsh-Go>

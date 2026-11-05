@@ -48,7 +48,7 @@ export const overview: Diagram = {
 export const hwCompute: Diagram = {
   id: "HardwareCompute",
   title: "2.1 眼镜硬件：显示、计算与连接",
-  subtitle: `四芯片：① 显示与重投影处理器 ② 主 SoC ③ RedCap ④ 低功耗 MCU · ${SUB}`,
+  subtitle: `四颗主芯片：① 显示与重投影处理器 ② 主 SoC ③ RedCap ④ 低功耗 MCU（含常驻 BLE） · ${SUB}`,
   rankdir: "LR",
   nodes: [
     { id: "usbc", label: "USB-C\nDP Alt / USB 3 / PD" },
@@ -92,16 +92,17 @@ export const hwCompute: Diagram = {
 export const hwPower: Diagram = {
   id: "HardwarePower",
   title: "2.2 眼镜硬件：低功耗、存储与电源",
-  subtitle: `MCU 管全机：手表模式、状态机、电源域 · ${SUB}`,
+  subtitle: `MCU 管全机：手表模式、状态机、电源域、常驻 BLE 与听音 · ${SUB}`,
   rankdir: "LR",
   nodes: [
     { id: "soc", label: "② 主 SoC" },
-    { id: "mcu", label: "④ 低功耗 MCU\n主选 STM32N657 + PSRAM\n手表模式 · 状态机 · 电源管理", accent: true },
+    { id: "mcu", label: "④ 低功耗 MCU（M1 定 A/B 案）\nA：STM32N657 + PSRAM + 小 BLE\nB：BES2800BP（片内蓝牙）\n手表模式 · 状态机 · 电源 · 唤醒词", accent: true },
+    { id: "ble", label: "常驻 BLE\n手机的气泡 / 看板描述" },
     { id: "rgb", label: "主摄 RGB\n1080p30 起 · 防抖" },
     { id: "csw", label: "主摄 MIPI 开关\nMCU 仲裁" },
     { id: "dsw", label: "显示开关" },
     { id: "wear", label: "佩戴检测" },
-    { id: "mic", label: "麦克风" },
+    { id: "mic", label: "麦克风阵列\n直连 MCU · 常驻听音" },
     { id: "nand", label: "小容量 NAND\n手表模式录制" },
     { id: "pmic", label: "PMIC + 负载开关" },
     { id: "doms", label: "各电源域\n显示 · 显示处理器 · 主 SoC\nWi-Fi · 蜂窝 · 各相机" },
@@ -116,6 +117,7 @@ export const hwPower: Diagram = {
     { from: "mcu", to: "dsw", kind: "video", label: "低速显示" },
     { from: "wear", to: "mcu", kind: "pose" },
     { from: "mic", to: "mcu", kind: "audio" },
+    { from: "ble", to: "mcu", kind: "rf", bidir: true, label: "气泡 ≤0.1 s 上屏（目标）" },
     { from: "mcu", to: "nand", kind: "data", bidir: true },
     { from: "mcu", to: "pmic", kind: "control", label: "I2C" },
     { from: "pmic", to: "doms", kind: "power" },
