@@ -14,7 +14,7 @@
 | AR1 与 AR1+ 有条件评估 | 公开连接信息以 Wi-Fi、蓝牙为主；提供面向眼镜的媒体和端侧 AI 能力。[S6](sources.md#s6)[S7](sources.md#s7) | 离线小模型能力不等于原生 LTE。独立蜂窝需供应商证明完整架构；RAM、系统开放度、modem 集成和持续并发能力待核实。 |
 | W5+ Gen 2 备选询价 | 四核 A53、4nm、LPDDR4，公开有 LTE 平台信息。[S8](sources.md#s8) | 不能自动按 Gen 1 推定 Cat4、RAM 容量或摄像编解码能力。询问供货、BSP、蜂窝版本及是否有可展示的目标整机。 |
 | Wear Elite 跟踪新平台 | 3nm、LPDDR5、LTE 与 RedCap、双 CSI；公开 Android 与 Linux 支持信息。[S9](sources.md#s9) | RAM 容量、视频编码能力、持续整机功耗及可获得的 BSP 仍需询证。公开 CPU 信息不支持自行补写核型和核数。 |
-| BES2800BP 辅助路线 | 双 M55 加双 STAR-MC1；共享 8.3MB SRAM；PSRAM/Flash 为配置项；公开 Wi-Fi、蓝牙和 DSI。[S10](sources.md#s10) | 更偏 MCU 级路线。未获得官方 LTE、ISP、H.264 完整证据，不宜直接当成所需 ARM 应用主机；采用时须证明外接媒体与蜂窝方案。 |
+| BES2800BP 辅助路线 | 双 M55 加双 STAR-MC1；共享 8.3MB SRAM；PSRAM/Flash 为配置项；公开 Wi-Fi、蓝牙和 DSI。[S10](sources.md#s10) | 更偏 MCU 级路线。未获得官方 LTE、ISP、H.264 完整证据，不宜直接当成所需 ARM 应用主机；采用时须证明外接媒体与蜂窝方案。按方案决定 #24，它是低功耗 MCU 的 B 案候选（片内蓝牙可常驻收手机的气泡 / 看板描述，音频强），与 A 案 STM32N657 + 小 BLE 芯片在 M1 并行评估，见[技术路线](technical-roadmap.md)第 1.5 节。 |
 | BES6100 成熟度待核实 | 2026年10月23日三季报披露已进入客户送样阶段。[S11](sources.md#s11) | 不能写成已量产。主核、RAM、系统、视频链路、蜂窝及量产时间均需官方规格和供应商书面确认。 |
 | STM32N657 辅助路线 | M55 MCU、4.2MB SRAM，具 ISP 与 H.264 能力。[S12](sources.md#s12) | 不是 Android 应用主机，不能以 SRAM 取代本项目所需应用 RAM。可评估专项采集或辅控，但不直接替代主方案。 |
 

@@ -16,10 +16,10 @@
 | [芯片候选](docs/chips.md) | 已讨论平台的公开信息、项目判断及待核实项 |
 | [工程判断](docs/engineering-assessment.md) | 选型依据、系统集成风险及证据边界 |
 | [串流终端方向](docs/streaming-direction.md) | v0.7.5：默认无线、依赖网络而非手机的串流 AR 眼镜；联网全功能 / 断网手表模式、光波导 + 光机、手机级视频通话与虚拟形象、6DoF 真实画面交互、开放云、8 小时混合续航、续航优先、佩戴无感的重量分配、芯片组合 |
-| [技术路线](docs/technical-roadmap.md) | 四芯片结构（AR 级主 SoC + 显示与重投影处理器 + RedCap + 低功耗 MCU）各子系统主选 / 备选与切换条件、软件栈与开放协议、M0 验证 → M1 桌面功能样机 → M2 完全版样机 → M3 优化样机 |
+| [技术路线](docs/technical-roadmap.md) | 四颗主芯片当小脑（AR 级主 SoC + 显示与重投影处理器 + RedCap + 常驻 BLE 与听音的低功耗 MCU）各子系统主选 / 备选与切换条件、软件栈与开放协议、M0 验证 → M1 桌面功能样机 → M2 完全版样机 → M3 优化样机 |
 | [在线浏览](https://glasses.youngtuo.win/) | 本仓库文档的网页版与动态架构图，公网可直接访问 |
-| [系统架构图](docs/system-architecture.md) | 初版 9 张图：系统全景、硬件框图（两张）、显示数据通路、软件栈、协议通道、功耗状态机、通话与虚拟形象、部署视图；动态版见 `visuals/architecture-motion` |
-| [设计开发要求](docs/design-requirements.md) | 191 条可验收要求（SYS / HW / PWR / DISP / NET / SW / HOST / PROT / CALL / APP / CLOUD / ERGO / SEC / DEV），每条含来源、优先级、验证方法、阶段，附 21 条决定追溯表 |
+| [系统架构图](docs/system-architecture.md) | 10 张图：系统全景（脑 / 小脑 / 手）、硬件框图（两张）、显示数据通路（含看板态）、软件栈、协议通道、功耗状态机、通话与虚拟形象、部署视图、显示模式与小脑调度；动态版见 `visuals/architecture-motion` |
+| [设计开发要求](docs/design-requirements.md) | 191 条可验收要求（SYS / HW / PWR / DISP / NET / SW / HOST / PROT / CALL / APP / CLOUD / ERGO / SEC / DEV），每条含来源、优先级、验证方法、阶段，附 24 条决定追溯表 |
 | [现成硬件验证计划](docs/validation-plan.md) | 自研前用现成设备做的 6 组验证：串流延迟与兼容、6DoF 交互、RedCap 联网与睡眠、手表模式功耗、视频通话与虚拟形象、佩戴无感基线；含设备清单、步骤、通过标准与记录表 |
 | [第 1、3、6 组设备准备清单](docs/equipment-groups-1-3-6.md) | 先做的三组验证的候选设备、共用关系与核实项（不含价格） |
 | [测试工具](tools/README.md) | 第 1、3、6 组的计时页、延迟统计、RedCap AT / 测速 / 电流分析、人体工学统计脚本（标准库，含单元测试） |

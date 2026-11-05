@@ -1,4 +1,4 @@
-// 9 张图的直角走线排版：ELK layered + ORTHOGONAL；硬件框图用手工排版（src/diagrams/hw-manual.json）
+// 10 张图的直角走线排版：ELK layered + ORTHOGONAL；硬件框图用手工排版（src/diagrams/hw-manual.json）
 import ELK from "elkjs/lib/elk.bundled.js";
 import { writeFileSync, readFileSync } from "node:fs";
 import { ALL } from "../src/diagrams";

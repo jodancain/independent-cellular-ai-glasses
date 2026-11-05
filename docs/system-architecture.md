@@ -1,6 +1,6 @@
-# 系统架构图（初版）
+# 系统架构图
 
-**v0.1.2 · 2026-11-04 · 依据 [串流终端方向](streaming-direction.md) v0.7.5、[技术路线](technical-roadmap.md) v0.1.1 · 配套 [设计开发要求](design-requirements.md)**
+**v0.2 · 2026-11-04 · 依据 [串流终端方向](streaming-direction.md) v0.7.5、[技术路线](technical-roadmap.md) v0.1.1 · 配套 [设计开发要求](design-requirements.md)**
 
 本页把方案和技术路线画成图，供评审和分工使用。
 
@@ -8,7 +8,7 @@
 > - 图中的芯片和器件型号都是**候选**，按技术路线第 1 节的门禁和切换条件定案，M1 结束前不冻结。
 > - 接口和数值是【设计目标】，还没有实测。
 > - 图用 Mermaid 编写，GitHub 上能直接显示。
-> - **动态版**：同样 9 张图的信号流动动画（Remotion），单文件 HTML 在 [`visuals/architecture-motion/dist/system-architecture-motion.html`](../visuals/architecture-motion/dist/system-architecture-motion.html)，下载后用浏览器打开。
+> - **动态版**：同样 10 张图的信号流动动画（Remotion），单文件 HTML 在 [`visuals/architecture-motion/dist/system-architecture-motion.html`](../visuals/architecture-motion/dist/system-architecture-motion.html)，下载后用浏览器打开。
 
 **目录**
 
@@ -20,6 +20,7 @@
 6. 功耗状态机
 7. 视频通话与虚拟形象链路
 8. 部署视图：官方云与自建
+9. 显示模式与小脑调度
 
 ---
 
@@ -29,11 +30,15 @@
 
 ```mermaid
 flowchart LR
-  subgraph HOSTS["外部主机（负责渲染，可任选）"]
+  subgraph HOSTS["手：所有主机（谁是手谁渲染）"]
     PC["PC / 笔记本<br/>虚拟显示驱动 + 串流服务<br/>虚拟摄像头 / 麦克风"]
-    PHONE["手机<br/>伴随服务"]
+    PHONE["手机<br/>Mika 改造 · 任务接口<br/>后台开应用 · 生成看板"]
     CAR["车机<br/>车机侧串流服务"]
-    CLOUD["云 / 自建服务端<br/>云串流 · 通话 · 虚拟形象渲染<br/>同步 · 设备管理 · 小程序源"]
+    CLOUD["云主机 / 自建<br/>云串流 · 虚拟形象 GPU<br/>同步 · 设备管理 · 小程序源"]
+  end
+
+  subgraph BRAIN["脑"]
+    LLM["云端 LLM<br/>理解意图 · 派哪只手 · 决定显示什么"]
   end
 
   subgraph NET["连接方式"]
@@ -41,9 +46,10 @@ flowchart LR
     A2["A2 有线编码串流<br/>USB 3"]
     B["B Wi-Fi 7"]
     C["C 蜂窝<br/>机身 RedCap / 模块 5G"]
+    BLE["BLE 控制面<br/>意图 · 气泡 · 看板描述"]
   end
 
-  GLASSES["眼镜本体（默认无线）<br/>联网：全功能<br/>断网：手表模式"]
+  GLASSES["眼镜本体（脑 + 小脑）<br/>眼睛 · 嘴巴 · 耳朵 · 视网膜<br/>小脑：合成 · 重投影 · 显示分配<br/>断网：手表模式"]
   MODULE["可选线控模块<br/>大电池 + 全功能 5G<br/>（可选算力版）"]
   USER["佩戴者<br/>看到真实世界 + 叠加内容"]
 
@@ -60,6 +66,10 @@ flowchart LR
   A2 --> GLASSES
   B <--> GLASSES
   C <--> GLASSES
+  PHONE <--> BLE
+  BLE <--> GLASSES
+  LLM <--> C
+  LLM <--> B
   MODULE -. USB-C 供电 + 数据 .- GLASSES
   GLASSES --> USER
 ```
@@ -67,6 +77,7 @@ flowchart LR
 **要点**：
 - 多台主机同时可用时，按 **有线 > 同一局域网 > 云** 的顺序优先（方案第 3.4 节）。
 - 判断“联网”的依据是能不能连上主机或云，而不是有没有连手机（方案第 2.1 节）。
+- 脑、小脑、手的分工和渲染规则见方案第 1.1 节；器官对应：摄像头 = 眼睛，麦克风 = 嘴巴，耳机 / 扬声器 = 耳朵，光波导 = 视网膜。
 
 ---
 
@@ -83,7 +94,7 @@ flowchart LR
   DPU["① 显示与重投影处理器<br/>原型 FPGA<br/>扭曲 · 畸变 · 缩放 · 补帧<br/>可选：集成硬解（视频与显示处理器）"]
   DSW["显示开关"]
   OPT["左右光波导 + 光机<br/>视场 30–50° · 光机待定"]
-  SOC["② 主 SoC<br/>主选 AR2 Gen 1 / 有条件备选 AR1+ Gen 1<br/>解码 · 6DoF · 手势 · 合成 · 通话"]
+  SOC["② 主 SoC（小脑）<br/>主选 AR2 Gen 1 / 有条件备选 AR1+ Gen 1<br/>解码 · 6DoF · 合成 · 看板光栅化 · 通话"]
   WIFI["Wi-Fi 7 / 蓝牙"]
   CELL["③ RedCap 模组<br/>RG255C-GL（X35）+ eSIM"]
   UFS["UFS / eMMC"]
@@ -92,6 +103,7 @@ flowchart LR
   EYE["眼动相机 ×2（预留）"]
   CSW["主摄 MIPI 开关"]
   MIC["麦克风阵列 / 扬声器"]
+  MCU["④ 低功耗 MCU<br/>常驻 BLE · 唤醒词"]
 
   USBC -- "DP 4 路 / 2 路 + DSC" --> DPRX --> DPU --> DSW --> OPT
   USBC -- "USB 3 / USB 2" --> SOC
@@ -101,7 +113,10 @@ flowchart LR
   TRK --> SOC
   EYE -.-> SOC
   CSW --> SOC
+  MIC -- "常驻听音" --> MCU
   MIC -.-> SOC
+  MCU <-- "SPI + 唤醒" --> SOC
+  MCU -- "气泡 / 手表模式" --> DSW
   SOC --- WIFI
   SOC -- "PCIe / USB" --- CELL
   SOC --- UFS
@@ -162,7 +177,7 @@ flowchart LR
 
 ## 3 显示数据通路
 
-扭曲始终在离屏幕最近的一级做，所以头动感知延迟不受网络影响（方案第 3.5 节）。
+扭曲始终在离屏幕最近的一级做，所以头动感知延迟不受网络影响（方案第 3.5 节）。编码串流承载“视频”和“投屏”两种显示模式；看板态见方案第 5.4 节。
 
 ```mermaid
 flowchart TB
@@ -180,14 +195,19 @@ flowchart TB
     direction LR
     c1["主机 / 云编码"] -- "USB 3 / Wi-Fi / 蜂窝" --> c2["主 SoC 硬解<br/>+ 空间合成"] -- MIPI --> c3["显示处理器<br/>扭曲 · 缩放 · 补帧"] --> c4["屏幕"]
   end
-  subgraph WATCH["手表模式"]
+  subgraph BOARD["看板态（主 SoC 低功耗活跃）"]
     direction LR
-    d1["MCU"] -- "低刷新 / 局部点亮" --> d2["显示开关"] --> d3["屏幕"]
+    k1["手机这只手<br/>看板描述（KB 级）"] -- "BLE / Wi-Fi" --> k2["主 SoC 按描述光栅化<br/>关解码 · 关追踪"] --> k3["显示处理器<br/>重投影"] --> k4["屏幕（降刷新）"]
+  end
+  subgraph WATCH["手表模式 / 只有气泡"]
+    direction LR
+    d0["BLE 气泡"] -- "≤0.1 s（目标）" --> d1["MCU"] -- "低刷新 / 局部点亮" --> d2["显示开关"] --> d3["屏幕"]
     d4["主 SoC + 显示处理器断电"]
   end
   A1_3 ~~~ A1_6
   A1_6 ~~~ ENC
-  ENC ~~~ WATCH
+  ENC ~~~ BOARD
+  BOARD ~~~ WATCH
 ```
 
 **边界**：
@@ -200,13 +220,14 @@ flowchart TB
 
 ```mermaid
 flowchart LR
-  subgraph HOST["主机侧"]
+  subgraph HOST["手：主机侧"]
     direction TB
     H1["虚拟显示<br/>IddCx · Linux 合成器 · Android VirtualDisplay · macOS"]
     H2["统一串流服务<br/>硬件编码 · 串流纪律"]
     H3["OpenXR 远端渲染<br/>参照 ALVR / WiVRn"]
     H4["虚拟摄像头 / 麦克风（V1）"]
     H5["虚拟形象渲染<br/>语音驱动口型 + 头部姿态 · GPU<br/>眼动参数接口预留"]
+    H6["手机手：Mika 改造<br/>任务接口 · 看板生成<br/>眼镜通道 · 发消息前确认"]
   end
 
   subgraph SOCSW["眼镜主 SoC（AOSP，基于厂商 BSP）"]
@@ -234,7 +255,7 @@ flowchart LR
     M4["佩戴检测 · 唤醒词 / 人声检测 · BLE 常驻"]
   end
 
-  subgraph CLOUDSW["云 / 自建服务端（同构容器镜像）"]
+  subgraph CLOUDSW["云 / 自建服务端（同构容器镜像，含脑）"]
     direction TB
     S1["云串流主机"]
     S2["通话（LiveKit）"]
@@ -242,6 +263,7 @@ flowchart LR
     S4["同步（WebDAV / S3）"]
     S5["设备管理 · 身份"]
     S6["小程序私有源"]
+    S7["云端 LLM（脑）<br/>意图 · 派手 · 决定显示"]
   end
 
   H2 == "开放串流协议" ==> G1
@@ -250,6 +272,11 @@ flowchart LR
   G3 --> G2
   G4 --> G2
   G8 --> G2
+  G6 --> G8
+  H6 -- "看板描述 / 气泡" --> G6
+  S7 <-- "显示什么" --> G8
+  S7 -- "派任务" --> H6
+  M4 -- "气泡" --> G8
   G2 --> D1
   G7 <-- "SPI 命令通道" --> M1
   G7 <--> S5
@@ -271,23 +298,28 @@ flowchart LR
     HC["会话管理"]
     HE["编码器"]
     HR["预测渲染"]
+    HV["手 · 看板描述源"]
+    HB["手机手 · BLE"]
   end
   subgraph G["眼镜"]
     GC["会话管理"]
     GD["解码 + 合成"]
     GT["6DoF 追踪"]
-    GV["本地矢量绘制"]
+    GV["小脑 · 看板光栅化"]
+    GB["MCU · 常驻 BLE"]
   end
   HC <-- "控制面：QUIC 可靠流或 TCP + TLS<br/>能力位握手 · 主机切换 · 按键 · 诊断" --> GC
   HE -- "视频面：QUIC DATAGRAM 或 RTP / UDP（不可靠）<br/>最新帧优先 · 关键帧恢复 · 自适应码率" --> GD
   GT -- "姿态上行：不可靠小包，高频<br/>6DoF 姿态 + 时间戳" --> HR
-  HC -- "矢量通道（走控制面）<br/>导航 · 字幕 · 状态 · L3 看板" --> GV
+  HV -- "看板描述（走控制面）<br/>导航 · 字幕 · 应用看板 · 表达不了时发图片" --> GV
+  HB <-- "BLE 控制面：低功耗常连<br/>意图 · 气泡 · 任务状态" --> GB
   HC <-. "时钟同步：类似 NTP 的往返测量" .-> GC
 ```
 
 **两条规则**：
 - 控制面和视频面至少要分开拥塞控制。
 - 视频面**不能用 QUIC 的普通流**：普通流可靠有序，会被队头阻塞。
+- 手协议与看板描述的 v0 要点见技术路线第 2.3 节；BLE 只走控制面，不承载视频。
 
 ---
 
@@ -303,6 +335,7 @@ stateDiagram-v2
   S1: S1 浅睡（摘下 / 熄屏）<br/>主 SoC 低功耗活跃<br/>Wi-Fi 芯片或模组保活
   S0: S0 全功能（联网）
   S0w: S0' 手表模式（断网）<br/>只有 MCU 工作
+  S0k: S0'' 看板态<br/>只画卡片 + 重投影<br/>降刷新 · 关解码 · 关追踪
 
   S3 --> S2: 长按 / 充电
   S2 --> S0: 戴上 · 唤醒词 · 消息推送（且能连上服务）
@@ -312,6 +345,8 @@ stateDiagram-v2
   S1 --> S2: 超过保活时间
   S0 --> S0w: 主机和云都连不上
   S0w --> S0: 恢复联网
+  S0 --> S0k: 只剩看板
+  S0k --> S0: 视频 · 投屏 · 通话
   S0w --> S2: 摘下 / 超时
   S2 --> S3: 长按关机 / 电量过低
 ```
@@ -362,6 +397,8 @@ flowchart LR
 
 **降级**：没有 GPU 主机或云时，降级为静态头像 + 口型动画。
 
+**显示**：视频通话是优先级最高的显示模式，画面排布由小脑负责；虚拟形象由有 GPU 的手渲染（PC 优先，其次云）。
+
 ---
 
 ## 8 部署视图：官方云与自建
@@ -370,20 +407,52 @@ flowchart LR
 flowchart LR
   G["眼镜<br/>设置里填服务器地址"]
   subgraph OFF["官方云"]
-    O["同构服务端"]
+    O["同构服务端<br/>含云端 LLM（脑）"]
   end
   subgraph SELF["用户自建"]
     SS["参考服务端容器镜像"]
     GPU["任意 GPU 主机"]
     ST["WebDAV / S3 / 局域网主机"]
+    LL["自选 LLM 端点（脑）"]
   end
   G <-- 同一份开放协议 --> O
   G <-- 同一份开放协议 --> SS
   SS --- GPU
   SS --- ST
+  SS --- LL
 ```
 
-**原则**：官方云不能成为使用眼镜的前提。离线内容默认不上传，同步目标由用户选择（方案第 2.4、4.4 节）。
+**原则**：官方云不能成为使用眼镜的前提。离线内容默认不上传，同步目标由用户选择（方案第 2.4、4.4 节）。脑（LLM 端点）同样可以自建。
+
+---
+
+## 9 显示模式与小脑调度
+
+见方案第 3.9 节（决定 #23）。显示什么由脑决定，怎么分配、放在哪由小脑决定。
+
+```mermaid
+flowchart LR
+  subgraph FLOW["一次“打开 QQ”"]
+    direction LR
+    SAY["你说“打开 QQ”"] --> BUB["小脑：气泡“正在打开 QQ”<br/>≤0.1 s 条件反射"]
+    SAY --> BR["脑：云端 LLM<br/>派给手机这只手"]
+    BR -- 任务 --> HAND["手机（Mika）<br/>后台打开 QQ · 渲染 QQ 看板"]
+    HAND -- 看板描述 --> BOARD["小脑：气泡就地变成 QQ 看板"]
+    BUB -- 就地变形 --> BOARD
+    BOARD -. "“我来操作”" .-> TAKE["投屏（接管）"]
+  end
+  subgraph MODES["六种显示模式（优先级从高到低）"]
+    direction TB
+    M1["视频通话"] ~~~ M2["投屏（接管才出现）"] ~~~ M3["视频"] ~~~ M4["实时拍照"] ~~~ M5["看板（含气泡）"] ~~~ M6["图片"]
+  end
+  SCH["小脑调度器<br/>1 主 + 最多 2 气泡<br/>行走时缩到边缘 · 焦点跟语音走"]
+  MODES --> SCH
+```
+
+**说明**：
+- 气泡是看板的一种，优先级最低；图片按出现场景并入看板或主显示（方案第 3.9 节）。
+- 投屏里的付款、密码页显示黑屏，提示到手机上处理。
+- “Muse 那样的交互逻辑”具体指什么，需求方尚未说明，见方案第 10 节。
 
 ---
 
@@ -394,3 +463,4 @@ flowchart LR
 | v0.1 | 2026-11-03 | 初版，共 8 张图：系统全景、硬件框图、数据通路、软件栈、协议通道、功耗状态机、通话链路、部署视图 |
 | v0.1.1 | 2026-11-04 | 显示方案改为左右光波导 + 光机；① 增加可选硬解（视频与显示处理器）；对应方案 v0.7.4 |
 | v0.1.2 | 2026-11-04 | 同步决定 #22–#24：MCU 改 A/B 两案（A 案外加小 BLE），补 BLE 常驻与音频前级；L0/L3/L4 改为投屏 / 看板 / 看板兜底；对应方案 v0.7.5 |
+| v0.2 | 2026-11-04 | 全部图按脑 / 小脑 / 手重画：全景加脑与 BLE 控制面，硬件图加 MCU 常驻听音，数据通路与状态机加看板态，软件栈加 Mika 手与云端 LLM，协议加看板描述与 BLE，部署加自建 LLM；新增第 9 张图“显示模式与小脑调度” |

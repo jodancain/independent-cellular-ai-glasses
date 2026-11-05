@@ -13,11 +13,11 @@ const isDrop = (f: number) => (f >= bars(8) && f < bars(28)) || (f >= bars(36) &
 type Scene = { from: number; len: number; ch: string; label: string; hue: string; el: (pulse: number) => React.ReactNode };
 const SCENES: Scene[] = [
   { from: 0, len: 4, ch: "00", label: "INTRO", hue: C.cyan, el: (p) => <SIntro pulse={p} /> },
-  { from: 4, len: 4, ch: "01", label: "VISION", hue: C.cyan, el: () => <SVision /> },
+  { from: 4, len: 4, ch: "01", label: "BRAIN · HANDS", hue: C.cyan, el: () => <SVision /> },
   { from: 8, len: 6, ch: "02", label: "COMPETITORS", hue: C.pink, el: () => <SRivals /> },
   { from: 14, len: 6, ch: "03", label: "ARCHITECTURE", hue: C.cyan, el: () => <SArchitecture /> },
   { from: 20, len: 4, ch: "04", label: "CONNECT", hue: C.lime, el: () => <SConnect /> },
-  { from: 24, len: 4, ch: "05", label: "COMPATIBILITY", hue: C.amber, el: () => <SCompat /> },
+  { from: 24, len: 4, ch: "05", label: "DISPLAY MODES", hue: C.amber, el: () => <SCompat /> },
   { from: 28, len: 4, ch: "06", label: "POWER", hue: C.lime, el: () => <SPower /> },
   { from: 32, len: 4, ch: "07", label: "ERGONOMICS", hue: C.pink, el: () => <SWeight /> },
   { from: 36, len: 8, ch: "08", label: "EXPERIENCE", hue: C.cyan, el: () => <SDay /> },

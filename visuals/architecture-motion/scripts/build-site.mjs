@@ -11,7 +11,7 @@ rmSync(OUT, { recursive: true, force: true });
 mkdirSync(OUT);
 
 const LAYOUTS = JSON.parse(readFileSync("src/diagrams/layouts.json", "utf8"));
-const ORDER = ["Overview", "HardwareCompute", "HardwarePower", "DataPaths", "SoftwareStack", "Protocol", "PowerStates", "Calls", "Deploy"];
+const ORDER = ["Overview", "HardwareCompute", "HardwarePower", "DataPaths", "SoftwareStack", "Protocol", "PowerStates", "Calls", "Deploy", "DisplayModes"];
 const docs = readdirSync(`${REPO}/docs`).filter((f) => f.endsWith(".md"));
 const titleOf = (md) => (md.match(/^#\s+(.+)$/m)?.[1] ?? "文档").trim();
 const hasFilm = existsSync("dist/plan-film.mp4");
@@ -122,7 +122,7 @@ for (const f of docs) {
 const hero = `<section class="hero">
   <div class="eyebrow">Independent Cellular AI Glasses</div>
   <h1><span class="en">OPEN SIGNAL</span>开放的信号，永远在流动</h1>
-  <p class="lede">一副靠网络工作的眼镜，不依赖手机。联网时，电脑、手机、车机和云端的画面都能送到眼前；断网时，它是一块表；摘下就睡，戴上一秒醒来。</p>
+  <p class="lede">一副靠网络工作的眼镜，不依赖手机。眼镜和云端 LLM 是脑，电脑、手机、车机和云主机都是手：你说一句话，脑派一只手去做，手渲染好的看板就出现在眼前。断网时，它是一块表；摘下就睡，戴上一秒醒来。</p>
   <div class="pillars">
     <div><span class="n">01</span><span class="k">快科技</span><p>信号先于目光抵达。转头的一瞬，画面已经在那里。</p></div>
     <div><span class="n">02</span><span class="k">潮流</span><p>轻得像一副寻常的眼镜，亮得像一块随身的屏幕。</p></div>
@@ -133,10 +133,10 @@ const hero = `<section class="hero">
   </div>
 </section>
 <div class="live" data-live="HardwareCompute"></div>
-<p class="cap">眼镜硬件：显示、计算与连接。光带是一路信号，线型代表信号类型。<a href="architecture-motion.html">看全部 9 张架构图</a></p>
+<p class="cap">眼镜硬件：显示、计算与连接。光带是一路信号，线型代表信号类型。<a href="architecture-motion.html">看全部 10 张架构图</a></p>
 <div class="entries">
   ${hasFilm ? `<a href="film.html">全流程宣传片<span>从设计到一天的使用体验</span></a>` : ""}
-  <a href="technical-roadmap.html">技术路线<span>四芯片、主选与备选、M0–M3</span></a>
+  <a href="technical-roadmap.html">技术路线<span>小脑四芯片、MCU A/B 案、M0–M3</span></a>
   <a href="design-requirements.html">设计开发要求<span>167 条可验收要求</span></a>
   <a href="streaming-direction.html">方案<span>串流终端方向 v0.7.3</span></a>
   <a href="validation-plan.html">验证计划<span>6 组现成硬件验证</span></a>
@@ -148,7 +148,7 @@ writeFileSync(`${OUT}/index.html`, page("index.html", "独立蜂窝 AI 眼镜", 
 copyFileSync("dist/system-architecture-motion.html", `${OUT}/architecture-motion.html`);
 if (hasFilm) {
   copyFileSync("dist/plan-film.mp4", `${OUT}/plan-film.mp4`);
-  const body = `<div class="eyebrow">Open Signal · Film</div><h1>全流程宣传片</h1><p class="lede">从设计、竞品、架构、连接、兼容、睡眠续航、佩戴，到一天的使用体验和路线图。配乐为代码合成的原创音乐。</p>
+  const body = `<div class="eyebrow">Open Signal · Film</div><h1>全流程宣传片</h1><p class="lede">从脑 / 小脑 / 手的设计、竞品、架构、连接、六种显示模式、睡眠续航、佩戴，到一天的使用体验和路线图。配乐为代码合成的原创音乐。</p>
 <video src="plan-film.mp4" controls playsinline preload="metadata" style="width:100%;border-radius:14px;border:1px solid #1b1f29;background:#000"></video>
 <p class="cap"><a href="plan-film.mp4" download>下载 MP4</a> · 型号均为候选，数值为设计目标</p>`;
   writeFileSync(`${OUT}/film.html`, page("film.html", "全流程宣传片", body));

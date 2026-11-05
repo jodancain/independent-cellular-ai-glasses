@@ -11,7 +11,7 @@ export type LEdge = { from: string; to: string; kind: string; label?: string; bi
 export type Layout = { title: string; subtitle?: string; width: number; height: number; groups: { id: string; label: string; x: number; y: number; w: number; h: number }[]; nodes: LNode[]; edges: LEdge[] };
 
 export const DIAGRAMS = LAYOUTS as unknown as Record<string, Layout>;
-export const DIAGRAM_ORDER = ["Overview", "HardwareCompute", "HardwarePower", "DataPaths", "SoftwareStack", "Protocol", "PowerStates", "Calls", "Deploy"];
+export const DIAGRAM_ORDER = ["Overview", "HardwareCompute", "HardwarePower", "DataPaths", "SoftwareStack", "Protocol", "PowerStates", "Calls", "Deploy", "DisplayModes"];
 
 const SIGNAL = "#e8e2d4";
 const T = { bg: "#050608", grid: "rgba(242,244,248,.07)", groupFill: "rgba(242,244,248,.02)", groupStroke: "rgba(242,244,248,.1)", nodeFill: "#0b0e15", nodeStroke: "rgba(242,244,248,.18)", accentFill: "#12141a", text: "#f2f4f8", sub: "#9aa6bd", base: 0.6, knock: "#050608" };

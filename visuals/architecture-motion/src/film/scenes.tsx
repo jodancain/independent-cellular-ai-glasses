@@ -44,7 +44,7 @@ export const SIntro: React.FC<{ pulse: number }> = ({ pulse }) => (
     </div>
     <KineticTitle text="独立蜂窝 AI 眼镜" start={40} size={128} />
     <div style={{ height: 24 }} />
-    <KineticTitle text="依赖网络，不依赖手机" start={80} size={52} color={C.cyan} weight={500} stagger={3} />
+    <KineticTitle text="眼镜是脑，所有主机都是手" start={80} size={52} color={C.cyan} weight={500} stagger={3} />
     <div style={{ marginTop: 40, fontFamily: MONO, color: C.dim, fontSize: 22, letterSpacing: 4, opacity: interpolate(useCurrentFrame(), [140, 170], [0, 1], clamp) }}>
       全流程 · 全计划 · 从设计到使用体验
     </div>
@@ -53,15 +53,15 @@ export const SIntro: React.FC<{ pulse: number }> = ({ pulse }) => (
 
 // ---------- 2 愿景 ----------
 const GOALS = [
-  { n: "01", t: "Quest 级串流体验", d: "眼镜做显示、追踪与交互\n渲染交给 PC / 手机 / 车机 / 云", c: C.cyan },
-  { n: "02", t: "兼容所有软件", d: "系统级虚拟显示为主路\n语义转化 + 像素转化兜底", c: C.pink },
+  { n: "01", t: "脑 · 小脑 · 手", d: "眼镜 + 云端 LLM 是脑，眼镜算力是小脑\nPC / 手机 / 车机 / 云都是手，谁是手谁渲染", c: C.cyan },
+  { n: "02", t: "想看什么就看到什么", d: "看板 · 气泡 · 图片 · 视频\n投屏 · 实时拍照 · 视频通话", c: C.pink },
   { n: "03", t: "强睡眠能力", d: "分级睡眠 · 戴上 ≤ 1 s 恢复\n断网退化为手表级设备", c: C.lime },
 ];
 export const SVision: React.FC = () => (
   <Pad>
-    <Kicker text="VISION · 三个目标" />
+    <Kicker text="VISION · 眼睛 · 嘴巴 · 耳朵 · 视网膜" />
     <div style={{ height: 20 }} />
-    <KineticTitle text="把 Quest 2 的体验，装进一副眼镜" start={6} size={78} />
+    <KineticTitle text="眼镜是脑，所有主机都是手" start={6} size={78} />
     <div style={{ display: "flex", gap: 36, marginTop: 70 }}>
       {GOALS.map((g, i) => (
         <Card key={g.n} start={40 + i * 15} color={g.c} style={{ flex: 1, minHeight: 300 }}>
@@ -148,9 +148,9 @@ export const SArchitecture: React.FC = () => {
   const p = useIn(10, 24);
   return (
     <Pad>
-      <Kicker text="ARCHITECTURE · 四芯片分工" />
+      <Kicker text="ARCHITECTURE · 小脑在眼镜里" />
       <div style={{ height: 14 }} />
-      <KineticTitle text="主 SoC · 显示重投影 · RedCap · 低功耗 MCU" start={4} size={56} />
+      <KineticTitle text="主 SoC · 显示重投影 · RedCap · MCU 常驻 BLE 与听音" start={4} size={52} />
       <div style={{ marginTop: 30, height: 720, borderRadius: 18, overflow: "hidden", border: "1px solid rgba(242,244,248,.12)", opacity: p, transform: `scale(${0.94 + p * 0.06})`, position: "relative" }}>
         <div style={{ position: "absolute", left: "50%", top: 0, width: ARCH.width, height: ARCH.height, transform: `translateX(-50%) scale(${ARCH_SCALE})`, transformOrigin: "50% 0" }}>
           <FlowDiagram id="HardwareCompute" transparent />
@@ -165,20 +165,21 @@ const LINKS = [
   { k: "A1", t: "有线原始画面", d: "USB-C DP Alt · 最低延迟", c: C.cyan },
   { k: "A2", t: "有线编码串流", d: "USB 3 · 兼容面最广", c: C.blue },
   { k: "B", t: "Wi-Fi 7", d: "日常移动使用", c: C.lime },
-  { k: "C", t: "5G RedCap 蜂窝", d: "离开主机直连云端", c: C.pink },
+  { k: "C", t: "5G RedCap 蜂窝", d: "离开主机直连脑和云", c: C.pink },
+  { k: "BLE", t: "常驻控制面", d: "意图 · 气泡 · 看板描述", c: C.amber },
 ];
-const HOSTS = ["PC / 笔记本", "手机", "车机", "云 / 自建"];
+const HOSTS = ["PC / 笔记本", "手机（Mika）", "车机", "云主机", "云端 LLM（脑）"];
 export const SConnect: React.FC = () => {
   const f = useCurrentFrame();
   return (
     <Pad>
-      <Kicker text="CONNECT · 四种连接 × 四类主机" color={C.lime} />
+      <Kicker text="CONNECT · 脑连上每一只手" color={C.lime} />
       <div style={{ height: 14 }} />
-      <KineticTitle text="有线 > 局域网 > 云，自动切换" start={4} size={64} />
+      <KineticTitle text="有线 > 局域网 > 云，BLE 常连" start={4} size={64} />
       <div style={{ position: "relative", marginTop: 40, height: 600 }}>
         <svg width={1680} height={600} style={{ position: "absolute" }}>
           {LINKS.map((l, i) => {
-            const y = 70 + i * 140;
+            const y = 60 + i * 118;
             const d = `M 330 ${y} C 800 ${y}, 900 300, 1330 300`;
             const p = interpolate(f, [20 + i * 8, 50 + i * 8], [0, 1], clamp);
             const ev = evolvePath(p, d);
@@ -200,7 +201,7 @@ export const SConnect: React.FC = () => {
           })}
         </svg>
         {LINKS.map((l, i) => (
-          <Card key={l.k} start={10 + i * 8} color={l.c} from="left" style={{ position: "absolute", left: 0, top: 20 + i * 140, width: 320, padding: "14px 20px" }}>
+          <Card key={l.k} start={10 + i * 8} color={l.c} from="left" style={{ position: "absolute", left: 0, top: 14 + i * 118, width: 320, padding: "12px 20px" }}>
             <span style={{ fontFamily: MONO, color: l.c, fontSize: 30, fontWeight: 700, marginRight: 12 }}>{l.k}</span>
             <span style={{ fontSize: 28, fontWeight: 700 }}>{l.t}</span>
             <div style={{ fontSize: 20, color: "#b8c4d9" }}>{l.d}</div>
@@ -208,7 +209,7 @@ export const SConnect: React.FC = () => {
         ))}
         <Card start={50} color={C.cyan} style={{ position: "absolute", left: 1330, top: 200, width: 340, textAlign: "center" }}>
           <div style={{ fontSize: 40, fontWeight: 700 }}>眼镜本体</div>
-          <div style={{ fontSize: 22, color: C.cyan, marginTop: 6 }}>默认无线 · 全功能</div>
+          <div style={{ fontSize: 22, color: C.cyan, marginTop: 6 }}>脑 + 小脑 · 默认无线</div>
           <div style={{ display: "flex", flexWrap: "wrap", gap: 8, justifyContent: "center", marginTop: 16 }}>
             {HOSTS.map((h, i) => (
               <span key={h} style={{ fontSize: 18, padding: "4px 10px", borderRadius: 999, border: `1px solid ${C.cyan}66`, opacity: interpolate(f, [70 + i * 6, 84 + i * 6], [0, 1], clamp) }}>{h}</span>
@@ -222,20 +223,21 @@ export const SConnect: React.FC = () => {
 
 // ---------- 6 兼容分层 ----------
 const LAYERS = [
-  { k: "L0", t: "系统级虚拟显示器（主路）", d: "眼镜就是一台显示器：所有普通软件天然兼容", c: C.cyan },
-  { k: "L1", t: "OpenXR / 空间应用", d: "主机渲染 3D 内容，眼镜做显示与追踪", c: C.blue },
-  { k: "L2", t: "标准投屏 / 车机协议", d: "地图、音乐、语音", c: C.lime },
-  { k: "L3", t: "语义转化", d: "读界面结构，重排成眼镜卡片", c: C.amber },
-  { k: "L4", t: "像素转化（兜底）", d: "画面捕获 + ROI + 低码率", c: C.pink },
+  { k: "01", t: "视频通话", d: "小脑排布画面 · 虚拟形象由有 GPU 的手渲染", c: C.cyan },
+  { k: "02", t: "投屏（接管才出现）", d: "手的虚拟显示 · 可直接操作 · 安全页黑屏（L0）", c: C.blue },
+  { k: "03", t: "视频", d: "手编码，小脑解码", c: C.lime },
+  { k: "04", t: "实时拍照", d: "本地取景不联网 · 帧交给脑识别", c: C.amber },
+  { k: "05", t: "看板 · 气泡", d: "手发描述，小脑画 · 图片兜底（L3 / L4）", c: C.pink },
+  { k: "06", t: "图片", d: "手或摄像头 · 本地解码", c: C.cyan },
 ];
 export const SCompat: React.FC = () => (
   <Pad>
-    <Kicker text="COMPATIBILITY · 投屏转化算法" color={C.amber} />
+    <Kicker text="DISPLAY MODES · 小脑分配显示" color={C.amber} />
     <div style={{ height: 14 }} />
-    <KineticTitle text="不逐个适配应用，在显示层一次接入" start={4} size={62} />
-    <div style={{ display: "flex", flexDirection: "column", gap: 16, marginTop: 44 }}>
+    <KineticTitle text="六种显示模式，1 主 + 2 气泡" start={4} size={62} />
+    <div style={{ display: "flex", flexDirection: "column", gap: 10, marginTop: 34 }}>
       {LAYERS.map((l, i) => (
-        <Card key={l.k} start={24 + i * 9} color={l.c} from="right" style={{ display: "flex", alignItems: "center", gap: 30, padding: "16px 28px", marginLeft: i * 40 }}>
+        <Card key={l.k} start={24 + i * 9} color={l.c} from="right" style={{ display: "flex", alignItems: "center", gap: 30, padding: "12px 28px", marginLeft: i * 32 }}>
           <span style={{ fontFamily: MONO, fontSize: 40, color: l.c, fontWeight: 700, width: 70 }}>{l.k}</span>
           <span style={{ fontSize: 34, fontWeight: 700, width: 560 }}>{l.t}</span>
           <span style={{ fontSize: 24, color: "#b8c4d9" }}>{l.d}</span>
@@ -243,7 +245,7 @@ export const SCompat: React.FC = () => (
       ))}
     </div>
     <div style={{ marginTop: 26, fontFamily: MONO, fontSize: 18, color: C.dim, opacity: useIn(80) }}>
-      串流纪律：只保留最新帧 · 同时只传一帧 · 忙就丢帧 · 断流等关键帧恢复 · DRM / 反作弊为已知边界，不绕过
+      按优先级从高到低 · 气泡就地变成看板，看板就地变成投屏 · 走路时缩到边缘 · 焦点跟着语音走
     </div>
   </Pad>
 );
@@ -257,7 +259,7 @@ const PROFILE = [
   { t: "手表 1 h", wh: 0.08, c: "#6f6c66" },
   { t: "睡眠 2 h", wh: 0.16, c: "#55534e" },
 ];
-const STATES = ["S0 全功能", "S1 浅睡", "S2 待机", "S3 深睡", "S0' 手表模式"];
+const STATES = ["S0 全功能", "S0'' 看板态", "S1 浅睡", "S2 待机", "S3 深睡", "S0' 手表模式"];
 export const SPower: React.FC = () => {
   const f = useCurrentFrame();
   const total = PROFILE.reduce((s, p) => s + p.wh, 0);
@@ -266,7 +268,7 @@ export const SPower: React.FC = () => {
     <Pad>
       <Kicker text="POWER · 强睡眠 + 8 小时" color={C.lime} />
       <div style={{ height: 14 }} />
-      <KineticTitle text="MCU 常驻，主处理器按需唤醒" start={4} size={62} />
+      <KineticTitle text="MCU 常驻听音与 BLE，主处理器按需唤醒" start={4} size={58} />
       <div style={{ display: "flex", gap: 14, marginTop: 40 }}>
         {STATES.map((s, i) => {
           const p = interpolate(f, [16 + i * 6, 30 + i * 6], [0, 1], { ...clamp, easing: ease });
@@ -279,7 +281,7 @@ export const SPower: React.FC = () => {
           );
         })}
       </div>
-      <div style={{ marginTop: 50, fontSize: 28, color: "#b8c4d9" }}>8 小时机身混合使用剖面 · 功耗预算（设计目标）</div>
+      <div style={{ marginTop: 50, fontSize: 28, color: "#b8c4d9" }}>8 小时机身混合使用剖面 · 功耗预算（设计目标 · 以看板为主的新剖面待 M1 定案）</div>
       <div style={{ display: "flex", height: 90, marginTop: 18, borderRadius: 14, overflow: "hidden", border: "1px solid #334155" }}>
         {PROFILE.map((p, i) => {
           const g = interpolate(f, [50 + i * 8, 70 + i * 8], [0, 1], { ...clamp, easing: ease });
@@ -345,10 +347,11 @@ export const SWeight: React.FC = () => {
 // ---------- 9 使用体验：一天 ----------
 const DAY = [
   { t: "08:00", s: "起床 · 手表模式", d: "看时间、拍照、录音；主处理器不醒", c: C.amber, m: "S0'" },
-  { t: "09:00", s: "地铁 · 视频会议", d: "机身 5G RedCap 直连；对方看到我的虚拟形象", c: C.pink, m: "C · V2" },
-  { t: "10:00", s: "办公 · 多块虚拟屏", d: "PC 虚拟显示器，屏幕锚定在桌面上方", c: C.cyan, m: "B · L0" },
-  { t: "14:00", s: "现场 · 6DoF 指引", d: "叠加标注贴在真实物体上，手势操作", c: C.blue, m: "6DoF" },
-  { t: "18:30", s: "开车 · 导航卡片", d: "车机串流；结构化卡片本地绘制", c: C.lime, m: "L2 · 车机" },
+  { t: "09:00", s: "地铁 · “打开 QQ”", d: "气泡“正在打开”→ 手机渲染的 QQ 看板就地出现", c: C.pink, m: "BLE · 看板" },
+  { t: "10:00", s: "办公 · “我来操作”", d: "PC 虚拟显示器接管，投屏锚定在桌面上方", c: C.cyan, m: "B · 投屏" },
+  { t: "14:00", s: "现场 · “帮我看看这个”", d: "实时拍照取景，脑识别后把标注贴在实物上", c: C.blue, m: "实时拍照 · 6DoF" },
+  { t: "18:30", s: "开车 · 导航看板", d: "车机这只手发描述，小脑本地画", c: C.lime, m: "车机 · 看板" },
+  { t: "21:00", s: "家里 · 视频通话", d: "机身 5G 直连；对方看到云这只手渲染的虚拟形象", c: C.pink, m: "C · 视频通话" },
   { t: "23:00", s: "摘下 · 深度睡眠", d: "戴上秒级恢复到原来的画面", c: "#94a3b8", m: "S1→S3" },
 ];
 export const SDay: React.FC = () => {
@@ -387,7 +390,7 @@ export const SDay: React.FC = () => {
 // ---------- 10 路线图 ----------
 const STAGES = [
   { k: "M0", t: "现成硬件验证", d: "6 组验证 · 闸门 G1–G6", c: C.cyan, now: true },
-  { k: "M1", t: "桌面功能样机", d: "开发板拼全链路 · 协议 v0 冻结 · 主 SoC 定案", c: C.blue },
+  { k: "M1", t: "桌面功能样机", d: "全链路 · 协议 v0 含看板描述 · 主 SoC 与 MCU A/B 定案", c: C.blue },
   { k: "M2", t: "完全版样机 EVT", d: "全部功能进眼镜形态 · 8 小时整机实测", c: C.pink },
   { k: "M3", t: "优化样机 DVT", d: "功耗 / 重量 / 散热 · 认证预测试", c: C.lime },
   { k: "Gen 2", t: "第二代", d: "波导减重 · 蜂窝芯片级设计 · ASIC", c: C.amber },
@@ -432,9 +435,9 @@ export const SOutro: React.FC<{ pulse: number }> = ({ pulse }) => {
     <Pad style={{ alignItems: "center", justifyContent: "center", textAlign: "center", opacity: out }}>
       <GlassesWire start={0} scale={0.7} glow={pulse} />
       <div style={{ height: 40 }} />
-      <KineticTitle text="依赖网络，不依赖手机" start={20} size={104} />
+      <KineticTitle text="眼镜是脑，主机是手" start={20} size={104} />
       <div style={{ height: 30 }} />
-      <KineticTitle text="联网全功能 · 断网手表 · 秒级唤醒" start={60} size={44} color={C.cyan} weight={500} stagger={2} />
+      <KineticTitle text="想看什么就看到什么 · 断网手表 · 秒级唤醒" start={60} size={44} color={C.cyan} weight={500} stagger={2} />
       <div style={{ marginTop: 60, fontFamily: MONO, fontSize: 34, color: C.text, opacity: interpolate(f, [100, 130], [0, 1], clamp) }}>
         glasses.youngtuo.win
       </div>
