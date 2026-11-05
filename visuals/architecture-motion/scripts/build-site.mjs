@@ -191,7 +191,7 @@ if (hasHW) {
     .replace(/<script type="importmap">[\s\S]*?<\/script>/, `<script type="importmap">{ "imports": { "three": "./three.module.js", "three/addons/controls/": "./", "three/addons/loaders/": "./" } }</script>`)
     .replace('<script type="module" src="./app.js"></script>', `<script>window.HW_DATA = "./hw-";</script><script type="module" src="./hw-app.js"></script>`)
     .replace("</header>", `</header><div class="dl"><a href="index.html">← 返回网站</a>${dl.join("")}</div>`)
-    .replace("</style>", `  .dl { position:fixed; top:58px; right:14px; width:330px; display:flex; gap:14px; flex-wrap:wrap; font-size:12px; z-index:6; } .dl a { color:#8f96a3; text-decoration:none; } .dl a:hover { color:#eceae4; } aside { top:88px !important; } header { padding-right:360px !important; } header nav { flex-wrap:wrap; }\n</style>`);
+    .replace("</style>", `  .dl { position:fixed; top:58px; right:14px; width:330px; display:flex; gap:14px; flex-wrap:wrap; font-size:12px; z-index:6; } .dl a { color:#8f96a3; text-decoration:none; } .dl a:hover { color:#eceae4; } @media (min-width:761px){ aside { top:88px !important; } header { padding-right:360px !important; } header nav { flex-wrap:wrap; } } @media (max-width:760px){ .dl { position:fixed; top:86px; left:12px; right:12px; width:auto; font-size:11px; gap:10px; } }\n</style>`);
   writeFileSync(`${OUT}/hardware.html`, html);
 }
 console.log(readdirSync(OUT).join(" "));

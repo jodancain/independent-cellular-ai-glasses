@@ -21,6 +21,7 @@ const cache = {};
 let cur = null;
 
 function size() { return { w: innerWidth, h: innerHeight }; }
+const narrow = () => innerWidth <= 760;
 addEventListener('resize', () => cur && cur.resize());
 
 // ---------------- 原理图 ----------------
@@ -53,8 +54,9 @@ async function makeSch(board) {
   const cam = new THREE.OrthographicCamera(-w / 2, w / 2, h / 2, -h / 2, -100, 100);
   const fit = () => {
     const { w, h } = size();
-    const z = Math.min((w - 380) / W, (h - 120) / H) * 0.95;
-    cam.zoom = z; cam.position.set(W / 2 + 180 / z, -H / 2, 10); ctr.target.set(W / 2 + 180 / z, -H / 2, 0); cam.updateProjectionMatrix(); ctr.update();
+    const z = narrow() ? Math.min((w - 16) / W, (h * 0.5) / H) * 0.95 : Math.min((w - 380) / W, (h - 120) / H) * 0.95;
+    const ox = narrow() ? 0 : 180 / z, oy = narrow() ? -(h * 0.12) / z : 0;
+    cam.zoom = z; cam.position.set(W / 2 + ox, -H / 2 - oy, 10); ctr.target.set(W / 2 + ox, -H / 2 - oy, 0); cam.updateProjectionMatrix(); ctr.update();
   };
   const ctr = new MapControls(cam, renderer.domElement);
   ctr.enableRotate = false; ctr.screenSpacePanning = true; ctr.zoomToCursor = true; ctr.maxZoom = 400; ctr.minZoom = 0.05;
@@ -119,11 +121,11 @@ async function makePcb(board) {
   const cam = new THREE.PerspectiveCamera(35, 1, R / 100, R * 50);
   const ctr = new OrbitControls(cam, renderer.domElement);
   ctr.enableDamping = true; ctr.enabled = false;
-  const view = (dir) => { const d = R * 1.9; cam.position.set(dir[0] * d, dir[1] * d, dir[2] * d); ctr.target.set(0, 0, 0); ctr.update(); };
+  const view = (dir) => { const d = R * (narrow() ? 3.4 : 1.9); cam.position.set(dir[0] * d, dir[1] * d, dir[2] * d); ctr.target.set(0, 0, 0); ctr.update(); };
   view([0.35, 0.8, 0.75]);
   return {
     scene, cam, ctr,
-    resize() { const { w, h } = size(); cam.aspect = w / h; cam.setViewOffset(w, h, 175, 0, w, h); cam.updateProjectionMatrix(); renderer.setSize(w, h); },
+    resize() { const { w, h } = size(); cam.aspect = w / h; cam.setViewOffset(w, h, narrow() ? 0 : 175, narrow() ? h * 0.14 : 0, w, h); cam.updateProjectionMatrix(); renderer.setSize(w, h); },
     tick() { ctr.update(); },
     tools() {
       tools.innerHTML = '';
@@ -215,7 +217,7 @@ async function makeGlasses() {
   view([250, 170, 150], [-60, -5, -70]);
   return {
     scene, cam, ctr,
-    resize() { const { w, h } = size(); cam.aspect = w / h; cam.setViewOffset(w, h, 175, 0, w, h); cam.updateProjectionMatrix(); renderer.setSize(w, h); },
+    resize() { const { w, h } = size(); cam.aspect = w / h; cam.setViewOffset(w, h, narrow() ? 0 : 175, narrow() ? h * 0.14 : 0, w, h); cam.updateProjectionMatrix(); renderer.setSize(w, h); },
     tick() { ctr.update(); },
     tools() {
       tools.innerHTML = '';
@@ -229,6 +231,7 @@ async function makeGlasses() {
 // ---------------- 信息面板 ----------------
 function cnt(o) { return Object.entries(o).map(([k, v]) => `${k} ${v}`).join('，') || '无'; }
 function panel(key) {
+  info.classList.toggle('collapsed', narrow());
   if (key === 'glasses') {
     info.innerHTML = `<h2>装进眼镜</h2>
     <p>右镜腿放 MCU 常驻板（真实器件，可以按现状继续布线）；左镜腿是主板将来的位置。</p>
@@ -272,6 +275,7 @@ async function show(key) {
   loading.style.display = 'none';
 }
 document.querySelectorAll('#tabs button').forEach(b => (b.onclick = () => show(b.dataset.v)));
+info.addEventListener('click', (e) => { if (narrow() && e.target.tagName === 'H2') info.classList.toggle('collapsed'); });
 renderer.setAnimationLoop(() => { if (cur) { cur.tick && cur.tick(); renderer.render(cur.scene, cur.cam); } });
 show(location.hash ? location.hash.slice(1) : 'sch:mcu_board');
 window.__show = show;
