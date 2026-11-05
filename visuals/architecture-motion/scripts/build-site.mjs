@@ -151,7 +151,7 @@ if (hasFilm) {
   copyFileSync("dist/plan-film.mp4", `${OUT}/plan-film.mp4`);
   // 带内容哈希，换片后不被 CDN 旧缓存挡住
   const FILM = `plan-film.mp4?v=${createHash("sha1").update(readFileSync("dist/plan-film.mp4")).digest("hex").slice(0, 8)}`;
-  const body = `<div class="eyebrow">Open Signal · Film</div><h1>全流程宣传片</h1><p class="lede">从脑 / 小脑 / 手的设计、竞品、架构、连接、六种显示模式、睡眠续航、佩戴，到一天的使用体验和路线图。配乐为代码合成的原创音乐。</p>
+  const body = `<div class="eyebrow">Open Signal · Film</div><h1>全流程宣传片</h1><p class="lede">以眼镜 Agent “她”的第一人称讲述：从戴在脸上的手表，进化到有脑、有手、有脚。与传统 AI 眼镜对比看、做、连、手四件事，演示 Agent 替你操作手机、手渲染再投到眼前、六种显示模式和一天的使用。配乐为代码合成的原创音乐。</p>
 <video src="${FILM}" controls playsinline preload="metadata" style="width:100%;border-radius:14px;border:1px solid #1b1f29;background:#000"></video>
 <p class="cap"><a href="${FILM}" download>下载 MP4</a> · 型号均为候选，数值为设计目标</p>`;
   writeFileSync(`${OUT}/film.html`, page("film.html", "全流程宣传片", body));

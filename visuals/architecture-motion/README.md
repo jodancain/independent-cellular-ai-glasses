@@ -18,7 +18,7 @@
   ```
 - `src/diagram/FlowDiagram.tsx`：Remotion 版框图，用于播放页和视频。
 - `web/diagram.js`：网页版框图，用于网站首页和架构图页。两份代码用同一套样式。
-- `src/film/`：宣传片的场景，配乐来自 `scripts/make_music.py`（只用 numpy 合成）。
+- `src/film/`：宣传片的场景（`story.tsx` 为“她的进化”主线，`persona.tsx` 为拟人化眼镜与第一人称字幕），配乐来自 `scripts/make_music.py`（只用 numpy 合成）。
 
 ```bash
 npm install

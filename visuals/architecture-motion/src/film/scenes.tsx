@@ -6,6 +6,7 @@ import { evolvePath } from "@remotion/paths";
 import { C, Card, Counter, FONT, Kicker, KineticTitle, MONO, ease, useIn } from "./kit";
 import { FlowDiagram, DIAGRAMS, diagramSize } from "../diagram/FlowDiagram";
 import { Glyph, GlyphName, Icon } from "./icons";
+import { Say } from "./persona";
 import { ChatPanel, DayArt, DayKind, GlassesSide, GlassesTop, GlassesWire, StreetScene, cubicAt, quadAt } from "./illus";
 
 const clamp = { extrapolateLeft: "clamp", extrapolateRight: "clamp" } as const;
@@ -511,14 +512,14 @@ export const SWeight: React.FC = () => {
 };
 
 // ---------- 9 一天：七幅小插画 ----------
-const DAY: { t: string; s: string; kind: DayKind }[] = [
-  { t: "08:00", s: "手表模式", kind: "watch" },
-  { t: "09:00", s: "打开 QQ", kind: "subway" },
-  { t: "10:00", s: "我来操作", kind: "office" },
-  { t: "14:00", s: "帮我看看", kind: "field" },
-  { t: "18:30", s: "开车导航", kind: "drive" },
-  { t: "21:00", s: "视频通话", kind: "call" },
-  { t: "23:00", s: "摘下睡眠", kind: "sleep" },
+const DAY: { t: string; s: string; kind: DayKind; say: string }[] = [
+  { t: "08:00", s: "手表模式", kind: "watch", say: "早。我先安静地醒着。" },
+  { t: "09:00", s: "打开 QQ", kind: "subway", say: "地铁上，我替你打开 QQ。" },
+  { t: "10:00", s: "我来操作", kind: "office", say: "到公司，几块屏我来摆。" },
+  { t: "14:00", s: "帮我看看", kind: "field", say: "看不懂的，我帮你看。" },
+  { t: "18:30", s: "开车导航", kind: "drive", say: "开车时，路我来指。" },
+  { t: "21:00", s: "视频通话", kind: "call", say: "晚上，陪你视频通话。" },
+  { t: "23:00", s: "摘下睡眠", kind: "sleep", say: "晚安，我也睡了。" },
 ];
 export const SDay: React.FC = () => {
   const f = useCurrentFrame();
@@ -530,7 +531,8 @@ export const SDay: React.FC = () => {
   const p = interpolate(local, [0, 9], [0.45, 1], { ...clamp, easing: ease });
   return (
     <Pad>
-      <Kicker text="EXPERIENCE" />
+      <Say lines={DAY.map((d, i) => ({ from: i * per + 4, to: (i + 1) * per - 2, text: d.say }))} bottom={40} size={42} />
+      <Kicker text="MY DAY · 我陪你的一天" />
       <div style={{ display: "flex", gap: 9, marginTop: 20 }}>
         {DAY.map((d, i) => (
           <div key={d.t} style={{ flex: 1, height: 6, borderRadius: 3, background: "rgba(232,226,212,.12)", overflow: "hidden" }}>
@@ -562,18 +564,18 @@ const STAGES: { k: string; t: string; d: string; icon: GlyphName; now?: boolean 
 ];
 export const SRoadmap: React.FC = () => {
   const f = useCurrentFrame();
-  const line = interpolate(f, [20, 150], [0, 1], { ...clamp, easing: ease });
+  const line = interpolate(f, [4, 70], [0, 1], { ...clamp, easing: ease });
   return (
     <Pad>
       <Kicker text="ROADMAP" />
       <div style={{ height: 14 }} />
-      <KineticTitle text="先在桌面跑通，再画板" start={4} size={62} />
+      <KineticTitle text="先在桌面跑通，再画板" start={0} size={62} stagger={1} />
       <div style={{ position: "relative", marginTop: 90, height: 420 }}>
         <div style={{ position: "absolute", left: 65, width: 1380, top: 95, height: 3, background: "rgba(232,226,212,.12)" }} />
         <div style={{ position: "absolute", left: 65, width: `${line * 1380}px`, top: 95, height: 3, background: C.cyan, opacity: 0.8 }} />
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           {STAGES.map((s, i) => {
-            const p = interpolate(f, [24 + i * 26, 44 + i * 26], [0, 1], { ...clamp, easing: ease });
+            const p = interpolate(f, [6 + i * 12, 20 + i * 12], [0, 1], { ...clamp, easing: ease });
             return (
               <div key={s.k} style={{ width: 300, opacity: p, transform: `translateY(${(1 - p) * 24}px)` }}>
                 <div style={{ height: 30, fontFamily: MONO, fontSize: 27, fontWeight: 600, color: C.cyan, letterSpacing: 2 }}>{s.k}</div>
