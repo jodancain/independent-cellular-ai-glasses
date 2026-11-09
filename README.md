@@ -19,7 +19,8 @@
 | [技术路线](docs/technical-roadmap.md) | 四颗主芯片按角色分工（主 SoC 与显示与重投影处理器是小脑，RedCap 是脚，常驻 BLE 与听音的低功耗 MCU 是常醒的小脑兼管脚的 BLE）各子系统主选 / 备选与切换条件、软件栈与开放协议、M0 验证 → M1 桌面功能样机 → M2 完全版样机 → M3 优化样机 |
 | [在线浏览](https://glasses.youngtuo.win/) | 本仓库文档的网页版与动态架构图，公网可直接访问 |
 | [系统架构图](docs/system-architecture.md) | 11 张图：系统全景（脑 / 小脑 / 手 / 脚）、硬件框图（两张）、显示数据通路（含看板态）、软件栈、协议通道、功耗状态机、通话与虚拟形象、部署视图、显示模式与小脑调度、投屏与多路信号；动态版见 `visuals/architecture-motion` |
-| [设计开发要求](docs/design-requirements.md) | 209 条可验收要求（SYS / HW / PWR / DISP / NET / SW / HOST / PROT / CALL / APP / CLOUD / ERGO / SEC / DEV），每条含来源、优先级、验证方法、阶段，附 25 条决定追溯表与脑 / 小脑 / 手 / 脚角色映射 |
+| [设计开发要求](docs/design-requirements.md) | 218 条可验收要求（SYS / HW / PWR / DISP / NET / SW / HOST / PROT / CALL / APP / CLOUD / ERGO / SEC / DEV），每条含来源、优先级、验证方法、阶段，附 25 条决定追溯表与脑 / 小脑 / 手 / 脚角色映射 |
+| [原型经验](docs/prototype-learnings.md) | 应用原型里验证过的核心技术：第一视角投屏与专家标注回传、远程视频通话（路线收敛、六档带宽自适应、会议入会）、头姿与相机–IMU 时间对齐、显示–相机标定、采集质量门、Agent 边界与来源标注 |
 | [现成硬件验证计划](docs/validation-plan.md) | 自研前用现成设备做的 6 组验证：串流延迟与兼容、6DoF 交互、RedCap 联网与睡眠、手表模式功耗、视频通话与虚拟形象、佩戴无感基线；含设备清单、步骤、通过标准与记录表 |
 | [第 1、3、6 组设备准备清单](docs/equipment-groups-1-3-6.md) | 先做的三组验证的候选设备、共用关系与核实项（不含价格） |
 | [测试工具](tools/README.md) | 第 1、3、6 组的计时页、延迟统计、RedCap AT / 测速 / 电流分析、人体工学统计脚本（标准库，含单元测试） |

@@ -27,6 +27,7 @@ const NAV = [
   ["system-architecture.html", "架构图"],
   ["technical-roadmap.html", "技术路线"],
   ["design-requirements.html", "设计开发要求"],
+  ["prototype-learnings.html", "原型经验"],
   ["streaming-direction.html", "方案"],
   ["validation-plan.html", "验证计划"],
   ["sources.html", "来源"],
@@ -86,7 +87,7 @@ copyFileSync("web/diagram.js", `${OUT}/diagram.js`);
 writeFileSync(`${OUT}/layouts.js`, `window.LAYOUTS=${JSON.stringify(LAYOUTS)};`);
 
 const esc = (s) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;");
-const MERMAID_INIT = `mermaid.initialize({startOnLoad:true,securityLevel:"strict",theme:"base",themeVariables:{darkMode:true,background:"#050608",primaryColor:"#0b0e15",primaryTextColor:"#f2f4f8",primaryBorderColor:"#3a3f4b",secondaryColor:"#0b0e15",tertiaryColor:"#0a0c11",lineColor:"#e8e2d4",textColor:"#f2f4f8",clusterBkg:"#0a0c11",clusterBorder:"#2a2f3a",edgeLabelBackground:"#050608",fontFamily:"Noto Sans SC, PingFang SC, sans-serif"}});`;
+const MERMAID_INIT = `mermaid.initialize({startOnLoad:false,securityLevel:"strict",theme:"base",themeVariables:{darkMode:true,background:"#050608",primaryColor:"#0b0e15",primaryTextColor:"#f2f4f8",primaryBorderColor:"#3a3f4b",secondaryColor:"#0b0e15",tertiaryColor:"#0a0c11",lineColor:"#e8e2d4",textColor:"#f2f4f8",clusterBkg:"#0a0c11",clusterBorder:"#2a2f3a",edgeLabelBackground:"#050608",fontFamily:"Noto Sans SC, PingFang SC, sans-serif"}});mermaid.run({querySelector:"pre.mermaid"});`;
 const LIVE_INIT = `<script src="layouts.js"></script><script src="diagram.js"></script><script>(()=>{const hs=[...document.querySelectorAll("[data-live]")].map(el=>renderDiagram(el,LAYOUTS[el.dataset.live],{hideHeader:el.hasAttribute("data-noheader")}));const rm=matchMedia("(prefers-reduced-motion: reduce)").matches;const loop=t=>{hs.forEach(h=>h.tick(rm?1500:t));if(!rm)requestAnimationFrame(loop)};requestAnimationFrame(loop)})();</script>`;
 const FONTS = `<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500&family=Noto+Sans+SC:wght@400;500&family=JetBrains+Mono&display=swap" rel="stylesheet">`;
 
@@ -143,7 +144,8 @@ const hero = `<section class="hero">
   ${hasFilm ? `<a href="film.html">视频<span>宣传片「她的进化」· 技术全解 25 章</span></a>` : ""}
   ${hasHW ? `<a href="hardware.html">硬件 · 初版原理图与 PCB<span>three.js 三维查看 · KiCad 工程下载</span></a>` : ""}
   <a href="technical-roadmap.html">技术路线<span>小脑与脚的四颗芯片、MCU A/B 案、M0–M3</span></a>
-  <a href="design-requirements.html">设计开发要求<span>209 条可验收要求</span></a>
+  <a href="design-requirements.html">设计开发要求<span>218 条可验收要求</span></a>
+  <a href="prototype-learnings.html">原型经验<span>投屏、远程视频、头姿对齐与标定等核心算法</span></a>
   <a href="streaming-direction.html">方案<span>串流终端方向 v0.7.6</span></a>
   <a href="validation-plan.html">验证计划<span>6 组现成硬件验证</span></a>
   <a href="sources.html">来源<span>58 条公开资料</span></a>
