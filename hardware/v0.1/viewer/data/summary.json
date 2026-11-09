@@ -477,13 +477,13 @@
   "title": "主板（小脑：主 SoC + 显示处理器；脚：RedCap + Wi-Fi 7 + USB-C）",
   "notes": [
    "M1 桌面载板形态 100×70 mm，8 层 HDI",
-   "主 SoC / Wi-Fi 7 / LT7911UXC / FPGA / RedCap / 开关 为占位：引脚待供应商资料或 NDA",
-   "RedCap 模组外形尺寸待按移远硬件设计手册核实",
+   "主 SoC / Wi-Fi 7 / FPGA / 开关 为占位：引脚待供应商资料或 NDA；LT7911UXC 已定封装与供电，球位待龙迅规格书",
+   "RedCap 模组 RG255C-GL 已换真实引脚与 LGA-204 焊盘（立创 EDA 公开库），下单前对照移远硬件设计手册核对",
    "未布线：只有布局与飞线"
   ],
   "layers": 8,
-  "parts": 55,
-  "nets": 207,
+  "parts": 77,
+  "nets": 222,
   "placeholders": [
    {
     "ref": "U1",
@@ -499,11 +499,6 @@
     "ref": "U3",
     "value": "Wi-Fi 7 + 蓝牙连接芯片（占位）",
     "note": "AR2 / AR1+ 平台配套连接芯片"
-   },
-   {
-    "ref": "U4",
-    "value": "Quectel RG255C-GL（X35，占位）",
-    "note": "引脚编号按移远《RG255C-GL 硬件设计手册》替换；外形尺寸待核"
    },
    {
     "ref": "J12",
@@ -522,8 +517,8 @@
    },
    {
     "ref": "U10",
-    "value": "LT7911UXC DP→MIPI（占位）",
-    "note": "A1 有线原始画面入口；引脚待龙迅资料"
+    "value": "LT7911UXC DP→MIPI（BGA169 9×9，球位待定）",
+    "note": "A1 有线原始画面入口。已按龙迅产品简介改为 BGA169 9×9 mm、3.3 V + 1.1 V 供电、25 MHz 晶振；芯片内置双 CC 与 PD 控制器，U12 PD 控制器有望省掉（待定）；球位编号要龙迅完整规格书"
    },
    {
     "ref": "U11",
@@ -558,11 +553,11 @@
   "drc": {
    "hole_clearance": 2,
    "copper_edge_clearance": 3,
-   "silk_overlap": 21,
-   "silk_over_copper": 26,
-   "unconnected_items": 433
+   "silk_overlap": 47,
+   "silk_over_copper": 53,
+   "unconnected_items": 499
   },
-  "unconnected": 433,
+  "unconnected": 499,
   "roles": {
    "器官 · 眼睛": [
     {
@@ -720,8 +715,56 @@
      "value": "Wi-Fi 天线"
     },
     {
+     "ref": "Q1",
+     "value": "MMBT3904"
+    },
+    {
+     "ref": "Q2",
+     "value": "MMBT3904"
+    },
+    {
      "ref": "R20",
      "value": "0"
+    },
+    {
+     "ref": "R21",
+     "value": "4.7k"
+    },
+    {
+     "ref": "R22",
+     "value": "47k"
+    },
+    {
+     "ref": "R23",
+     "value": "4.7k"
+    },
+    {
+     "ref": "R24",
+     "value": "47k"
+    },
+    {
+     "ref": "TP1",
+     "value": "CELL_USB_BOOT"
+    },
+    {
+     "ref": "TP2",
+     "value": "CELL_DBG_TX"
+    },
+    {
+     "ref": "TP3",
+     "value": "CELL_DBG_RX"
+    },
+    {
+     "ref": "TP4",
+     "value": "CELL_USB_DP"
+    },
+    {
+     "ref": "TP5",
+     "value": "CELL_USB_DM"
+    },
+    {
+     "ref": "TP6",
+     "value": "CELL_USB_VBUS"
     },
     {
      "ref": "U15",
@@ -733,7 +776,7 @@
     },
     {
      "ref": "U4",
-     "value": "Quectel RG255C-GL（X35，占位）"
+     "value": "Quectel RG255C-GL（X35 RedCap）"
     },
     {
      "ref": "U5",
@@ -742,8 +785,48 @@
    ],
    "脚（有线 A1）": [
     {
+     "ref": "C50",
+     "value": "12pF"
+    },
+    {
+     "ref": "C51",
+     "value": "12pF"
+    },
+    {
+     "ref": "C52",
+     "value": "10uF"
+    },
+    {
+     "ref": "C53",
+     "value": "100nF"
+    },
+    {
+     "ref": "C54",
+     "value": "100nF"
+    },
+    {
+     "ref": "L2",
+     "value": "0.47uH"
+    },
+    {
+     "ref": "R3",
+     "value": "100k"
+    },
+    {
+     "ref": "R4",
+     "value": "120k"
+    },
+    {
      "ref": "U10",
-     "value": "LT7911UXC DP→MIPI（占位）"
+     "value": "LT7911UXC DP→MIPI（BGA169 9×9，球位待定）"
+    },
+    {
+     "ref": "U19",
+     "value": "TPS62823 LT7911UXC 1.1V"
+    },
+    {
+     "ref": "Y1",
+     "value": "25MHz ±50ppm"
     }
    ],
    "脚（有线）": [
@@ -890,8 +973,8 @@
    },
    {
     "ref": "U10",
-    "value": "LT7911UXC DP→MIPI（占位）",
-    "note": "A1 有线原始画面入口；引脚待龙迅资料",
+    "value": "LT7911UXC DP→MIPI（BGA169 9×9，球位待定）",
+    "note": "A1 有线原始画面入口。已按龙迅产品简介改为 BGA169 9×9 mm、3.3 V + 1.1 V 供电、25 MHz 晶振；芯片内置双 CC 与 PD 控制器，U12 PD 控制器有望省掉（待定）；球位编号要龙迅完整规格书",
     "role": "脚（有线 A1）"
    },
    {
@@ -943,6 +1026,12 @@
     "role": "器官 · 视网膜"
    },
    {
+    "ref": "U19",
+    "value": "TPS62823 LT7911UXC 1.1V",
+    "note": "A1 有线模式下主 SoC 可能睡眠，使能脚后续改由 MCU 控制",
+    "role": "脚（有线 A1）"
+   },
+   {
     "ref": "U2",
     "value": "SoC 配套 PMIC（占位）",
     "note": "随 SoC 平台选定",
@@ -956,8 +1045,8 @@
    },
    {
     "ref": "U4",
-    "value": "Quectel RG255C-GL（X35，占位）",
-    "note": "引脚编号按移远《RG255C-GL 硬件设计手册》替换；外形尺寸待核",
+    "value": "Quectel RG255C-GL（X35 RedCap）",
+    "note": "引脚与 LGA-204 焊盘来自立创 EDA 公开库 C22437156，下单前对照移远《RG255C-GL 硬件设计手册》核对；PWRKEY / RESET_N 经 Q1 / Q2 开集驱动；USB_BOOT、调试串口、USB 引到测试点；方案不含 GNSS，ANT_GNSS 悬空",
     "role": "脚"
    },
    {

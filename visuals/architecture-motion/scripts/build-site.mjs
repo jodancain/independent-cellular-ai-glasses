@@ -143,7 +143,7 @@ const hero = `<section class="hero">
   ${hasFilm ? `<a href="film.html">视频<span>宣传片「她的进化」· 技术全解 25 章</span></a>` : ""}
   ${hasHW ? `<a href="hardware.html">硬件 · 初版原理图与 PCB<span>three.js 三维查看 · KiCad 工程下载</span></a>` : ""}
   <a href="technical-roadmap.html">技术路线<span>小脑与脚的四颗芯片、MCU A/B 案、M0–M3</span></a>
-  <a href="design-requirements.html">设计开发要求<span>202 条可验收要求</span></a>
+  <a href="design-requirements.html">设计开发要求<span>209 条可验收要求</span></a>
   <a href="streaming-direction.html">方案<span>串流终端方向 v0.7.6</span></a>
   <a href="validation-plan.html">验证计划<span>6 组现成硬件验证</span></a>
   <a href="sources.html">来源<span>58 条公开资料</span></a>

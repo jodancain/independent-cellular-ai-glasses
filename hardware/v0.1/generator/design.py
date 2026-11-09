@@ -47,6 +47,37 @@ def n6_symbol_and_fp():
     return sym, fp, xmlpins
 
 
+def rg255c_symbol_and_fp():
+    """移远 RG255C-GL：引脚号与名称、LGA-204 焊盘来自立创 EDA 公开库 C22437156（vendor/），须对照移远硬件设计手册核对。"""
+    pins = []
+    for line in open(os.path.join(HERE, 'vendor', 'RG255C-GL_pins.tsv'), encoding='utf8'):
+        if line.startswith('#') or not line.strip():
+            continue
+        num, nm = line.rstrip('\n').split('\t')
+        pins.append((num, nm))
+    def et(nm):
+        if nm == 'GND' or nm.startswith('VBAT'):
+            return 'power_in'
+        if nm in ('VDD_EXT', 'USIM1_VDD', 'USIM2_VDD'):
+            return 'power_out'
+        if nm == 'RESERVED':
+            return 'no_connect'
+        return 'bidirectional' if nm.startswith(('PCIE', 'USB_D', 'USIM', 'I2C', 'SGMII_MDIO')) else 'passive'
+    pwr = [p for p in pins if p[1] == 'GND' or p[1].startswith(('VBAT', 'VDD'))]
+    used = ('PCIE', '~{PERST}', '~{CLKREQ}', '~{PEWAKE}', 'USIM1', 'PWRKEY', 'RESET_N', 'STATUS', '~{W_DISABLE}', 'ANT_MAIN', 'ANT_DRX', 'USB_')
+    sig = [p for p in pins if p not in pwr and p[1].startswith(used)]
+    rest = [p for p in pins if p not in pwr and p not in sig]
+    units = []
+    for grp in (pwr, sig, rest):
+        half = (len(grp) + 1) // 2
+        units.append([(n, nm, et(nm), 'L' if i < half else 'R') for i, (n, nm) in enumerate(grp)])
+    fpname = 'Quectel_RG255C-GL_LGA-204_32x29mm'
+    sym = custom_symbol('RG255C-GL', units, ref='U', value='RG255C-GL', footprint=f'glasses:{fpname}',
+                        desc='移远 RG255C-GL（X35 RedCap，LGA-204 32×29 mm）；引脚来自立创 EDA 公开库 C22437156，须对照移远硬件设计手册核对')
+    fp = open(os.path.join(HERE, 'vendor', fpname + '.kicad_mod'), encoding='utf8').read()
+    return sym, fpname, fp
+
+
 class Alloc:
     """按 ST 数据给外设信号分配引脚，保证复用功能与芯片一致。"""
     def __init__(self):
@@ -246,8 +277,8 @@ def board_a():
 def board_b():
     b = Board('main_board', '主板（小脑：主 SoC + 显示处理器；脚：RedCap + Wi-Fi 7 + USB-C）', 8,
               [(0, 3), (3, 0), (97, 0), (100, 3), (100, 67), (97, 70), (3, 70), (0, 67)],
-              ['M1 桌面载板形态 100×70 mm，8 层 HDI', '主 SoC / Wi-Fi 7 / LT7911UXC / FPGA / RedCap / 开关 为占位：引脚待供应商资料或 NDA',
-               'RedCap 模组外形尺寸待按移远硬件设计手册核实', '未布线：只有布局与飞线'])
+              ['M1 桌面载板形态 100×70 mm，8 层 HDI', '主 SoC / Wi-Fi 7 / FPGA / 开关 为占位：引脚待供应商资料或 NDA；LT7911UXC 已定封装与供电，球位待龙迅规格书',
+               'RedCap 模组 RG255C-GL 已换真实引脚与 LGA-204 焊盘（立创 EDA 公开库），下单前对照移远硬件设计手册核对', '未布线：只有布局与飞线'])
     G = lambda n: [('GND', 'GND', 'power_in')] * n
     # 主 SoC（AR2 Gen 1 占位）
     soc = [('VDD_CORE', 'VDD_SOC_CORE', 'power_in'), ('VDD_MX', 'VDD_SOC_MX', 'power_in'), ('VDD_IO_1V8', '+1V8_IO', 'power_in'), ('VDD_LPDDR', 'VDD_SOC_MEM', 'power_in')] + G(4)
@@ -289,15 +320,28 @@ def board_b():
           ('BT_TX', 'BT_UART_RX', 'output'), ('BT_RX', 'BT_UART_TX', 'input'), ('PWR_EN', 'WIFI_PWR_EN', 'input'), ('ANT_WIFI', 'ANT_WIFI', 'passive')]
     placeholder(b, 'U3', 'WIFI7_COMBO_PLACEHOLDER', 'Wi-Fi 7 + 蓝牙连接芯片（占位）', (8, 8), wl, pos=(64, 14), group='wifi', note='AR2 / AR1+ 平台配套连接芯片')
     b.add('J9', 'Conn_Coaxial', 'Connector_Coaxial:U.FL_Hirose_U.FL-R-SMT-1_Vertical', 'Wi-Fi 天线', {'1': 'ANT_WIFI', '2': 'GND'}, pos=(76, 7), group='wifi')
-    # RedCap 模组（占位，引脚按功能列出）
-    cell = [('VBAT_BB', 'VSYS_CELL', 'power_in'), ('VBAT_RF', 'VSYS_CELL', 'power_in')] + G(6) + [('USB_DP', None, 'bidirectional'), ('USB_DM', None, 'bidirectional'),
-            ('PCIE_TXP', 'CELL_PCIE_RXP', 'output'), ('PCIE_TXN', 'CELL_PCIE_RXN', 'output'), ('PCIE_RXP', 'CELL_PCIE_TXP', 'input'), ('PCIE_RXN', 'CELL_PCIE_TXN', 'input'),
-            ('PCIE_REFCLKP', 'CELL_PCIE_CKP', 'input'), ('PCIE_REFCLKN', 'CELL_PCIE_CKN', 'input'), ('PCIE_RST_N', 'CELL_PERST_N', 'input'), ('PCIE_CLKREQ_N', 'CELL_CLKREQ_N', 'bidirectional'),
-            ('PCIE_WAKE_N', 'CELL_WAKE_N', 'output'), ('USIM_VDD', 'USIM_VDD', 'power_out'), ('USIM_DATA', 'USIM_DATA', 'bidirectional'), ('USIM_CLK', 'USIM_CLK', 'output'),
-            ('USIM_RST', 'USIM_RST', 'output'), ('USIM_DET', 'USIM_DET', 'input'), ('PWRKEY', 'CELL_PWRKEY', 'input'), ('RESET_N', 'CELL_RESET_N', 'input'),
-            ('STATUS', 'CELL_STATUS', 'output'), ('W_DISABLE_N', 'CELL_PWR_EN', 'input'), ('ANT_MAIN', 'ANT_CELL_MAIN', 'passive'), ('ANT_DIV', 'ANT_CELL_DIV', 'passive')]
-    placeholder(b, 'U4', 'RG255C_GL_PLACEHOLDER', 'Quectel RG255C-GL（X35，占位）', (29, 32), cell, pos=(82, 47), group='cell',
-                note='引脚编号按移远《RG255C-GL 硬件设计手册》替换；外形尺寸待核')
+    # RedCap 模组：移远 RG255C-GL（2026-11-09 去占位，引脚与焊盘来自立创 EDA 公开库 C22437156）
+    cell_sym, cell_fpname, cell_fp = rg255c_symbol_and_fp()
+    cell_nets = {'VBAT_BB': 'VSYS_CELL', 'VBAT_RF': 'VSYS_CELL', 'GND': 'GND',
+                 'PCIE_TX_P': 'CELL_PCIE_RXP', 'PCIE_TX_M': 'CELL_PCIE_RXN', 'PCIE_RX_P': 'CELL_PCIE_TXP', 'PCIE_RX_M': 'CELL_PCIE_TXN',
+                 'PCIE_REFCLK_P': 'CELL_PCIE_CKP', 'PCIE_REFCLK_M': 'CELL_PCIE_CKN', '~{PERST}': 'CELL_PERST_N', '~{CLKREQ}': 'CELL_CLKREQ_N', '~{PEWAKE}': 'CELL_WAKE_N',
+                 'USIM1_VDD': 'USIM_VDD', 'USIM1_DATA': 'USIM_DATA', 'USIM1_CLK': 'USIM_CLK', 'USIM1_RST': 'USIM_RST', 'USIM1_DET': 'USIM_DET',
+                 'PWRKEY': 'CELL_PWRKEY_OD', 'RESET_N': 'CELL_RESET_OD', 'STATUS': 'CELL_STATUS', '~{W_DISABLE}': 'CELL_PWR_EN',
+                 'ANT_MAIN': 'ANT_CELL_MAIN', 'ANT_DRX': 'ANT_CELL_DIV',
+                 'USB_BOOT': 'CELL_USB_BOOT', 'DBG_TXD': 'CELL_DBG_TX', 'DBG_RXD': 'CELL_DBG_RX',
+                 'USB_DP': 'CELL_USB_DP', 'USB_DM': 'CELL_USB_DM', 'USB_VBUS': 'CELL_USB_VBUS'}
+    b.add('U4', 'RG255C-GL', f'glasses:{cell_fpname}', 'Quectel RG255C-GL（X35 RedCap）', cell_nets,
+          custom={'sym': cell_sym, 'fpraw': (cell_fpname, cell_fp)}, pos=(82, 47), group='cell',
+          note='引脚与 LGA-204 焊盘来自立创 EDA 公开库 C22437156，下单前对照移远《RG255C-GL 硬件设计手册》核对；'
+               'PWRKEY / RESET_N 经 Q1 / Q2 开集驱动；USB_BOOT、调试串口、USB 引到测试点；方案不含 GNSS，ANT_GNSS 悬空')
+    # PWRKEY / RESET_N：主 SoC GPIO 经 NPN 开集驱动（移远模组常用接法，阻值待按手册核对）
+    for q, rb, rp, ctl, od in [('Q1', 'R21', 'R22', 'CELL_PWRKEY', 'CELL_PWRKEY_OD'), ('Q2', 'R23', 'R24', 'CELL_RESET_N', 'CELL_RESET_OD')]:
+        bnet = f'{q}_B'
+        b.add(q, 'Q_NPN_BEC', 'Package_TO_SOT_SMD:SOT-23', 'MMBT3904', {'B': bnet, 'C': od, 'E': 'GND'}, side='B', group='cell')
+        b.R(rb, '4.7k', ctl, bnet, side='B', group='cell'); b.R(rp, '47k', bnet, 'GND', side='B', group='cell')
+    # 模组调试与升级测试点
+    for i, net in enumerate(['CELL_USB_BOOT', 'CELL_DBG_TX', 'CELL_DBG_RX', 'CELL_USB_DP', 'CELL_USB_DM', 'CELL_USB_VBUS']):
+        b.add(f'TP{1+i}', 'TestPoint', 'TestPoint:TestPoint_Pad_D1.0mm', net, {'1': net}, side='B', group='cell')
     b.C('C20', '100uF', 'VSYS_CELL', 'GND', size='0603', side='B', group='cell'); b.C('C21', '10uF', 'VSYS_CELL', 'GND', size='0402', side='B', group='cell')
     b.R('R20', '0', 'VSYS_MAIN', 'VSYS_CELL', size='0603', group='cell', note='后续换负载开关，由 CELL_PWR_EN 控制')
     b.add('J10', 'Conn_Coaxial', 'Connector_Coaxial:U.FL_Hirose_U.FL-R-SMT-1_Vertical', '蜂窝主天线', {'1': 'ANT_CELL_MAIN', '2': 'GND'}, pos=(92, 26), group='cell')
@@ -334,12 +378,25 @@ def board_b():
           pos=(52, 24), group='dpu', note='型号待选（方案要求 6 轴、采样 ≥1 kHz）')
     b.C('C35', '100nF', '+1V8_IO', 'GND', group='dpu')
     # DP 接收桥（占位）
-    lt = [('VDD_1V8', '+1V8_IO', 'power_in'), ('VDD_3V3', '+3V3_RF', 'power_in')] + G(3)
+    # 龙迅产品简介（R1.0）已确认：BGA169 9×9 mm、3.3 V + 1.1 V 供电、外部 25 MHz 晶振、内置双 CC 与 PD 控制器、内置 SPI Flash、I²S 音频输出；球位编号仍待龙迅完整规格书
+    lt = [('VDD_1V1', 'VDD_LT_1V1', 'power_in'), ('VDD_3V3', '+3V3_RF', 'power_in')] + G(3) + [('XTAL_IN', 'LT_XI', 'input'), ('XTAL_OUT', 'LT_XO', 'output')]
     lt += sum([[(f'DP_ML{l}P', f'DP_ML{l}P', 'input'), (f'DP_ML{l}N', f'DP_ML{l}N', 'input')] for l in range(4)], [])
     lt += [('DP_AUXP', 'DP_AUXP', 'bidirectional'), ('DP_AUXN', 'DP_AUXN', 'bidirectional'), ('DP_HPD', 'DP_HPD', 'output'), ('MIPI_CKP', 'LT_MIPI_CKP', 'output'), ('MIPI_CKN', 'LT_MIPI_CKN', 'output')]
     lt += sum([[(f'MIPI_D{l}P', f'LT_MIPI_D{l}P', 'output'), (f'MIPI_D{l}N', f'LT_MIPI_D{l}N', 'output')] for l in range(4)], [])
     lt += [('I2C_SCL', 'I2C_SNS_SCL', 'input'), ('I2C_SDA', 'I2C_SNS_SDA', 'bidirectional'), ('RST_N', 'LT_RST_N', 'input')]
-    placeholder(b, 'U10', 'LT7911UXC_PLACEHOLDER', 'LT7911UXC DP→MIPI（占位）', (7, 7), lt, pos=(24, 17), group='dp', note='A1 有线原始画面入口；引脚待龙迅资料')
+    placeholder(b, 'U10', 'LT7911UXC_BGA169_PLACEHOLDER', 'LT7911UXC DP→MIPI（BGA169 9×9，球位待定）', (9, 9), lt, pos=(24, 17), group='dp',
+                note='A1 有线原始画面入口。已按龙迅产品简介改为 BGA169 9×9 mm、3.3 V + 1.1 V 供电、25 MHz 晶振；'
+                     '芯片内置双 CC 与 PD 控制器，U12 PD 控制器有望省掉（待定）；球位编号要龙迅完整规格书')
+    # LT7911UXC 外围：25 MHz 晶振（±50 ppm）与 1.1 V 内核降压
+    b.add('Y1', 'Crystal_GND24', 'Crystal:Crystal_SMD_2016-4Pin_2.0x1.6mm', '25MHz ±50ppm', {'1': 'LT_XI', '3': 'LT_XO', '2': 'GND', '4': 'GND'}, side='B', group='dp')
+    b.C('C50', '12pF', 'LT_XI', 'GND', side='B', group='dp'); b.C('C51', '12pF', 'LT_XO', 'GND', side='B', group='dp', note='负载电容按所选晶振规格调整')
+    b.add('U19', 'TPS62823DLC', 'Package_SON:Texas_VSON-HR-8_1.5x2mm_P0.5mm', 'TPS62823 LT7911UXC 1.1V',
+          {'EN': 'SOC_PWR_EN', 'FB': 'LT_FB', 'AGND': 'GND', 'PGND': 'GND', 'SW': 'LT_SW', 'VIN': 'VSYS_MAIN', 'PG': None}, side='B', group='dp',
+          note='A1 有线模式下主 SoC 可能睡眠，使能脚后续改由 MCU 控制')
+    b.L('L2', '0.47uH', 'LT_SW', 'VDD_LT_1V1', fp='Inductor_SMD:L_0805_2012Metric', side='B', group='dp')
+    b.R('R3', '100k', 'VDD_LT_1V1', 'LT_FB', side='B', group='dp'); b.R('R4', '120k', 'LT_FB', 'GND', side='B', group='dp', note='0.6 V × (1 + 100k/120k) ≈ 1.10 V')
+    b.C('C52', '10uF', 'VDD_LT_1V1', 'GND', size='0402', side='B', group='dp'); b.C('C53', '100nF', 'VDD_LT_1V1', 'GND', side='B', group='dp')
+    b.C('C54', '100nF', '+3V3_RF', 'GND', side='B', group='dp')
     # USB-C、Type-C 复用开关、PD 控制器
     b.add('J1', 'USB_C_Receptacle', 'Connector_USB:USB_C_Receptacle_Amphenol_12401610E4-2A', 'USB-C（DP Alt / USB 3 / PD）',
           {'VBUS': 'VBUS', 'GND': 'GND', 'CC1': 'CC1', 'CC2': 'CC2', 'D+': 'USB_DP', 'D-': 'USB_DM', 'SBU1': 'SBU1', 'SBU2': 'SBU2',
@@ -392,7 +449,7 @@ def board_b():
               pos=(x - 6, 4.5), rot=90, group='disp', note='光机 LCoS / 全彩 microLED 在 M1 定案，引脚按光机重排')
     # 板间连接器
     b.add('J2', 'Conn_02x20_Odd_Even', B2B_FP, '板间 DF40 40P（至 MCU 板）', {str(k): v for k, v in B2B.items()}, pos=(40, 52), rot=90, group='b2b')
-    b.flags = ['VBUS', 'VBAT_L', 'VSYS_MAIN', 'VSYS_CELL', '+1V8_IO', '+1V8_AON', '+3V3_RF', 'VDD_SOC_CORE', 'VDD_SOC_MX', 'VDD_SOC_MEM', 'VDD_DPU_CORE', 'GND']
+    b.flags = ['VBUS', 'VBAT_L', 'VSYS_MAIN', 'VSYS_CELL', '+1V8_IO', '+1V8_AON', '+3V3_RF', 'VDD_SOC_CORE', 'VDD_SOC_MX', 'VDD_SOC_MEM', 'VDD_DPU_CORE', 'VDD_LT_1V1', 'GND']
     return b
 
 

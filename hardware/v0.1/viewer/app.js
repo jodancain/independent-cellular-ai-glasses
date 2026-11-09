@@ -255,7 +255,7 @@ function panel(key) {
   <h3>检查结果</h3>
   <p>ERC：${cnt(S.erc)}</p>
   <p>DRC：${cnt(Object.fromEntries(Object.entries(S.drc).filter(([k]) => k !== 'unconnected_items')))}</p>
-  <p class="warn">未布线焊盘 ${S.unconnected} 个（初版只做布局，未布线）</p>
+  <p class="warn">未连线焊盘 ${S.unconnected} 个${S.unconnected < 50 ? "（已布线，剩余断线待人工补）" : "（这块板只做了布局，还没布线）"}</p>
   <h3>按角色（脑 · 小脑 · 手 · 脚 · 器官）</h3><ul>${Object.entries(S.roles).map(([r, ps]) => `<li><b>${r}</b>（${ps.length}）：${ps.filter(p => !/^[RCL]\d/.test(p.ref)).map(p => p.ref).join('、') || '阻容感'}${ps.some(p => /^[RCL]\d/.test(p.ref)) ? ' 等' : ''}</li>`).join('')}</ul>
   ${S.placeholders.length ? `<h3>占位器件（引脚待资料）</h3><ul>${S.placeholders.map(p => `<li><b>${p.ref}</b> ${p.value}</li>`).join('')}</ul>` : ''}
   <h3>主要器件</h3><ul>${S.ics.map(p => `<li><b>${p.ref}</b> ${p.value} <span class="tag">${p.role}</span>${p.note ? `<br><span style="color:#8f96a3">${p.note}</span>` : ''}</li>`).join('')}</ul>`;

@@ -1,6 +1,6 @@
 # 核验来源与参考项目
 
-**来源核验日期 2026-11-02；S43–S48 及 S17、S18 摘要补充于 2026-11-03；S49–S56 补充于 2026-11-04**
+**来源核验日期 2026-11-02；S43–S48 及 S17、S18 摘要补充于 2026-11-03；S49–S56 补充于 2026-11-04；S59–S63 补充于 2026-11-09**
 
 以下链接用于支持技术讨论。原厂规格和参考板信息只证明其公开内容；器件可采购性、实际量产配置、整机实现、授权和可获得的 BSP 仍须供应商书面确认。推荐与适用性判断见 [芯片候选](chips.md) 和 [工程判断](engineering-assessment.md)。
 
@@ -373,3 +373,33 @@ Mika：开源 Android 手机 agent（Apache-2.0，Kotlin），本项目 2026-11-
 dsh-Go：开源手机控制项目（AGPL-3.0，Flutter + Kotlin），本项目 2026-11-04 读源码评估
 
 <https://github.com/ccch1mneyyy/dsh-Go>
+
+## S59
+
+立创开源硬件平台：光波导AR眼镜_Btai1（CC BY-NC-SA 4.0；单绿 microLED JBD013 + 单绿树脂衍射光波导，全志 V821 + eMMC + 杰理 JL7016G8 音频协处理器、双路音频合路，主控板 6 + 4 层叠板，全 0201），本项目 2026-11-09 阅读
+
+<https://oshwhub.com/sgsax/project_tiqnqiyt>
+
+## S60
+
+立创开源硬件平台：智能眼镜盒_Btai box1（CC BY-NC-SA 4.0；充电宝 SoC SW6208 + BLE MCU CH582M，22.5 W 充电宝、BLE 手柄 / 鼠标、2.8 寸屏），本项目 2026-11-09 阅读
+
+<https://oshwhub.com/sgsax/project_bjlnkwqh>
+
+## S61
+
+JLCPCB：Rigid PCB Capabilities（1–32 层、HDI 1–3 阶、激光盲孔 0.075–0.15 mm、3/3 mil），2026-11-09 读取
+
+<https://jlcpcb.com/capabilities/pcb-capabilities>
+
+## S62
+
+JLCPCB：PCB Assembly Capabilities（标准档最小 01005、IC 间距 0.35 mm、BGA 0.3 mm、X-ray），2026-11-09 读取
+
+<https://jlcpcb.com/capabilities/pcb-assembly-capabilities>
+
+## S63
+
+JLCPCB：Flex PCB Capabilities（FPC 1 / 2 / 4 层，不支持软硬结合板，FPC 不做阻抗测量与控制），2026-11-09 读取
+
+<https://jlcpcb.com/capabilities/flex-pcb-capabilities>

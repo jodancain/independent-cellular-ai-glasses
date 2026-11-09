@@ -1,14 +1,14 @@
-ERC report (2026-11-05T05:31:51, Encoding UTF8)
+ERC report (2026-11-09T01:16:07, Encoding UTF8)
 Report includes: Errors, Warnings
 
 ***** Sheet /
 [isolated_pin_label]: Label connected to only one pin
     ; warning
-    @(347.98 mm, 78.74 mm): Label 'WEAR_DET'
+    @(528.32 mm, 78.74 mm): Label 'WEAR_DET'
 [pin_to_pin]: Pins of type Bidirectional and Power output are connected
     ; warning
-    @(769.62 mm, 45.72 mm): Symbol U9 Pin 2 [SDX, Bidirectional, Line]
-    @(30.48 mm, 266.70 mm): Symbol #FLG01 Pin 1 [Power output, Line]
+    @(863.60 mm, 45.72 mm): Symbol U9 Pin 2 [SDX, Bidirectional, Line]
+    @(30.48 mm, 318.77 mm): Symbol #FLG01 Pin 1 [Power output, Line]
 
  ** ERC messages: 2  Errors 0  Warnings 2
 
